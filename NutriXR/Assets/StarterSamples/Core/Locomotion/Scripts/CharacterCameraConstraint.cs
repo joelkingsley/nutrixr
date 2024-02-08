@@ -165,7 +165,13 @@ public class CharacterCameraConstraint : MonoBehaviour
         // We want to select a height offset that places the camera near the top of the
         // capsule.  We offset the camera down from the top of the capsule to prevent
         // the screen from fading while the capsule barely fits under an overhang.
-        float cameraRigHeightOffset = HeightOffset - (_character.height * 0.5f) - capsuleOffset;
+
+        //########      DEBUG SESSION       ########
+        // float cameraRigHeightOffset = HeightOffset - (_character.height * 0.5f) - capsuleOffset;
+        float cameraRigHeightOffset = - (_character.height * 0.5f);
+        //########      DEBUG SESSION       ########
+
+
         CameraRig.transform.localPosition = new Vector3(0.0f, cameraRigHeightOffset, 0.0f);
     }
 
