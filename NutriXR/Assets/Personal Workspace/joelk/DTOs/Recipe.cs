@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 
 namespace Personal_Workspace.joelk.DTOs
 {
+    [Serializable]
     public class Recipe
     {
-        public string Id;
-        public string Name;
+        public string id;
+        public string name;
 
-        public List<int> IdsOfIngredientCategories;
+        public List<int> idsOfIngredientCategories;
     }
 }
