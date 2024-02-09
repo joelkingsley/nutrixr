@@ -1,12 +1,24 @@
 {
-    "categories": [
+    "ingredientCategories": [
         {
             "categoryId": 1,
             "name": "Oil",
-            "ingredientChoices": [
-
+            "fdcNamesOfIngredientChoices": [
+                "Oil, sunflower",
+                "Oil, sunflower, linoleic, (partially hydrogenated)"
             ],
-            "recipesThatHaveThisCategory": []
+            "idsOfRecipesThatHaveThisCategory": [
+            ]
+        },
+        {
+            "categoryId": 2,
+            "name": "Pizza with pepperoni, stuffed crust",
+            "fdcNamesOfIngredientChoices": [
+                "Pizza with pepperoni, stuffed crust"
+            ],
+            "idsOfRecipesThatHaveThisCategory": [
+                1
+            ]
         }
     ]
 }
