@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147265270201188881}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,14 +32,15 @@ Transform:
   - {fileID: 6103803167526586675}
   - {fileID: 27685364899680246}
   - {fileID: 6159404438734995360}
+  - {fileID: 7234393245673594098}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4703574212853464928
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2147265270201188880}
     m_Modifications:
     - target: {fileID: 1581717258105976403, guid: 0975a667bd2f1479ea80c8967b87cf9f, type: 3}
@@ -90,17 +92,83 @@ PrefabInstance:
       value: FreeCoffeeMaker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0975a667bd2f1479ea80c8967b87cf9f, type: 3}
 --- !u!4 &6103803167526586675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1581717258105976403, guid: 0975a667bd2f1479ea80c8967b87cf9f, type: 3}
   m_PrefabInstance: {fileID: 4703574212853464928}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7200977828167383833
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2147265270201188880}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+      propertyPath: m_Name
+      value: CoffeeMaker
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+--- !u!4 &7234393245673594098 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 87f2ce164b502494cab17787aa06db2f, type: 3}
+  m_PrefabInstance: {fileID: 7200977828167383833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7955111964680199870
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2147265270201188880}
     m_Modifications:
     - target: {fileID: 7300254950089280498, guid: 177c52344eee54631af8ac52503d1ea3, type: 3}
@@ -152,6 +220,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 177c52344eee54631af8ac52503d1ea3, type: 3}
 --- !u!4 &27685364899680246 stripped
 Transform:
@@ -163,6 +234,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2147265270201188880}
     m_Modifications:
     - target: {fileID: 2657234724463046323, guid: 1c18ad21c7ffe42d0ac6bd53d86cf4ad, type: 3}
@@ -214,6 +286,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c18ad21c7ffe42d0ac6bd53d86cf4ad, type: 3}
 --- !u!4 &6159404438734995360 stripped
 Transform:
