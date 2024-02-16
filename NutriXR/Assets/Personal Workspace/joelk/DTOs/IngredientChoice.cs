@@ -17,13 +17,9 @@ namespace Personal_Workspace.joelk.DTOs
             [Serializable]
             public class FdcFoodNutrient
             {
-                public string type = "FoodNutrient";
+                public string type;
                 public double id;
                 public FdcNutrient nutrient;
-                public int dataPoints;
-                public float max;
-                public float min;
-                public float median;
                 public float amount;
 
                 [Serializable]

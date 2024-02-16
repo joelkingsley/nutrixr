@@ -9,6 +9,6 @@ namespace Personal_Workspace.joelk.DTOs
         public string id;
         public string name;
 
-        public List<int> idsOfIngredientCategories;
+        public List<int> ingredientCategories;
     }
 }
