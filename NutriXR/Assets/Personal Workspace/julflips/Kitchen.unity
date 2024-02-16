@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18263724, g: 0.22834894, b: 0.30714563, a: 1}
+  m_IndirectSpecularColor: {r: 0.18263672, g: 0.22834823, b: 0.30714434, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -893,12 +893,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741293267}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.06, y: -0, z: -0.46}
-  m_LocalScale: {x: 6, y: 6, z: 0.01}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.06, y: 0, z: 0.46}
+  m_LocalScale: {x: 6, y: 6, z: 0.009999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1785178914}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &769664810
 PrefabInstance:
@@ -3399,7 +3399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8868264100644430724, guid: 5aa38728fc18ee74885d84c9e992b001, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6580001
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 8868264100644430724, guid: 5aa38728fc18ee74885d84c9e992b001, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3407,7 +3407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8868264100644430724, guid: 5aa38728fc18ee74885d84c9e992b001, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.061
+      value: -2.074
       objectReference: {fileID: 0}
     - target: {fileID: 8868264100644430724, guid: 5aa38728fc18ee74885d84c9e992b001, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3749,7 +3749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9043793486667161118, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       propertyPath: m_Name
-      value: RoomCeiling
+      value: Ceiling
       objectReference: {fileID: 0}
     - target: {fileID: 9043793486667161118, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       propertyPath: m_IsActive
@@ -3779,9 +3779,16 @@ PrefabInstance:
     - {fileID: 8820566438574511965, guid: 4324507d163af4f849523295e146c7bf, type: 3}
     - {fileID: 2835828153200122593, guid: 4324507d163af4f849523295e146c7bf, type: 3}
     - {fileID: 3957229683302017742, guid: 4324507d163af4f849523295e146c7bf, type: 3}
+    - {fileID: 3470610866147418675, guid: 4324507d163af4f849523295e146c7bf, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
-      insertIndex: 9
+      insertIndex: 1
+      addedObject: {fileID: 410726862}
+    - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 741293271}
+    - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
+      insertIndex: 10
       addedObject: {fileID: 1155079769}
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       insertIndex: -1
@@ -3789,9 +3796,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2108813316}
-    - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 410726862}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4324507d163af4f849523295e146c7bf, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -3803,4 +3807,3 @@ SceneRoots:
   - {fileID: 2572309527171000704}
   - {fileID: 666132445}
   - {fileID: 1084929728}
-  - {fileID: 741293271}
