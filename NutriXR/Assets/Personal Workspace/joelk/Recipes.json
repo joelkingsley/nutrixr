@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Pepperoni Pizza",
-            "ingredientCategories": [
+            "inputIngredientCategories": [
                 {
                     "id": 2,
                     "ingredientWeight": 100
@@ -139,6 +139,10 @@
                 {
                     "id": 9,
                     "ingredientWeight": 30
+                },
+                {
+                    "id": 10,
+                    "ingredientWeight": 62.5
                 }
             ],
             "foodPortions": [
@@ -173,7 +177,7 @@
             "name": "Cupcake",
             "inputIngredientCategories": [
                 {
-                    "id": 10,
+                    "id": 11,
                     "ingredientWeight": 100
                 }
             ],
@@ -225,6 +229,38 @@
                     "gramWeight": 90,
                     "sequenceNumber": 1,
                     "portionDescription": "1 cupcake, any size"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Doughnut",
+            "inputIngredientCategories": [
+                {
+                    "id": 12,
+                    "ingredientWeight": 100
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Bean Salad",
+            "inputIngredientCategories": [
+                {
+                    "id": 13,
+                    "ingredientWeight": 660
+                },
+                {
+                    "id": 14,
+                    "ingredientWeight": 74.5
+                },
+                {
+                    "id": 15,
+                    "ingredientWeight": 80
+                },
+                {
+                    "id": 7,
+                    "ingredientWeight": 235
                 }
             ]
         }
