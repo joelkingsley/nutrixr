@@ -46,7 +46,7 @@ public class JSONReader : MonoBehaviour
     [Serializable]
     public class Category
     {
-        public int id;
+        public int categoryId;
         public string name;
         public String[] fdcNamesOfIngredientChoices;
     }
@@ -57,28 +57,34 @@ public class JSONReader : MonoBehaviour
         public Category[] ingredientCategories;
     }
 
-    public Recipes recipes;
-    public Ingredients ingredients;
-    public Categories categories;
+    public Recipe[] recipes;
+    public Dictionary<String, Ingredient> ingredients = new Dictionary<String, Ingredient>();
+    public Dictionary<int, Category> categories = new Dictionary<int, Category>();
 
     void Start()
     {
-        recipes = JsonUtility.FromJson<Recipes>(Recipejson.text);
+        recipes = JsonUtility.FromJson<Recipes>(Recipejson.text).recipes;
         /*foreach (Recipe recipe in recipes.recipes)
         {
             Debug.Log("Found recipe: " + recipe.id + " " + recipe.name);
         }*/
 
-        ingredients = JsonUtility.FromJson<Ingredients>(Ingredientjson.text);
-        /*foreach (Ingredient ingredient in ingredients.ingredientChoices)
+        foreach (Ingredient ingredient in JsonUtility.FromJson<Ingredients>(Ingredientjson.text).ingredientChoices)
         {
-            Debug.Log("Found ingredient: " + ingredient.fdcName + " | " + ingredient.data.description + " | " + ingredient.data.foodClass);
+            ingredients.Add(ingredient.fdcName, ingredient);
+        }
+        /*foreach (String key in ingredients.Keys)
+        {
+            Debug.Log("Found ingredient: " + key + " | " + ingredients[key].data.description + " | " + ingredients[key].data.foodClass);
         }*/
 
-        categories = JsonUtility.FromJson<Categories>(Categoryjson.text);
-        /*foreach (Category category in categories.ingredientCategories)
+        foreach (Category category in JsonUtility.FromJson<Categories>(Categoryjson.text).ingredientCategories)
         {
-            Debug.Log("Found category: " + category.id + " | " + category.name + " | " + category.fdcNamesOfIngredientChoices);
+            categories.Add(category.categoryId, category);
+        }
+        /*foreach (int key in categories.Keys)
+        {
+            Debug.Log("Found category: " + key + " | " + categories[key].name + " | " + categories[key].fdcNamesOfIngredientChoices);
         }*/
     }
 }
