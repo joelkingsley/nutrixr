@@ -35,6 +35,16 @@ public class Cooking : MonoBehaviour
     private void checkRecipies()
     {
         List<JSONReader.Recipe> validRecipies = new List<JSONReader.Recipe>(jsonReader.recipes);
-
+        foreach (JSONReader.Recipe recipe in jsonReader.recipes)
+        {
+            Debug.Log(recipe.name);
+            foreach (int categoryID in recipe.ingredientCategories)
+            {
+                foreach (String ingredient in jsonReader.categories[categoryID].fdcNamesOfIngredientChoices)
+                {
+                    Debug.Log(ingredient);
+                }
+            }
+        }
     }
 }
