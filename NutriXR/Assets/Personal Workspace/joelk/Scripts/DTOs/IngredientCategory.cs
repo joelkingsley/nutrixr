@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DTOs
+namespace Personal_Workspace.joelk.DTOs
 {
     [Serializable]
     public class IngredientCategory
