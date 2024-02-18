@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UIElements.Button;
+using Toggle = UnityEngine.UI.Toggle;
 
 public class UIHandler : MonoBehaviour
 {
@@ -11,6 +14,18 @@ public class UIHandler : MonoBehaviour
     public GameObject uiGameObject;
 
     public GameObject interactor;
+
+    public GameDataManager gameDataManager;
+
+    public TMP_InputField ageInputField;
+
+    public TMP_InputField heightInputField;
+
+    public Toggle toggleFemale;
+
+    public Toggle toggleMale;
+
+    public TMP_Dropdown activityLevel;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,5 +42,13 @@ public class UIHandler : MonoBehaviour
     {
         Destroy(uiGameObject);
         Destroy(interactor);
+        gameDataManager.WriteFile("{"+
+                                  $"\"age\":{ageInputField.text}," +
+                                  $"\"height\":{heightInputField.text}," +
+                                  $"\"female\":{toggleFemale.isOn}," +
+                                  $"\"male\":{toggleMale.isOn}," +
+                                  $"\"activity\":{activityLevel.value}"+
+                                  "}");
+
     }
 }

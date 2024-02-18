@@ -5,6 +5,9 @@ using UnityEngine;
 public class ItemSelector : MonoBehaviour
 {
     private OVRGrabber _ovrGrabber;
+
+    public OVRInput.Controller controller;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +26,8 @@ public class ItemSelector : MonoBehaviour
         }
     }
 
-    private void SelectItem(GameObject grabbedGameObject)
+    public void SelectItem(GameObject grabbedGameObject)
     {
-        var data = grabbedGameObject.GetComponent<NutritionalData>().GetAll();
-        Debug.Log(data);
-        Destroy(grabbedGameObject);
+        grabbedGameObject.GetComponent<FoodItem>().SelectFoodItem();
     }
 }
