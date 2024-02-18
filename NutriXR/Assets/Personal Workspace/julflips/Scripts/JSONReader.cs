@@ -18,7 +18,7 @@ public class JSONReader : MonoBehaviour
     }
 
     [Serializable]
-    public class Recipes
+    private class Recipes
     {
         public Recipe[] recipes;
     }
@@ -38,7 +38,7 @@ public class JSONReader : MonoBehaviour
     }
 
     [Serializable]
-    public class Ingredients
+    private class Ingredients
     {
         public Ingredient[] ingredientChoices;
     }
@@ -52,7 +52,7 @@ public class JSONReader : MonoBehaviour
     }
 
     [Serializable]
-    public class Categories
+    private class Categories
     {
         public Category[] ingredientCategories;
     }

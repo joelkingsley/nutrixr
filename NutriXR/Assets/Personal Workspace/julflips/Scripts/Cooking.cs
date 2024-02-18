@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,33 +19,53 @@ public class Cooking : MonoBehaviour
 
     }
 
-    private List<String> ingredients = new List<String>();
+    [SerializeField] private List<String> potIngredients; //ToDo: Remove [SerializeField]
     [SerializeField] private JSONReader jsonReader;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ingredient")
         {
-            Debug.Log("Add " + other.gameObject.name + " to Pot");
-            ingredients.Add(other.gameObject.name);
+            Debug.Log("Add " + other.gameObject.GetComponent<Ingredient>().fdcName + " to Pot");
+            potIngredients.Add(other.gameObject.GetComponent<Ingredient>().fdcName);
             Destroy(other.gameObject);
-            checkRecipies();
+
+            List<JSONReader.Recipe> possibleRecipes = checkRecipies();
+            /*foreach (JSONReader.Recipe recipe in possibleRecipes)
+            {
+                Debug.Log(recipe.name);
+            }*/
         }
     }
 
-    private void checkRecipies()
+    private List<JSONReader.Recipe> checkRecipies()
     {
-        List<JSONReader.Recipe> validRecipies = new List<JSONReader.Recipe>(jsonReader.recipes);
+        List<JSONReader.Recipe> validRecipies = new List<JSONReader.Recipe>();
+
         foreach (JSONReader.Recipe recipe in jsonReader.recipes)
         {
-            Debug.Log(recipe.name);
-            foreach (int categoryID in recipe.ingredientCategories)
+            bool isValidRecipe = true;
+            foreach (String potIngredient in potIngredients)
             {
-                foreach (String ingredient in jsonReader.categories[categoryID].fdcNamesOfIngredientChoices)
+                bool isInRecipe = false;
+                foreach (int categoryID in recipe.ingredientCategories)
                 {
-                    Debug.Log(ingredient);
+                    if (jsonReader.categories[categoryID].fdcNamesOfIngredientChoices.Contains(potIngredient))
+                    {
+                        isInRecipe = true;
+                    }
+                }
+                if (!isInRecipe)
+                {
+                    isValidRecipe = false;
                 }
             }
+
+            if (isValidRecipe)
+            {
+                validRecipies.Add(recipe);
+            }
         }
+        return validRecipies;
     }
 }
