@@ -11,14 +11,12 @@ public class Cooking : MonoBehaviour
     [SerializeField] private JSONReader jsonReader;
     [SerializeField] private GameObject Content;
     [SerializeField] private GameObject potUIElementPrefab;
-    [SerializeField] private GameObject surface;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ingredient")
         {
             addIngredient(other.gameObject);
-            Destroy(other.gameObject);
 
             List<JSONReader.Recipe> possibleRecipes = checkRecipies();
             /*foreach (JSONReader.Recipe recipe in possibleRecipes)
@@ -31,9 +29,11 @@ public class Cooking : MonoBehaviour
     private void addIngredient(GameObject ingredient)
     {
         Debug.Log("Add " + ingredient.GetComponent<Ingredient>().fdcName + " to Pot");
-        //GameObject UIElement = Instantiate(potUIElementPrefab);
-        //UIElement.GetComponent<PotIngredientUI>().surface = surface;
-        //UIElement.transform.parent = Content.transform;
+        GameObject UIElement = Instantiate(potUIElementPrefab, Content.transform);
+        ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        ingredient.transform.SetParent(UIElement.transform.GetChild(2));
+        ingredient.transform.localPosition = new Vector3();
+        ingredient.transform.localRotation = new Quaternion();
         potIngredients.Add(ingredient.GetComponent<Ingredient>().fdcName);
     }
 

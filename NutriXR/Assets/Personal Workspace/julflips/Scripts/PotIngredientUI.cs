@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PotIngredientUI : MonoBehaviour
 {
-    public GameObject surface;
     private float surfaceWidth = 0.4f;
     private Vector3 initialScale;
     private float scaleFactor = 30;
+    private Vector3 center;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class PotIngredientUI : MonoBehaviour
     {
         if (transform.hasChanged)
         {
-            float distanceToBorder = Mathf.Abs(transform.position.x - surface.transform.position.x) - (surfaceWidth / 2 - 0.06f);
+            float distanceToBorder = Mathf.Abs(transform.position.x - 0.5624f) - (surfaceWidth / 2 - 0.06f);
             transform.localScale = initialScale * Math.Clamp(1 - distanceToBorder * scaleFactor, 0, 1);
         }
     }
