@@ -20,6 +20,11 @@ public class HandNatuaralRender : MonoBehaviour
     // no real performance down grade, the skinnedmeshrenderers are set to enabled/disabled every frame as well
     void Update()
     {
+        if (_handLeft == null || _handRight == null || OVRManager.instance == null)
+        {
+            return;
+        }
+
         if (!_handLeft.enabled && !_handRight.enabled)
         {
             OVRManager.instance.controllerDrivenHandPosesType = OVRManager.ControllerDrivenHandPosesType.ConformingToController;
