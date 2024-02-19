@@ -9,8 +9,11 @@ public class OvenController : MonoBehaviour
 
     [SerializeField] private GameObject OvenDoor;
     [SerializeField] private GameObject OvenTray;
-
     [SerializeField] private GameObject TrayInteractable;
+
+    [SerializeField] private GameObject cube;
+
+    private bool isGrabbed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +25,43 @@ public class OvenController : MonoBehaviour
     void Update()
     {
         float current_rot = OvenDoor.transform.eulerAngles.x;
-        int threshold = 48;
+        int threshold = 48; //Degree of the oven door at which the tray closes automatically (Minimum Angle the door needs to be opened for the tray to be fully extended)
 
         if (current_rot < threshold)
         {
-            float test = (current_rot / threshold) * 0.4f;
-            OvenTray.transform.localPosition = new Vector3(OvenTray.transform.localPosition.x, OvenTray.transform.localPosition.y, Math.Min(OvenTray.transform.localPosition.z, test));
+            //Calculate the maximum distance the oven tray can be extended at the given door angle
+            float ext_distance = Math.Min((current_rot / threshold) * 0.4f, OvenTray.transform.localPosition.z);
+            OvenTray.transform.localPosition = new Vector3(OvenTray.transform.localPosition.x, OvenTray.transform.localPosition.y, ext_distance);
             TrayInteractable.SetActive(false);
 
             //if not grabbed: close automatically
-
+            if (!isGrabbed && current_rot > 1)
+            {
+                current_rot -= Time.deltaTime * 10;
+                OvenDoor.transform.eulerAngles = new Vector3(current_rot, OvenDoor.transform.eulerAngles.y, OvenDoor.transform.eulerAngles.z);
+            }
         }
         else
         {
             TrayInteractable.SetActive(true);
             //if not grabbed: open automatically
+            if (!isGrabbed && current_rot < 99)
+            {
+                current_rot += Time.deltaTime * 10;
+                OvenDoor.transform.eulerAngles = new Vector3(current_rot, OvenDoor.transform.eulerAngles.y, OvenDoor.transform.eulerAngles.z);
+            }
         }
+    }
+
+    public void GrabStart()
+    {
+        isGrabbed = true;
+        cube.GetComponent<Renderer>().material.color = Color.green;
+    }
+
+    public void GrabEnd()
+    {
+        isGrabbed = false;
+        cube.GetComponent<Renderer>().material.color = Color.red;
     }
 }
