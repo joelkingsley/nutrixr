@@ -7,27 +7,17 @@ using UnityEngine.UIElements;
 
 public class Cooking : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     [SerializeField] private List<String> potIngredients; //ToDo: Remove [SerializeField]
     [SerializeField] private JSONReader jsonReader;
+    [SerializeField] private GameObject Content;
+    [SerializeField] private GameObject potUIElementPrefab;
+    [SerializeField] private GameObject surface;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ingredient")
         {
-            Debug.Log("Add " + other.gameObject.GetComponent<Ingredient>().fdcName + " to Pot");
-            potIngredients.Add(other.gameObject.GetComponent<Ingredient>().fdcName);
+            addIngredient(other.gameObject);
             Destroy(other.gameObject);
 
             List<JSONReader.Recipe> possibleRecipes = checkRecipies();
@@ -36,6 +26,20 @@ public class Cooking : MonoBehaviour
                 Debug.Log(recipe.name);
             }*/
         }
+    }
+
+    private void addIngredient(GameObject ingredient)
+    {
+        Debug.Log("Add " + ingredient.GetComponent<Ingredient>().fdcName + " to Pot");
+        //GameObject UIElement = Instantiate(potUIElementPrefab);
+        //UIElement.GetComponent<PotIngredientUI>().surface = surface;
+        //UIElement.transform.parent = Content.transform;
+        potIngredients.Add(ingredient.GetComponent<Ingredient>().fdcName);
+    }
+
+    private void removeIngredient()
+    {
+
     }
 
     private List<JSONReader.Recipe> checkRecipies()
