@@ -11,8 +11,6 @@ public class OvenController : MonoBehaviour
     [SerializeField] private GameObject OvenTray;
     [SerializeField] private GameObject TrayInteractable;
 
-    [SerializeField] private GameObject cube;
-
     private bool isGrabbed = false;
 
     // Start is called before the first frame update
@@ -56,12 +54,10 @@ public class OvenController : MonoBehaviour
     public void GrabStart()
     {
         isGrabbed = true;
-        cube.GetComponent<Renderer>().material.color = Color.green;
     }
 
     public void GrabEnd()
     {
         isGrabbed = false;
-        cube.GetComponent<Renderer>().material.color = Color.red;
     }
 }
