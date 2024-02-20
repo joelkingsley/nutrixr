@@ -18,22 +18,19 @@ public class PotIngredientUI : MonoBehaviour
 
     void Update()
     {
-        float distanceToBorder = Mathf.Abs(transform.position.x - 0.5624f) - (surfaceWidth / 2 - 0.06f);
-        float newScalePercentage = Math.Clamp(1 - distanceToBorder * scaleFactor, 0, 1);
-        if (newScalePercentage == 0)
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-        else
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-            transform.localScale = initialScale * newScalePercentage;
-        }
-
-        /*if (transform.hasChanged)
+        if (transform.hasChanged)
         {
             float distanceToBorder = Mathf.Abs(transform.position.x - 0.5624f) - (surfaceWidth / 2 - 0.06f);
-            transform.localScale = initialScale * Math.Clamp(1 - distanceToBorder * scaleFactor, 0, 1);
-        }*/
+            float newScalePercentage = Math.Clamp(1 - distanceToBorder * scaleFactor, 0, 1);
+            if (newScalePercentage == 0)
+            {
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.localScale = initialScale * newScalePercentage;
+            }
+        }
     }
 }

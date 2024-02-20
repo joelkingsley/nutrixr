@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -28,14 +29,17 @@ public class Cooking : MonoBehaviour
 
     private void addIngredient(GameObject ingredient)
     {
-        Debug.Log("Add " + ingredient.GetComponent<Ingredient>().fdcName + " to Pot");
+        String fdcName = ingredient.GetComponent<Ingredient>().fdcName;
+        Debug.Log("Add " + fdcName + " to Pot");
         GameObject UIElement = Instantiate(potUIElementPrefab, Content.transform);
+        UIElement.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = fdcName;
         Quaternion oldRot = ingredient.transform.rotation;
         ingredient.transform.SetParent(UIElement.transform.GetChild(2), false);
-        ingredient.transform.localPosition = new Vector3();
-        ingredient.transform.rotation = oldRot;
         ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        potIngredients.Add(ingredient.GetComponent<Ingredient>().fdcName);
+        ingredient.transform.rotation = oldRot;
+        ingredient.transform.localPosition = new Vector3();
+        ingredient.GetComponent<Rigidbody>().velocity = new Vector3();
+        potIngredients.Add(fdcName);
     }
 
     private void removeIngredient()
