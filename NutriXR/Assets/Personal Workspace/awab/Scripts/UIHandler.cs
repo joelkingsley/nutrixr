@@ -9,11 +9,9 @@ using Toggle = UnityEngine.UI.Toggle;
 
 public class UIHandler : MonoBehaviour
 {
-    public Button done;
+    public Button Done;
 
     public GameObject uiGameObject;
-
-    public GameObject interactor;
 
     public GameDataManager gameDataManager;
 
@@ -40,8 +38,7 @@ public class UIHandler : MonoBehaviour
 
     public void DoneIsClicked()
     {
-        Destroy(uiGameObject);
-        Destroy(interactor);
+        uiGameObject.SetActive(false);
         gameDataManager.WriteFile("{"+
                                   $"\"age\":{ageInputField.text}," +
                                   $"\"height\":{heightInputField.text}," +

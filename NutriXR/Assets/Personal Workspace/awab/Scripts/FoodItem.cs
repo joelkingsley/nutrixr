@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Meta.Voice.Audio;
 using Oculus.Haptics;
+using Oculus.Interaction;
 using UnityEngine;
 
 public class FoodItem : MonoBehaviour
 {
     [SerializeField] private HapticClip hapticClipBackBag;
-    [SerializeField] private AudioClip audioClipBackBag;
     private HapticClipPlayer _hapticClipPlayer;
     public FoodItemData data;
     private AudioSource _audioClipPlayer;
@@ -39,14 +40,21 @@ public class FoodItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player")) return;
-        if (GetComponent<OVRGrabbable>().grabbedBy.GetComponent<ItemSelector>().controller ==
+        if (!other.gameObject.CompareTag("Player"))
+        {
+            var o = other.gameObject;
+            Debug.Log("other trigger name:" + o.name + "tag: " + o.tag);
+            return;
+        }
+
+        var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
+        if (interactors != null && interactors.First().GetComponent<ItemSelector>().controller ==
             OVRInput.Controller.LTouch)
         {
             _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
             _audioClipPlayer.Play();
         }
-        if (GetComponent<OVRGrabbable>().grabbedBy.GetComponent<ItemSelector>().controller ==
+        if (interactors != null && interactors.First().GetComponent<ItemSelector>().controller ==
             OVRInput.Controller.RTouch)
         {
             _hapticClipPlayer.Play(Oculus.Haptics.Controller.Right);
@@ -58,7 +66,7 @@ public class FoodItem : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        if (GetComponent<OVRGrabbable>().isGrabbed) return;
+        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select) return;
         SelectFoodItem();
 
 
@@ -67,7 +75,7 @@ public class FoodItem : MonoBehaviour
     public void SelectFoodItem()
     {
         Debug.Log(data.ToJson());
-        gameObject.SetActive(false);
         Debug.Log("Deleting: "+gameObject.name);
+        gameObject.SetActive(false);
     }
 }
