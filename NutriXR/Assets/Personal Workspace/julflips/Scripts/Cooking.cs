@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -34,10 +35,11 @@ public class Cooking : MonoBehaviour
         GameObject UIElement = Instantiate(potUIElementPrefab, Content.transform);
         UIElement.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = fdcName;
         Quaternion oldRot = ingredient.transform.rotation;
+        ingredient.GetComponentInChildren<Grabbable>().enabled = false;
         ingredient.transform.SetParent(UIElement.transform.GetChild(2), false);
-        ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         ingredient.transform.rotation = oldRot;
         ingredient.transform.localPosition = new Vector3();
+        ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         ingredient.GetComponent<Rigidbody>().velocity = new Vector3();
         potIngredients.Add(fdcName);
     }
