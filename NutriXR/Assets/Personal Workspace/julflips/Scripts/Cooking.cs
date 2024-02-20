@@ -30,10 +30,11 @@ public class Cooking : MonoBehaviour
     {
         Debug.Log("Add " + ingredient.GetComponent<Ingredient>().fdcName + " to Pot");
         GameObject UIElement = Instantiate(potUIElementPrefab, Content.transform);
-        ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        ingredient.transform.SetParent(UIElement.transform.GetChild(2));
+        Quaternion oldRot = ingredient.transform.rotation;
+        ingredient.transform.SetParent(UIElement.transform.GetChild(2), false);
         ingredient.transform.localPosition = new Vector3();
-        ingredient.transform.localRotation = new Quaternion();
+        ingredient.transform.rotation = oldRot;
+        ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         potIngredients.Add(ingredient.GetComponent<Ingredient>().fdcName);
     }
 
