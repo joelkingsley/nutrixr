@@ -5,8 +5,8 @@ using System.Linq;
 using Meta.Voice.Audio;
 using Oculus.Haptics;
 using Oculus.Interaction;
-using Oculus.Interaction.HandGrab;
 using UnityEngine;
+using InteractableState = Oculus.Interaction.InteractableState;
 
 public class FoodItem : MonoBehaviour
 {
@@ -48,14 +48,14 @@ public class FoodItem : MonoBehaviour
             return;
         }
 
-        var interactors = GetComponentInChildren<HandGrabInteractable>().SelectingInteractors;
-        if (interactors != null && interactors.First().GetComponent<ItemSelector>().controller ==
+        var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
+        if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
             OVRInput.Controller.LTouch)
         {
             _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
             _audioClipPlayer.Play();
         }
-        if (interactors != null && interactors.First().GetComponent<ItemSelector>().controller ==
+        if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
             OVRInput.Controller.RTouch)
         {
             _hapticClipPlayer.Play(Oculus.Haptics.Controller.Right);
@@ -67,7 +67,7 @@ public class FoodItem : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        if (GetComponentInChildren<HandGrabInteractable>().State == InteractableState.Select) return;
+        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select) return;
         SelectFoodItem();
 
 
