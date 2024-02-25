@@ -21,7 +21,7 @@ public class ItemSelector : MonoBehaviour
     {
         if (OVRInput.Get(OVRInput.Button.One))
         {
-            if (_grabInteractor.State == InteractorState.Select)
+            if (_grabInteractor.HasSelectedInteractable)
             {
                 SelectItem(_grabInteractor.SelectedInteractable.gameObject);
             }

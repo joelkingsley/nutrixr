@@ -14,6 +14,7 @@ public class FoodItem : MonoBehaviour
     private HapticClipPlayer _hapticClipPlayer;
     public FoodItemData data;
     private AudioSource _audioClipPlayer;
+    private GameObject _player;
 
 
      void Awake()
@@ -25,7 +26,7 @@ public class FoodItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -52,6 +53,7 @@ public class FoodItem : MonoBehaviour
         if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
             OVRInput.Controller.LTouch)
         {
+            //interactors.First().GetComponent<GrabInteractor>().get
             _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
             _audioClipPlayer.Play();
         }
@@ -75,6 +77,7 @@ public class FoodItem : MonoBehaviour
 
     public void SelectFoodItem()
     {
+        _player.GetComponent<Basket>().AddToBasket(this);
         Debug.Log(data.ToJson());
         Debug.Log("Deleting: "+gameObject.name);
         gameObject.SetActive(false);
