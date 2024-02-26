@@ -520,35 +520,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4753237801705847389, guid: e31bc46e314947643b76c1f87a79da6b, type: 3}
   m_PrefabInstance: {fileID: 960571678}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1282767651 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3459203516096097979, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
-  m_PrefabInstance: {fileID: 5692034665477154508}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1282767654 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6875215158334125522, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
-  m_PrefabInstance: {fileID: 5692034665477154508}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282767651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b47e36715521d4e8a30d2c5b6e83e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1282767655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282767651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 499eb81abe9bf03409720539fda5d1f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraRigRef: {fileID: 1282767654}
 --- !u!1001 &1742996794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1244,7 +1215,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1199393675439874038, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5580290416890970576, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
       propertyPath: AllowRecenter
@@ -1344,9 +1315,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5580290416900699188, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4653600263366887393}
-    - targetCorrespondingSourceObject: {fileID: 3459203516096097979, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1282767655}
   m_SourcePrefab: {fileID: 100100000, guid: bdca828993316bc4da62d17ebf755d09, type: 3}
 --- !u!23 &5962364394579595651
 MeshRenderer:
