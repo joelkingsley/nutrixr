@@ -46,7 +46,6 @@ public class StickMovement : MonoBehaviour
 
         if (primaryAxis.x != 0 || primaryAxis.y != 0)
         {
-            UnityEngine.Debug.Log(ort.eulerAngles);
             transform.Translate(moveDir * (Speed * Time.fixedDeltaTime));
         }
     }
