@@ -5628,63 +5628,6 @@ RectTransform:
   m_AnchoredPosition: {x: -110.999504, y: -30}
   m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0, y: 0.5}
---- !u!1001 &1827981933975967968
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1785178914}
-    m_Modifications:
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.589
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0050001144
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.217
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6446004236171989183, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-      propertyPath: m_Name
-      value: Next Gen Refrigerator
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
 --- !u!114 &2334935014289752430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6164,7 +6107,7 @@ PrefabInstance:
       addedObject: {fileID: 741293271}
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       insertIndex: 8
-      addedObject: {fileID: 5886929299474304865}
+      addedObject: {fileID: 4577284854673717363}
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       insertIndex: 10
       addedObject: {fileID: 1155079769}
@@ -6372,6 +6315,11 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!4 &4577284854673717363 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+  m_PrefabInstance: {fileID: 5929302960156700808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4912986490781766375
 GameObject:
   m_ObjectHideFlags: 0
@@ -6439,11 +6387,63 @@ MonoBehaviour:
   _loop: 0
   _chanceToPlay: 100
   _playOnStart: 0
---- !u!4 &5886929299474304865 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2799976387977552019, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
-  m_PrefabInstance: {fileID: 1827981933975967968}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5929302960156700808
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1785178914}
+    m_Modifications:
+    - target: {fileID: 5319455572401512136, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_Name
+      value: Next Gen Refrigerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.589
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0050001144
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.217
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145300898078625546, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 919c0594a33e5b64c8023a20f62e6866, type: 3}
 --- !u!114 &6524816347371959133
 MonoBehaviour:
   m_ObjectHideFlags: 0
