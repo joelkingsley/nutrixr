@@ -6107,9 +6107,12 @@ PrefabInstance:
       addedObject: {fileID: 741293271}
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       insertIndex: 8
+      addedObject: {fileID: 2873514692193566733}
+    - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
+      insertIndex: 9
       addedObject: {fileID: 4577284854673717363}
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
-      insertIndex: 10
+      insertIndex: 11
       addedObject: {fileID: 1155079769}
     - targetCorrespondingSourceObject: {fileID: 8743355301617260299, guid: 4324507d163af4f849523295e146c7bf, type: 3}
       insertIndex: -1
@@ -6218,6 +6221,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &2873514692193566733 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+  m_PrefabInstance: {fileID: 4100297402441481151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2903842226434304299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6285,6 +6293,63 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &4100297402441481151
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1785178914}
+    m_Modifications:
+    - target: {fileID: 5857343689975197409, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_Name
+      value: Next Gen Mirkowave
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.614
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7636
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162852524317391946, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71ebeb6eda6c8df48a927fa01dac4c00, type: 3}
 --- !u!114 &4348320426471486697
 MonoBehaviour:
   m_ObjectHideFlags: 0
