@@ -280,6 +280,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d102573385ce73c4cb5b2ef335b809b3, type: 3}
+--- !u!1 &621699384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8108644239635460032, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
+  m_PrefabInstance: {fileID: 8588784393797395372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 716799843}
+  - component: {fileID: 716799844}
   m_Layer: 0
   m_Name: GhostHandRight
   m_TagString: Untagged
@@ -566,6 +572,20 @@ Transform:
   - {fileID: 1623519048}
   m_Father: {fileID: 855807081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &716799844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716799842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4bf85ea804e664d8ac03c7390227a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyntheticHand: {fileID: 1090726370}
+  handGrabInteractor: {fileID: 8588784393797395373}
 --- !u!1 &748706014
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +647,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6280009800296539066, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
   m_PrefabInstance: {fileID: 8588784393797395372}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1232515706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3108644144460042128, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
+  m_PrefabInstance: {fileID: 8588784393797395372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9067480af55f5874d8f613b16812f968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1250817636 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2766290929299075030, guid: d102573385ce73c4cb5b2ef335b809b3, type: 3}
@@ -1160,11 +1191,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062696086330804866, guid: d102573385ce73c4cb5b2ef335b809b3, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9062696086330804866, guid: d102573385ce73c4cb5b2ef335b809b3, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9062696086330804866, guid: d102573385ce73c4cb5b2ef335b809b3, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1290,7 +1321,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785594083}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c36e28c647119459416d4f7173df14, type: 3}
   m_Name: 
@@ -1325,13 +1356,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859040960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.45451948, y: 0.5416752, z: -0.5416752, w: 0.45451948}
-  m_LocalPosition: {x: 0.04, y: -0.04, z: -0.11}
+  m_LocalRotation: {x: -0.45451948, y: 0.5416752, z: 0.5416752, w: 0.45451948}
+  m_LocalPosition: {x: -0.04, y: 0.04, z: 0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2111508051}
-  m_LocalEulerAnglesHint: {x: 90, y: 100, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 100, z: 0}
 --- !u!33 &1859040962
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1527,6 +1558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111508051}
+  - component: {fileID: 2111508052}
   m_Layer: 0
   m_Name: GhostHandLeft
   m_TagString: Untagged
@@ -1550,6 +1582,20 @@ Transform:
   - {fileID: 1859040961}
   m_Father: {fileID: 1283816184}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2111508052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111508050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4bf85ea804e664d8ac03c7390227a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyntheticHand: {fileID: 621699384}
+  handGrabInteractor: {fileID: 1232515706}
 --- !u!1001 &44910816629290362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1690,6 +1736,17 @@ PrefabInstance:
       addedObject: {fileID: 716799843}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
+--- !u!114 &8588784393797395373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 337263401847579683, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
+  m_PrefabInstance: {fileID: 8588784393797395372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9067480af55f5874d8f613b16812f968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
