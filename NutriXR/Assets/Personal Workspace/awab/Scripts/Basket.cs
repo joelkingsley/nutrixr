@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Meta.WitAi.Drawers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Basket : MonoBehaviour
 {
@@ -28,20 +30,39 @@ public class Basket : MonoBehaviour
 
     public void AddToBasket(FoodItem foodItem)
     {
-        GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
-        newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = foodItem.data.name;
-        var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
-        var x = mAnchoredPosition.anchoredPosition.x;
-        var y = mAnchoredPosition.anchoredPosition.y;
-        mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30*selectedItems.Count));
-        GameObject itemPrefabInEntry = Instantiate(foodItem.gameObject, newBasketEntry.transform);
-        itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
-        Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
-        itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
-        itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-        itemPrefabInEntry.transform.localRotation= transform.parent.rotation;
         selectedItems.Add(foodItem);
+        Redraw();
+    }
 
+    private void Redraw()
+    {
+        foreach(Transform child in basketUIScrollViewContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (var index = 0; index < selectedItems.Count; index++)
+        {
+            var item = selectedItems[index];
+            GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
+            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.data.name;
+            var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
+            var x = mAnchoredPosition.anchoredPosition.x;
+            var y = mAnchoredPosition.anchoredPosition.y;
+            mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
+            GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
+            itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
+            itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
+            itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
+            itemPrefabInEntry.transform.localRotation = transform.parent.rotation;
+            newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
+            {
+                selectedItems.Remove(item);
+                Redraw();
+            });
+            itemPrefabInEntry.SetActive(true);
+        }
     }
 }
