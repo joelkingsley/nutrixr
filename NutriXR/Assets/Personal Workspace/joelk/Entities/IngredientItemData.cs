@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Personal_Workspace.joelk.DTOs;
 using Unity.VisualScripting;
 
@@ -13,19 +14,42 @@ namespace Personal_Workspace.joelk.Entities
         {
             name = ingredientChoice.name;
             fdcName = ingredientChoice.fdcName;
-            fat = ingredientChoice.data.foodNutrients.Find(nutrient => nutrient.nutrient.name == "Total fat (NLEA)")
-                .amount;
-            sugar = ingredientChoice.data.foodNutrients.Find(
-                nutrient => nutrient.nutrient.name == "Sugars, total including NLEA" | nutrient.nutrient.name ==
-                    "Sugars, Total").amount;
-            carbohydrates = ingredientChoice.data.foodNutrients.Find(
-                    nutrient => nutrient.nutrient.name == "Carbohydrate, by difference").amount;
-            protein = ingredientChoice.data.foodNutrients.Find(
-                nutrient => nutrient.nutrient.name == "Protein").amount;
-            calories = ingredientChoice.data.foodNutrients.Find(nutrient =>
-                nutrient.nutrient.name == "Energy" & nutrient.nutrient.unitName == "kJ").amount;
-            caloriesInKcal = ingredientChoice.data.foodNutrients.Find(nutrient =>
-                nutrient.nutrient.name == "Energy" & nutrient.nutrient.unitName == "kcal").amount;
+            var fatIndex = ingredientChoice.data.foodNutrients.FindIndex(
+                    nutrient => nutrient.nutrient.name == "Total fat (NLEA)");
+            if (fatIndex >= 0)
+            {
+                fat = ingredientChoice.data.foodNutrients[fatIndex].amount;
+            }
+            var sugarIndex = ingredientChoice.data.foodNutrients.FindIndex(
+                nutrient => nutrient.nutrient.name == "Sugars, total including NLEA" | nutrient.nutrient.name == "Sugars, Total");
+            if (sugarIndex >= 0)
+            {
+                sugar = ingredientChoice.data.foodNutrients[sugarIndex].amount;
+            }
+            var carbohydratesIndex = ingredientChoice.data.foodNutrients.FindIndex(
+                    nutrient => nutrient.nutrient.name == "Carbohydrate, by difference");
+            if (carbohydratesIndex >= 0)
+            {
+                carbohydrates = ingredientChoice.data.foodNutrients[carbohydratesIndex].amount;
+            }
+            var proteinIndex = ingredientChoice.data.foodNutrients.FindIndex(
+                nutrient => nutrient.nutrient.name == "Protein");
+            if (proteinIndex >= 0)
+            {
+                protein = ingredientChoice.data.foodNutrients[proteinIndex].amount;
+            }
+            var caloriesIndex = ingredientChoice.data.foodNutrients.FindIndex(nutrient =>
+                nutrient.nutrient.name == "Energy" & nutrient.nutrient.unitName == "kJ");
+            if (caloriesIndex >= 0)
+            {
+                calories = ingredientChoice.data.foodNutrients[caloriesIndex].amount;
+            }
+            var caloriesInKcalIndex = ingredientChoice.data.foodNutrients.FindIndex(nutrient =>
+                nutrient.nutrient.name == "Energy" & nutrient.nutrient.unitName == "kcal");
+            if (caloriesInKcalIndex >= 0)
+            {
+                caloriesInKcal = ingredientChoice.data.foodNutrients[caloriesInKcalIndex].amount;
+            }
             isIngredient = true;
         }
     }
