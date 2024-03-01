@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Personal_Workspace.joelk.Scripts
 {
-    public class NutritionUIHandler : MonoBehaviour
+    public class IngredientNutritionUIHandler : MonoBehaviour
     {
         public TMP_Text nameComponent;
         public TMP_Text proteinTextComponent;
@@ -49,9 +49,12 @@ namespace Personal_Workspace.joelk.Scripts
             recipeList = JsonUtility.FromJson<RecipeList>(recipeJson.text);
             ingredientCategoryList = JsonUtility.FromJson<IngredientCategoryList>(ingredientCategoryJson.text);
             ingredientChoiceList = JsonUtility.FromJson<IngredientChoiceList>(ingredientChoiceJson.text);
+
+            // Choosing the first ingredient from a list of all ingredient (choices)
             var ingredientItems =
                 ingredientChoiceList.ingredientChoices.Select(choice => new IngredientItemData(choice)).ToList();
             Debug.Log(ingredientItems.First().protein);
+
             nameComponent.text = ingredientItems.First().name;
             proteinTextComponent.text = $"{ingredientItems.First().protein} g";
             carbohydratesTextComponent.text = $"{ingredientItems.First().carbohydrates} g";
