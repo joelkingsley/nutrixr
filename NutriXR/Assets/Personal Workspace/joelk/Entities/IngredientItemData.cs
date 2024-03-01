@@ -15,7 +15,7 @@ namespace Personal_Workspace.joelk.Entities
             name = ingredientChoice.name;
             fdcName = ingredientChoice.fdcName;
             var fatIndex = ingredientChoice.data.foodNutrients.FindIndex(
-                    nutrient => nutrient.nutrient.name == "Total fat (NLEA)");
+                    nutrient => nutrient.nutrient.name == "Total fat (NLEA)" | nutrient.nutrient.name == "Total lipid (fat)");
             if (fatIndex >= 0)
             {
                 fat = ingredientChoice.data.foodNutrients[fatIndex].amount;
