@@ -8,19 +8,20 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Basket : MonoBehaviour
+public class RecipeSystem : MonoBehaviour
 {
-    public List<FoodItem> selectedItems;
+    private List<FoodItem> _selectedItems;
     [SerializeField]
-    private GameObject basketUIScrollViewContent;
+    private GameObject recipeUIScrollViewContent;
 
-    private RecipeSystem _recipeSystem;
+    private List<FoodItem> _possibleRecipes;
 
-    [SerializeField] private GameObject basketEntryPrefab;
+    [SerializeField]
+    private GameObject recipeEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        _recipeSystem = GetComponent<RecipeSystem>();
+        _selectedItems = GetComponent<Basket>().selectedItems;
     }
 
     // Update is called once per frame
@@ -29,24 +30,22 @@ public class Basket : MonoBehaviour
 
     }
 
-    public void AddToBasket(FoodItem foodItem)
+    public void RedrawRecipeUI()
     {
-        selectedItems.Add(foodItem);
-        _recipeSystem.RedrawRecipeUI();
-        Redraw();
-    }
-
-    private void Redraw()
-    {
-        foreach(Transform child in basketUIScrollViewContent.transform)
+        //clear the UI
+        foreach(Transform child in recipeUIScrollViewContent.transform)
         {
             Destroy(child.gameObject);
         }
-
-        for (var index = 0; index < selectedItems.Count; index++)
+        /*
+         *
+         * TODO: Calculate the _possibleRecipes here
+         *
+         */
+        for (var index = 0; index < _possibleRecipes.Count; index++)
         {
-            var item = selectedItems[index];
-            GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
+            var item = _selectedItems[index];
+            GameObject newBasketEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
             newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.data.name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
@@ -59,12 +58,6 @@ public class Basket : MonoBehaviour
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
             itemPrefabInEntry.transform.localRotation = transform.parent.rotation;
-            newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
-            {
-                selectedItems.Remove(item);
-                _recipeSystem.RedrawRecipeUI();
-                Redraw();
-            });
             itemPrefabInEntry.SetActive(true);
         }
     }
