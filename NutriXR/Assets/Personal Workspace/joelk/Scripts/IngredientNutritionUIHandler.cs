@@ -1,18 +1,26 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Personal_Workspace.joelk.DTOs;
 using Personal_Workspace.joelk.Entities;
+using TMPro;
 using UnityEngine;
 
-namespace Personal_Workspace.joelk
+namespace Personal_Workspace.joelk.Scripts
 {
-    public class JsonReader : MonoBehaviour
+    public class IngredientNutritionUIHandler : MonoBehaviour
     {
+        public TMP_Text nameComponent;
+        public TMP_Text proteinTextComponent;
+        public TMP_Text carbohydratesTextComponent;
+        public TMP_Text fatsTextComponent;
+        public TMP_Text sugarTextComponent;
+        public TMP_Text caloriesTextComponent;
+
         public RecipeList recipeList;
         public IngredientCategoryList ingredientCategoryList;
         public IngredientChoiceList ingredientChoiceList;
-        public List<IngredientItemData> ingredientItems;
         public TextAsset recipeJson;
         public TextAsset ingredientCategoryJson;
         public TextAsset ingredientChoiceJson;
@@ -42,8 +50,17 @@ namespace Personal_Workspace.joelk
             ingredientCategoryList = JsonUtility.FromJson<IngredientCategoryList>(ingredientCategoryJson.text);
             ingredientChoiceList = JsonUtility.FromJson<IngredientChoiceList>(ingredientChoiceJson.text);
 
-            ingredientItems =
+            // Choosing the first ingredient from a list of all ingredient (choices)
+            var ingredientItems =
                 ingredientChoiceList.ingredientChoices.Select(choice => new IngredientItemData(choice)).ToList();
+            Debug.Log(ingredientItems.First().protein);
+
+            nameComponent.text = ingredientItems.First().name;
+            proteinTextComponent.text = $"{ingredientItems.First().protein} g";
+            carbohydratesTextComponent.text = $"{ingredientItems.First().carbohydrates} g";
+            fatsTextComponent.text = $"{ingredientItems.First().fat} g";
+            sugarTextComponent.text = $"{ingredientItems.First().sugar} g";
+            caloriesTextComponent.text = $"{ingredientItems.First().caloriesInKcal} kcal";
         }
 
         // Update is called once per frame
