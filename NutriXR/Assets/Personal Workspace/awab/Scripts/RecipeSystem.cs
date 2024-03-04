@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
-using System.Linq;
-using Meta.WitAi.Drawers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class RecipeSystem : MonoBehaviour
 {
@@ -22,6 +17,7 @@ public class RecipeSystem : MonoBehaviour
     void Start()
     {
         _selectedItems = GetComponent<Basket>().selectedItems;
+
     }
 
     // Update is called once per frame
@@ -42,16 +38,17 @@ public class RecipeSystem : MonoBehaviour
          * TODO: Calculate the _possibleRecipes here
          *
          */
+        _selectedItems = new List<FoodItem>();
         for (var index = 0; index < _possibleRecipes.Count; index++)
         {
             var item = _selectedItems[index];
-            GameObject newBasketEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
-            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.data.name;
-            var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
+            GameObject recipeEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
+            recipeEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.data.name;
+            var mAnchoredPosition = recipeEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
-            GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
+            GameObject itemPrefabInEntry = Instantiate(item.gameObject, recipeEntry.transform);
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
