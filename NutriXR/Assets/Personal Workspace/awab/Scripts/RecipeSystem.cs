@@ -39,6 +39,13 @@ public class RecipeSystem : MonoBehaviour
          *
          */
         _selectedItems = new List<FoodItem>();
+        foreach (var foodItem in _selectedItems)
+        {
+            //(Early vision for the code)
+            //foreach recipe in _allRecipes:
+            //  if fooditem.category in recipe.ingredients:
+            //      _possibleRecipes.Add(recipe)
+        }
         for (var index = 0; index < _possibleRecipes.Count; index++)
         {
             var item = _selectedItems[index];
