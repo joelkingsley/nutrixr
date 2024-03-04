@@ -28,11 +28,15 @@ public class Basket : MonoBehaviour
     public void AddToBasket(FoodItem foodItem)
     {
         selectedItems.Add(foodItem);
-        _recipeSystem.RedrawRecipeUI();
-        Redraw();
-    }
+        if (basketUIScrollViewContent.activeSelf)
+        {
+            Redraw();
+            _recipeSystem.RedrawRecipeUI();
+        }
 
-    private void Redraw()
+}
+
+    public void Redraw()
     {
         foreach(Transform child in basketUIScrollViewContent.transform)
         {

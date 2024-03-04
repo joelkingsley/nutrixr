@@ -14,7 +14,7 @@ public class UIHandler : MonoBehaviour
 
     public GameObject personalDataUI;
 
-    public GameObject LeftHandUI;
+    public GameObject leftHandUI;
 
     public GameDataManager gameDataManager;
 
@@ -27,6 +27,10 @@ public class UIHandler : MonoBehaviour
     public Toggle toggleMale;
 
     public TMP_Dropdown activityLevel;
+
+    private Basket _basket;
+
+    private RecipeSystem _recipeSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +40,20 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TODO move this code to another script
         if (OVRInput.Get(OVRInput.Button.Three))
         {
-            LeftHandUI.SetActive(!LeftHandUI.activeSelf);
+            leftHandUI.SetActive(!leftHandUI.activeSelf);
+            if (leftHandUI.activeSelf)
+            {
+                leftHandUI.SetActive(false);
+            }
+            else
+            {
+                leftHandUI.SetActive(true);
+                _basket.Redraw();
+                _recipeSystem.RedrawRecipeUI();
+            }
         }
     }
 
