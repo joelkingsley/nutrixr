@@ -6,6 +6,7 @@ using Meta.Voice.Audio;
 using Oculus.Haptics;
 using Oculus.Interaction;
 using UnityEngine;
+using InteractableState = Oculus.Interaction.InteractableState;
 
 public class FoodItem : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class FoodItem : MonoBehaviour
     private HapticClipPlayer _hapticClipPlayer;
     public FoodItemData data;
     private AudioSource _audioClipPlayer;
-
+    private GameObject _player;
+    private bool _readyForSelection;
 
      void Awake()
      {
@@ -24,7 +26,7 @@ public class FoodItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -47,18 +49,23 @@ public class FoodItem : MonoBehaviour
             return;
         }
 
-        var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
-        if (interactors != null && interactors.First().GetComponent<ItemSelector>().controller ==
-            OVRInput.Controller.LTouch)
+        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
         {
-            _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
+            var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
+            if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
+                OVRInput.Controller.LTouch)
+            {
+                _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
+
+            }
+            if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
+                OVRInput.Controller.RTouch)
+            {
+                _hapticClipPlayer.Play(Oculus.Haptics.Controller.Right);
+
+            }
             _audioClipPlayer.Play();
-        }
-        if (interactors != null && interactors.First().GetComponent<ItemSelector>().controller ==
-            OVRInput.Controller.RTouch)
-        {
-            _hapticClipPlayer.Play(Oculus.Haptics.Controller.Right);
-            _audioClipPlayer.Play();
+            _readyForSelection = true;
         }
 
     }
@@ -66,14 +73,22 @@ public class FoodItem : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select) return;
-        SelectFoodItem();
+        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
+        {
+            _readyForSelection = false;
+            return;
+        }
+        if (_readyForSelection)
+        {
+            SelectFoodItem();
+        }
 
 
     }
 
     public void SelectFoodItem()
     {
+        _player.GetComponent<Basket>().AddToBasket(this);
         Debug.Log(data.ToJson());
         Debug.Log("Deleting: "+gameObject.name);
         gameObject.SetActive(false);

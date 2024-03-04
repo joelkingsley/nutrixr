@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Personal_Workspace.joelk.DTOs;
+using Personal_Workspace.joelk.Entities;
 using UnityEngine;
 
 namespace Personal_Workspace.joelk
@@ -9,6 +12,7 @@ namespace Personal_Workspace.joelk
         public RecipeList recipeList;
         public IngredientCategoryList ingredientCategoryList;
         public IngredientChoiceList ingredientChoiceList;
+        public List<IngredientItemData> ingredientItems;
         public TextAsset recipeJson;
         public TextAsset ingredientCategoryJson;
         public TextAsset ingredientChoiceJson;
@@ -16,19 +20,19 @@ namespace Personal_Workspace.joelk
         [Serializable]
         public class RecipeList
         {
-            public Recipe[] recipes;
+            public List<Recipe> recipes;
         }
 
         [Serializable]
         public class IngredientCategoryList
         {
-            public IngredientCategory[] ingredientCategories;
+            public List<IngredientCategory> ingredientCategories;
         }
 
         [Serializable]
         public class IngredientChoiceList
         {
-            public IngredientChoice[] ingredientChoices;
+            public List<IngredientChoice> ingredientChoices;
         }
 
         // Start is called before the first frame update
@@ -37,6 +41,9 @@ namespace Personal_Workspace.joelk
             recipeList = JsonUtility.FromJson<RecipeList>(recipeJson.text);
             ingredientCategoryList = JsonUtility.FromJson<IngredientCategoryList>(ingredientCategoryJson.text);
             ingredientChoiceList = JsonUtility.FromJson<IngredientChoiceList>(ingredientChoiceJson.text);
+
+            ingredientItems =
+                ingredientChoiceList.ingredientChoices.Select(choice => new IngredientItemData(choice)).ToList();
         }
 
         // Update is called once per frame
