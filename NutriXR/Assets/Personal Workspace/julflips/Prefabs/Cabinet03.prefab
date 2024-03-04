@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8315494335849529621}
   - component: {fileID: 4956573815403089584}
   - component: {fileID: 7146578010710899322}
-  - component: {fileID: 4867286620683591970}
+  - component: {fileID: 3181503045027069709}
   m_Layer: 0
   m_Name: Cabinet03
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4867286620683591970
-BoxCollider:
+--- !u!64 &3181503045027069709
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,9 +105,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.1854801, y: 0.8905718, z: 0.62729675}
-  m_Center: {x: -0.0000022649765, y: 0.44528624, z: -0.009691387}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6006143915910037280, guid: 965726bb3b2db4202a03b91e27528d39, type: 3}
 --- !u!1001 &3420525675983627684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,10 +249,6 @@ PrefabInstance:
       propertyPath: _handGrabPoses.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4660890864541126071, guid: 9e8029e7a3033734b91970f017bfb91f, type: 3}
-      propertyPath: _handGrabPoses.Array.data[0]
-      value: 
-      objectReference: {fileID: 6119925158043688852}
     - target: {fileID: 7521935824444666965, guid: 9e8029e7a3033734b91970f017bfb91f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0018000603
@@ -302,14 +299,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7521935824444666965, guid: 9e8029e7a3033734b91970f017bfb91f, type: 3}
   m_PrefabInstance: {fileID: 9048203682538185814}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6119925158043688852 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2990384444432088002, guid: 9e8029e7a3033734b91970f017bfb91f, type: 3}
-  m_PrefabInstance: {fileID: 9048203682538185814}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

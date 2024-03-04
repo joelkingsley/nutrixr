@@ -116,9 +116,9 @@ GameObject:
   - component: {fileID: 7521935824444666965}
   - component: {fileID: 3334410203207339608}
   - component: {fileID: 2543339568931320956}
-  - component: {fileID: 4765431564575809168}
   - component: {fileID: 775169519091079906}
   - component: {fileID: 4748458955520602608}
+  - component: {fileID: 134285192359332535}
   m_Layer: 0
   m_Name: DrawerBig
   m_TagString: Untagged
@@ -193,27 +193,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4765431564575809168
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290027194037474035}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9946797, y: 0.1711514, z: 0.56403464}
-  m_Center: {x: 0, y: -0.00000011920929, z: -0.26348278}
 --- !u!54 &775169519091079906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -273,6 +252,28 @@ MonoBehaviour:
     MaxZ:
       Constrain: 1
       Value: 0.45
+--- !u!64 &134285192359332535
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290027194037474035}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4067081735716088782, guid: d1c98a9ae66fa4a35818bf0bdc74e7eb, type: 3}
 --- !u!1 &2208427458559937772
 GameObject:
   m_ObjectHideFlags: 0
