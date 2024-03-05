@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 
 public class ItemSelector : MonoBehaviour
 {
-    private GrabInteractor _grabInteractor;
+    private HandGrabInteractor _grabInteractor;
 
     public OVRInput.Controller controller;
 
     // Start is called before the first frame update
     void Start()
     {
-        _grabInteractor = GetComponent<GrabInteractor>();
+        _grabInteractor = GetComponent<HandGrabInteractor>();
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class ItemSelector : MonoBehaviour
     {
         if (OVRInput.Get(OVRInput.Button.One))
         {
-            if (_grabInteractor.State == InteractorState.Select)
+            if (_grabInteractor.HasSelectedInteractable)
             {
                 SelectItem(_grabInteractor.SelectedInteractable.gameObject);
             }

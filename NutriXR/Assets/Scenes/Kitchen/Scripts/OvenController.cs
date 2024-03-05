@@ -9,7 +9,6 @@ public class OvenController : MonoBehaviour
 
     [SerializeField] private GameObject OvenDoor;
     [SerializeField] private GameObject OvenTray;
-    [SerializeField] private GameObject TrayInteractable;
 
     private bool isGrabbed = false;
 
@@ -30,7 +29,7 @@ public class OvenController : MonoBehaviour
             //Calculate the maximum distance the oven tray can be extended at the given door angle
             float ext_distance = Math.Min((current_rot / threshold) * 0.4f, OvenTray.transform.localPosition.z);
             OvenTray.transform.localPosition = new Vector3(OvenTray.transform.localPosition.x, OvenTray.transform.localPosition.y, ext_distance);
-            TrayInteractable.SetActive(false);
+            OvenTray.GetComponentInChildren<Grabbable>().enabled = false;
 
             //if not grabbed: close automatically
             if (!isGrabbed && current_rot > 1)
@@ -41,7 +40,7 @@ public class OvenController : MonoBehaviour
         }
         else
         {
-            TrayInteractable.SetActive(true);
+            OvenTray.GetComponentInChildren<Grabbable>().enabled = true;
             //if not grabbed: open automatically
             if (!isGrabbed && current_rot < 99)
             {
