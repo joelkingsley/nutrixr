@@ -54,7 +54,7 @@ public class Basket : MonoBehaviour
             mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
             GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
-            Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
+            //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);

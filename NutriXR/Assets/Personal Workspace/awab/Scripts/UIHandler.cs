@@ -34,16 +34,15 @@ public class UIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _basket = GetComponent<Basket>();
+        _recipeSystem = GetComponent<RecipeSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // TODO move this code to another script
-        if (OVRInput.Get(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.Three))
         {
-            leftHandUI.SetActive(!leftHandUI.activeSelf);
             if (leftHandUI.activeSelf)
             {
                 leftHandUI.SetActive(false);

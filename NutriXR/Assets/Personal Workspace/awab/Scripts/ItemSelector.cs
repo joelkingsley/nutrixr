@@ -19,13 +19,13 @@ public class ItemSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.One))
+        /*if (OVRInput.Get(OVRInput.Button.One))
         {
             if (_grabInteractor.HasSelectedInteractable)
             {
                 SelectItem(_grabInteractor.SelectedInteractable.gameObject);
             }
-        }
+        }*/
     }
 
     public void SelectItem(GameObject grabbedGameObject)
