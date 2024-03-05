@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Toggle = UnityEngine.UI.Toggle;
@@ -11,7 +12,9 @@ public class UIHandler : MonoBehaviour
 {
     public Button Done;
 
-    public GameObject uiGameObject;
+    public GameObject personalDataUI;
+
+    public GameObject leftHandUI;
 
     public GameDataManager gameDataManager;
 
@@ -24,6 +27,10 @@ public class UIHandler : MonoBehaviour
     public Toggle toggleMale;
 
     public TMP_Dropdown activityLevel;
+
+    private Basket _basket;
+
+    private RecipeSystem _recipeSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +40,26 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // TODO move this code to another script
+        if (OVRInput.Get(OVRInput.Button.Three))
+        {
+            leftHandUI.SetActive(!leftHandUI.activeSelf);
+            if (leftHandUI.activeSelf)
+            {
+                leftHandUI.SetActive(false);
+            }
+            else
+            {
+                leftHandUI.SetActive(true);
+                _basket.Redraw();
+                _recipeSystem.RedrawRecipeUI();
+            }
+        }
     }
 
     public void DoneIsClicked()
     {
-        uiGameObject.SetActive(false);
+        personalDataUI.SetActive(false);
         gameDataManager.WriteFile("{"+
                                   $"\"age\":{ageInputField.text}," +
                                   $"\"height\":{heightInputField.text}," +
@@ -48,4 +69,5 @@ public class UIHandler : MonoBehaviour
                                   "}");
 
     }
+
 }
