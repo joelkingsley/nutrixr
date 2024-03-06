@@ -8,13 +8,15 @@ using Oculus.Interaction;
 using UnityEngine;
 using InteractableState = Oculus.Interaction.InteractableState;
 
-public class FoodItem : MonoBehaviour
+public class IngredientItem : MonoBehaviour
 {
     [SerializeField] private HapticClip hapticClipBackBag;
     private HapticClipPlayer _hapticClipPlayer;
-    public FoodItemData data;
+    public string fdcName;
+    public IngredientItemData data;
     private AudioSource _audioClipPlayer;
     private GameObject _player;
+    private DataStorage dataStorage;
     private bool _readyForSelection;
 
      void Awake()
@@ -27,6 +29,8 @@ public class FoodItem : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player");
+        dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
+        data = dataStorage.ReadIngredientData(fdcName);
     }
 
     // Update is called once per frame
@@ -89,8 +93,6 @@ public class FoodItem : MonoBehaviour
     public void SelectFoodItem()
     {
         _player.GetComponent<Basket>().AddToBasket(this);
-        Debug.Log(data.ToJson());
-        Debug.Log("Deleting: "+gameObject.name);
         gameObject.SetActive(false);
     }
 }

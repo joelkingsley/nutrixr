@@ -1,23 +1,31 @@
 
 using System.Collections.Generic;
+using System.Linq;
+using OVRSimpleJSON;
+using Personal_Workspace.joelk.DTOs;
+using Personal_Workspace.joelk.Entities;
+using Personal_Workspace.joelk.Scripts;
 using TMPro;
 using UnityEngine;
 
 public class RecipeSystem : MonoBehaviour
 {
-    private List<FoodItem> _selectedItems;
+    private List<IngredientItem> _selectedItems;
     [SerializeField]
     private GameObject recipeUIScrollViewContent;
 
-    private List<FoodItem> _possibleRecipes= new List<FoodItem>();
-
+    private List<IngredientItem> _possibleRecipes= new List<IngredientItem>();
+    public List<RecipeItemData> allRecipes;
+     private DataStorage dataStorage;
+    [SerializeField] private Basket basket;
     [SerializeField]
     private GameObject recipeEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        _selectedItems = GetComponent<Basket>().selectedItems;
-
+        _selectedItems = basket.selectedItems;
+        dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
+        allRecipes = dataStorage.ReadAllRecipes();
     }
 
     // Update is called once per frame
@@ -33,18 +41,24 @@ public class RecipeSystem : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        /*
-         *
-         * TODO: Calculate the _possibleRecipes here
-         *
-         */
-        _selectedItems = new List<FoodItem>();
+
+        _selectedItems = new List<IngredientItem>();
         foreach (var foodItem in _selectedItems)
         {
             //(Early vision for the code)
             //foreach recipe in _allRecipes:
             //  if fooditem.category in recipe.ingredients:
             //      _possibleRecipes.Add(recipe)
+            foreach (var recipe in allRecipes)
+            {
+                foreach (var id in foodItem.data.categoryIds)
+                {
+                    if (recipe.categoryIds.Select(x => x.Item1).ToList().Contains<int>(id))
+                    {
+                        //_possibleRecipes.Add(RecipeItemData(recipe.inputIngredientCategories));
+                    }
+                }
+            }
         }
         for (var index = 0; index < _possibleRecipes.Count; index++)
         {

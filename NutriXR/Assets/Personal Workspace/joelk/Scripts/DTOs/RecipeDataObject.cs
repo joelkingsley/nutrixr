@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Personal_Workspace.joelk.DTOs
-{
-    [Serializable]
-    public class Recipe
+[Serializable]
+    public class RecipeDataObject
     {
         public int id;
         public string name;
@@ -15,8 +13,8 @@ namespace Personal_Workspace.joelk.DTOs
         public class RecipeIngredientCategory
         {
             public int id;
-            public int ingredientWeight;
+            public float ingredientWeight;
             public bool isOptional = false;
         }
     }
-}
+

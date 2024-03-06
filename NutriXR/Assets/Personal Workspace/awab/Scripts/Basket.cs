@@ -6,17 +6,16 @@ using UnityEngine.UI;
 
 public class Basket : MonoBehaviour
 {
-    public List<FoodItem> selectedItems;
+    public List<IngredientItem> selectedItems;
     [SerializeField]
     private GameObject basketUIScrollViewContent;
-
+    [SerializeField]
     private RecipeSystem _recipeSystem;
 
     [SerializeField] private GameObject basketEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        _recipeSystem = GetComponent<RecipeSystem>();
     }
 
     // Update is called once per frame
@@ -25,9 +24,9 @@ public class Basket : MonoBehaviour
 
     }
 
-    public void AddToBasket(FoodItem foodItem)
+    public void AddToBasket(IngredientItem ingredientItem)
     {
-        selectedItems.Add(foodItem);
+        selectedItems.Add(ingredientItem);
         if (basketUIScrollViewContent.activeSelf)
         {
             Redraw();
