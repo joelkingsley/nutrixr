@@ -5853,26 +5853,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.5947827, z: 0.64536625}
   m_Center: {x: 0, y: 0.29739147, z: -0.32755157}
---- !u!114 &879895483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879895474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d58a7cb195187472288c1d3f2933306e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  personalDataUI: {fileID: 7114770129145997018}
-  leftHandUI: {fileID: 1042607045}
-  gameDataManager: {fileID: 2051799327}
-  ageInputField: {fileID: 683775620}
-  heightInputField: {fileID: 1368964742}
-  toggleFemale: {fileID: 541699025}
-  toggleMale: {fileID: 191139775}
-  activityLevel: {fileID: 1944742570}
 --- !u!1001 &887140596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11464,6 +11444,58 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723419212}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1726027112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726027114}
+  - component: {fileID: 1726027113}
+  m_Layer: 0
+  m_Name: UI Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1726027113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726027112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58a7cb195187472288c1d3f2933306e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personalDataUI: {fileID: 7114770129145997018}
+  leftHandUI: {fileID: 1042607045}
+  gameDataManager: {fileID: 2051799327}
+  ageInputField: {fileID: 683775620}
+  heightInputField: {fileID: 1368964742}
+  toggleFemale: {fileID: 541699025}
+  toggleMale: {fileID: 191139775}
+  activityLevel: {fileID: 1944742570}
+--- !u!4 &1726027114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726027112}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04355457, y: 0.36243397, z: 0.76159394}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1752669095
 GameObject:
   m_ObjectHideFlags: 0
@@ -12921,9 +12953,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4612000121498113247, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 879895481}
-    - targetCorrespondingSourceObject: {fileID: 4612000121498113247, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 879895483}
     - targetCorrespondingSourceObject: {fileID: 8078230897671289020, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2052805185}
@@ -13803,7 +13832,11 @@ PrefabInstance:
     - target: {fileID: 6566018193434891024, guid: d571d195919429b45963336b15cbbbcf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1693284372}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566018193434891024, guid: d571d195919429b45963336b15cbbbcf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DoneIsClicked
+      objectReference: {fileID: 0}
     - target: {fileID: 8201662470954407697, guid: d571d195919429b45963336b15cbbbcf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13922,3 +13955,4 @@ SceneRoots:
   - {fileID: 2052805179}
   - {fileID: 465937898}
   - {fileID: 1447099766}
+  - {fileID: 1726027114}
