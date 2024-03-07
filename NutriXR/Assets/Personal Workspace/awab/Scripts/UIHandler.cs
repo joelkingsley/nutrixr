@@ -16,7 +16,7 @@ public class UIHandler : MonoBehaviour
 
     public GameObject leftHandUI;
 
-    public GameDataManager gameDataManager;
+    public PersonalDataManager personalDataManager;
 
     public TMP_InputField ageInputField;
 
@@ -59,7 +59,7 @@ public class UIHandler : MonoBehaviour
     public void DoneIsClicked()
     {
         personalDataUI.SetActive(false);
-        gameDataManager.WriteFile("{"+
+        personalDataManager.WriteFile("{"+
                                   $"\"age\":{ageInputField.text}," +
                                   $"\"height\":{heightInputField.text}," +
                                   $"\"female\":{toggleFemale.isOn}," +
