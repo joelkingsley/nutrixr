@@ -9030,6 +9030,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194944520}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1204080676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3432515641409254715, guid: d58fa6a1b8a0808449f50c3a5e429e8d, type: 3}
+  m_PrefabInstance: {fileID: 5435298567432374911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58a7cb195187472288c1d3f2933306e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1268840006
 GameObject:
   m_ObjectHideFlags: 0
@@ -13064,6 +13075,67 @@ Transform:
   - {fileID: 903434369}
   m_Father: {fileID: 357493190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1951250473
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 321240150553320356, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_Name
+      value: Shopping Cart
+      objectReference: {fileID: 0}
+    - target: {fileID: 321240150553320356, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_TagString
+      value: ShoppingCart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.345
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
 --- !u!1 &1999789858
 GameObject:
   m_ObjectHideFlags: 0
@@ -14306,7 +14378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304446693931249322, guid: 4dcb5817ef5afaf49a3276151e44b6b3, type: 3}
       propertyPath: m_Name
-      value: Basket
+      value: BasketSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304446693931249322, guid: 4dcb5817ef5afaf49a3276151e44b6b3, type: 3}
+      propertyPath: m_TagString
+      value: BasketSystem
       objectReference: {fileID: 0}
     - target: {fileID: 8438848977342016856, guid: 4dcb5817ef5afaf49a3276151e44b6b3, type: 3}
       propertyPath: _recipeSystem
@@ -14493,7 +14569,7 @@ PrefabInstance:
     - target: {fileID: 6566018193434891024, guid: d571d195919429b45963336b15cbbbcf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1204080676}
     - target: {fileID: 6566018193434891024, guid: d571d195919429b45963336b15cbbbcf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DoneIsClicked
@@ -14795,3 +14871,4 @@ SceneRoots:
   - {fileID: 5211930276608841980}
   - {fileID: 8307183995528930337}
   - {fileID: 5435298567432374911}
+  - {fileID: 1951250473}

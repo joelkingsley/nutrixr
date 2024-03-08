@@ -15,7 +15,7 @@ public class IngredientItem : MonoBehaviour
     public string fdcName;
     public IngredientItemData data;
     private AudioSource _audioClipPlayer;
-    private GameObject _player;
+    private Basket _basketSystem;
     private DataStorage dataStorage;
     private bool _readyForSelection;
 
@@ -28,7 +28,7 @@ public class IngredientItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindWithTag("Player");
+        _basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<Basket>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
     }
@@ -46,14 +46,14 @@ public class IngredientItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("ShoppingCart"))
         {
             var o = other.gameObject;
             Debug.Log("other trigger name:" + o.name + "tag: " + o.tag);
             return;
         }
 
-        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
+        /*if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
         {
             var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
             if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
@@ -70,29 +70,29 @@ public class IngredientItem : MonoBehaviour
             }
             _audioClipPlayer.Play();
             _readyForSelection = true;
-        }
+        }*/
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player")) return;
-        if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
+        if (!other.gameObject.CompareTag("ShoppingCart")) return;
+        /*if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
         {
             _readyForSelection = false;
             return;
-        }
-        if (_readyForSelection)
-        {
+        }*/
+        //if (_readyForSelection)
+        //{
             SelectFoodItem();
-        }
+        //}
 
 
     }
 
     public void SelectFoodItem()
     {
-        _player.GetComponent<Basket>().AddToBasket(this);
-        gameObject.SetActive(false);
+        _basketSystem.AddToBasket(this);
+        // gameObject.SetActive(false);
     }
 }

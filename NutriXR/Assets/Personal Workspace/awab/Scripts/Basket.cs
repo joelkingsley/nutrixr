@@ -57,7 +57,7 @@ public class Basket : MonoBehaviour
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-            itemPrefabInEntry.transform.localRotation = transform.parent.rotation;
+            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
                 selectedItems.Remove(item);
