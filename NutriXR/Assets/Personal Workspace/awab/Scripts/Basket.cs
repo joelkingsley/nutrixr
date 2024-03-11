@@ -11,11 +11,13 @@ public class Basket : MonoBehaviour
     private GameObject basketUIScrollViewContent;
     [SerializeField]
     private RecipeSystem _recipeSystem;
+    private GameObject shoppingCartGameObject;
 
     [SerializeField] private GameObject basketEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
+        shoppingCartGameObject = GameObject.FindGameObjectWithTag("ShoppingCart");
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class Basket : MonoBehaviour
     public void AddToBasket(IngredientItem ingredientItem)
     {
         selectedItems.Add(ingredientItem);
+        ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
         {
             Redraw();
