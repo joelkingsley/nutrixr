@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Personal_Workspace.joelk.Entities
 {
-    public class RecipeItemData: FoodItemData
+    /*public class RecipeItemData:IngredientItemData
     {
         public int Id;
         private List<(IngredientItemData, float)> _ingredientItemsWithWeight;
@@ -40,5 +40,5 @@ namespace Personal_Workspace.joelk.Entities
             calories = caloriesSum;
             caloriesInKcal = caloriesInKcalSum;
         }
-    }
+    }*/
 }
