@@ -9,18 +9,36 @@ using UnityEngine.UIElements;
 
 public class Cooking : MonoBehaviour
 {
-    [SerializeField] private List<String> potIngredients; //ToDo: Remove [SerializeField]
+    //[SerializeField] private List<String> potIngredients; //ToDo: Remove [SerializeField]
+    //[SerializeField] private List<GameObject> potIngredients;
+    [SerializeField] Dictionary<GameObject, Vector3> potIngredients = new Dictionary<GameObject, Vector3>();
     [SerializeField] private JSONReader jsonReader;
     [SerializeField] private GameObject Content;
-    [SerializeField] private GameObject potUIElementPrefab;
+    //[SerializeField] private GameObject potUIElementPrefab;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ingredient")
         {
+            other.tag = "InPot";
             addIngredient(other.gameObject);
 
-            List<JSONReader.Recipe> possibleRecipes = checkRecipies();
+            //List<JSONReader.Recipe> possibleRecipes = checkRecipies();
+
+            /*foreach (JSONReader.Recipe recipe in possibleRecipes)
+            {
+                Debug.Log(recipe.name);
+            }*/
+            return;
+        }
+
+        if (other.gameObject.tag == "InPot")
+        {
+            other.tag = "Ingredient";
+            removeIngredient(other.gameObject);
+
+            //List<JSONReader.Recipe> possibleRecipes = checkRecipies();
+
             /*foreach (JSONReader.Recipe recipe in possibleRecipes)
             {
                 Debug.Log(recipe.name);
@@ -32,7 +50,10 @@ public class Cooking : MonoBehaviour
     {
         String fdcName = ingredient.GetComponent<Ingredient>().fdcName;
         Debug.Log("Add " + fdcName + " to Pot");
-        GameObject UIElement = Instantiate(potUIElementPrefab, Content.transform);
+        potIngredients.Add(ingredient, ingredient.transform.localScale);
+        ingredient.transform.localScale *= 0.1f;
+
+        /*GameObject UIElement = Instantiate(potUIElementPrefab, Content.transform);
         UIElement.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = fdcName;
         Quaternion oldRot = ingredient.transform.rotation;
         ingredient.GetComponentInChildren<Grabbable>().enabled = false;
@@ -41,15 +62,18 @@ public class Cooking : MonoBehaviour
         ingredient.transform.localPosition = new Vector3();
         ingredient.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         ingredient.GetComponent<Rigidbody>().velocity = new Vector3();
-        potIngredients.Add(fdcName);
+        potIngredients.Add(fdcName);*/
     }
 
-    private void removeIngredient()
+    private void removeIngredient(GameObject ingredient)
     {
-
+        String fdcName = ingredient.GetComponent<Ingredient>().fdcName;
+        Debug.Log("Remove " + fdcName + " from Pot");
+        ingredient.transform.localScale = potIngredients[ingredient];
+        potIngredients.Remove(ingredient);
     }
 
-    private List<JSONReader.Recipe> checkRecipies()
+    /*private List<JSONReader.Recipe> checkRecipies()
     {
         List<JSONReader.Recipe> validRecipies = new List<JSONReader.Recipe>();
 
@@ -78,5 +102,5 @@ public class Cooking : MonoBehaviour
             }
         }
         return validRecipies;
-    }
+    }*/
 }
