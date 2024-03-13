@@ -27,7 +27,7 @@ public class StickMovement : MonoBehaviour
         Quaternion ortOvrCameraRig = CameraRig.gameObject.transform.localRotation;
         Vector3 ortEulerOvrCameraRig = ortOvrCameraRig.eulerAngles;
         ortEulerOvrCameraRig.z = ortEulerOvrCameraRig.x = 0f;
-        ortEulerOvrCameraRig.y *= -1; // somehow required lol
+        // ortEulerOvrCameraRig.y *= -1; // somehow required lol
 
         Quaternion ort = Quaternion.Euler(ortEulerEyeAnchor) * Quaternion.Euler(ortEulerOvrCameraRig);
 
@@ -35,7 +35,7 @@ public class StickMovement : MonoBehaviour
         Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         moveDir += (ort) * (primaryAxis.x * Vector3.right);
         moveDir += (ort) * (primaryAxis.y * Vector3.forward);
-        Controller.Move(moveDir * Time.deltaTime * playerSpeed);
+        Controller.Move(moveDir * (playerSpeed * Time.deltaTime));
     }
 
 }
