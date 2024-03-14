@@ -10,27 +10,19 @@ using InteractableState = Oculus.Interaction.InteractableState;
 
 public class IngredientItem : MonoBehaviour
 {
-    [SerializeField] private HapticClip hapticClipBackBag;
-    private HapticClipPlayer _hapticClipPlayer;
     public string fdcName;
-    public IngredientItemData data;
-    private AudioSource _audioClipPlayer;
-    private Basket _basketSystem;
-    private DataStorage dataStorage;
-    private bool _readyForSelection;
 
-     void Awake()
-     {
-         _hapticClipPlayer = new HapticClipPlayer(hapticClipBackBag);
-         _audioClipPlayer = GetComponent<AudioSource>();
-     }
+    public IngredientItemData data;
+    private Basket basketSystem;
+    private DataStorage dataStorage;
 
     // Start is called before the first frame update
     void Start()
     {
-        _basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<Basket>();
-        dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
-        data = dataStorage.ReadIngredientData(fdcName);
+        DataStorage ds = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
+        data = ds.ReadIngredientData(fdcName);
+
+        basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<Basket>();
     }
 
     // Update is called once per frame
@@ -38,61 +30,21 @@ public class IngredientItem : MonoBehaviour
     {
 
     }
-    void OnDestroy()
-    {
-        _hapticClipPlayer.Dispose();
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("ShoppingCart"))
+        if (other.gameObject.CompareTag("ShoppingCart"))
         {
-            var o = other.gameObject;
-            Debug.Log("other trigger name:" + o.name + "tag: " + o.tag);
-            return;
+            transform.SetParent(other.gameObject.transform, true);
+            basketSystem.AddToBasket(this);
         }
-
-        /*if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
-        {
-            var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
-            if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
-                OVRInput.Controller.LTouch)
-            {
-                _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
-
-            }
-            if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
-                OVRInput.Controller.RTouch)
-            {
-                _hapticClipPlayer.Play(Oculus.Haptics.Controller.Right);
-
-            }
-            _audioClipPlayer.Play();
-            _readyForSelection = true;
-        }*/
-
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.CompareTag("ShoppingCart")) return;
-        /*if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
+        if (other.gameObject.CompareTag("ShoppingCart"))
         {
-            _readyForSelection = false;
-            return;
-        }*/
-        //if (_readyForSelection)
-        //{
-            SelectFoodItem();
-        //}
-
-
-    }
-
-    public void SelectFoodItem()
-    {
-        _basketSystem.AddToBasket(this);
-        // gameObject.SetActive(false);
+            transform.parent = null;
+        }
     }
 }

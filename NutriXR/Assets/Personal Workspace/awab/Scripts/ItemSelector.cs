@@ -30,6 +30,6 @@ public class ItemSelector : MonoBehaviour
 
     public void SelectItem(GameObject grabbedGameObject)
     {
-        grabbedGameObject.GetComponentInParent<IngredientItem>().SelectFoodItem();
+        //grabbedGameObject.GetComponentInParent<IngredientItem>().SelectFoodItem();
     }
 }
