@@ -28,7 +28,7 @@ namespace Personal_Workspace.joelk.Scripts
         [Serializable]
         public class RecipeList
         {
-            public List<Recipe> recipes;
+            public List<RecipeDataObject> recipes;
         }
 
         [Serializable]
@@ -40,7 +40,7 @@ namespace Personal_Workspace.joelk.Scripts
         [Serializable]
         public class IngredientChoiceList
         {
-            public List<IngredientChoice> ingredientChoices;
+            public List<IngredientDataObject> ingredientChoices;
         }
 
         // Start is called before the first frame update

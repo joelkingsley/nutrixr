@@ -4,11 +4,12 @@ using System.Collections.Generic;
 namespace Personal_Workspace.joelk.DTOs
 {
     [Serializable]
-    public class IngredientChoice
+    public class IngredientDataObject
     {
         public string fdcName;
         public string name;
         public FdcData data;
+        public int[] categoryIds;
 
         [Serializable]
         public class FdcData
