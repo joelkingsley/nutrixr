@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63036507}
   m_Layer: 0
-  m_Name: LeftHandUI
+  m_Name: CartUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1113,6 +1113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 778725441}
   - component: {fileID: 778725442}
+  - component: {fileID: 778725443}
   m_Layer: 7
   m_Name: TrollyHandle
   m_TagString: Untagged
@@ -1182,6 +1183,29 @@ MonoBehaviour:
       AxisRange:
         Min: 0
         Max: 0
+--- !u!114 &778725443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778725440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b053556d972eae24b947c1477538bff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _constraints:
+    ConstraintsAreRelative: 0
+    MinScale:
+      Constrain: 0
+      Value: 0
+    MaxScale:
+      Constrain: 0
+      Value: 0
+    ConstrainXScale: 1
+    ConstrainYScale: 1
+    ConstrainZScale: 1
 --- !u!1001 &786474641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1678,71 +1702,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 34ffd8b11f33b414f81c19caaa4189e8, type: 3}
   m_PrefabInstance: {fileID: 963393496}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1464217101
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 321240150553320356, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_Name
-      value: Shopping Cart
-      objectReference: {fileID: 0}
-    - target: {fileID: 321240150553320356, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.345
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.549
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1098480954271498526, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902524392894114434, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f674534d514927f469e0b6df1c513ea8, type: 3}
 --- !u!1001 &1524161298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2041,7 +2000,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6379829757502743174, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 1676308471}
+      addedObject: {fileID: 1676308475}
   m_SourcePrefab: {fileID: 100100000, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
 --- !u!4 &1524161299 stripped
 Transform:
@@ -2377,7 +2336,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6379829757502743174, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
   m_PrefabInstance: {fileID: 1524161298}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1676308471
+--- !u!114 &1676308475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2386,9 +2345,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1676308467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f81ebc859e4732498f9e1a4b46c2209, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fdcName: Sunflower oil
+  data:
+    name: 
+    calories: 0
+    caloriesInKcal: 0
+    carbohydrates: 0
+    protein: 0
+    fat: 0
+    sugar: 0
+    categoryIds: 
+    fdcName: 
 --- !u!1 &1696550271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,6 +2514,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8705681839519527949, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
       propertyPath: basket
+      value: 
+      objectReference: {fileID: 786474642}
+    - target: {fileID: 8705681839519527949, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
+      propertyPath: shoppingCart
       value: 
       objectReference: {fileID: 786474642}
     - target: {fileID: 8705681839519527949, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
@@ -3003,7 +2977,7 @@ MonoBehaviour:
   _addNewPointsToFront: 0
   _forwardElement: {fileID: 0}
   _oneGrabTransformer: {fileID: 778725442}
-  _twoGrabTransformer: {fileID: 0}
+  _twoGrabTransformer: {fileID: 778725443}
   _targetTransform: {fileID: 257456665}
   _maxGrabPoints: -1
 --- !u!54 &1986020263
@@ -3331,7 +3305,6 @@ SceneRoots:
   - {fileID: 748706015}
   - {fileID: 257456665}
   - {fileID: 1696550275}
-  - {fileID: 1464217101}
   - {fileID: 119799525}
   - {fileID: 786474641}
   - {fileID: 1726114679}

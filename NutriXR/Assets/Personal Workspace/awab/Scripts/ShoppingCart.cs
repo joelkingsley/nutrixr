@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Basket : MonoBehaviour
+public class ShoppingCart : MonoBehaviour
 {
     public List<IngredientItem> selectedItems;
     [SerializeField]
@@ -26,7 +26,7 @@ public class Basket : MonoBehaviour
 
     }
 
-    public void AddToBasket(IngredientItem ingredientItem)
+    public void AddToCart(IngredientItem ingredientItem)
     {
         selectedItems.Add(ingredientItem);
         ingredientItem.transform.parent = shoppingCartGameObject.transform;
@@ -63,11 +63,19 @@ public class Basket : MonoBehaviour
             itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
-                selectedItems.Remove(item);
-                _recipeSystem.RedrawRecipeUI();
-                Redraw();
+                item.RespawnToStart();
+                RemoveFromCart(item);
             });
             itemPrefabInEntry.SetActive(true);
         }
+    }
+
+
+
+    public void RemoveFromCart(IngredientItem item)
+    {
+        selectedItems.Remove(item);
+        _recipeSystem.RedrawRecipeUI();
+        Redraw();
     }
 }
