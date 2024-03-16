@@ -47,7 +47,7 @@ public class RecipeSystem : MonoBehaviour
         {
             foreach (var recipe in allRecipes)
             {
-                foreach (var id in foodItem.data.categoryIds)
+                foreach (var id in foodItem.GetIngredientItemData().categoryIds)
                 {
                     if (recipe.categoryIdsWithWeights.Select(x => x.Item1).ToList().Contains<int>(id))
                     {
