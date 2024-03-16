@@ -13,16 +13,21 @@ public class IngredientItem : MonoBehaviour
     public string fdcName;
 
     public IngredientItemData data;
-    private Basket basketSystem;
+    private ShoppingCart _shoppingCartSystem;
     private DataStorage dataStorage;
+    private Vector3 startingPosition;
+    private Quaternion startingRotation;
+
+    private bool isInCart = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        DataStorage ds = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
-        data = ds.ReadIngredientData(fdcName);
-
-        basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<Basket>();
+        _shoppingCartSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<ShoppingCart>();
+        dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
+        data = dataStorage.ReadIngredientData(fdcName);
+        startingPosition = transform.position;
+        startingRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -33,18 +38,27 @@ public class IngredientItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("ShoppingCart"))
+        if (other.gameObject.CompareTag("ShoppingCart") && !isInCart)
         {
             transform.SetParent(other.gameObject.transform, true);
-            basketSystem.AddToBasket(this);
+            _shoppingCartSystem.AddToCart(this);
+            isInCart = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("ShoppingCart"))
+        if (other.gameObject.CompareTag("ShoppingCart") && isInCart)
         {
             transform.parent = null;
+            _shoppingCartSystem.RemoveFromCart(this);
+            isInCart = false;
         }
+    }
+
+    public void RespawnToStart()
+    {
+        gameObject.transform.position = startingPosition;
+        gameObject.transform.rotation = startingRotation;
     }
 }
