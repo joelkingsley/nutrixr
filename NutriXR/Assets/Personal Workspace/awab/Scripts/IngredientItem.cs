@@ -19,6 +19,7 @@ public class IngredientItem : MonoBehaviour
     private Quaternion startingRotation;
 
     private bool isInCart = false;
+    private Collider[] allColliders;
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +29,30 @@ public class IngredientItem : MonoBehaviour
         data = dataStorage.ReadIngredientData(fdcName);
         startingPosition = transform.position;
         startingRotation = transform.rotation;
+
+        allColliders = GetComponentsInChildren<Collider>(false);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void OnSelect()
+    {
+        foreach (Collider c in allColliders)
+        {
+            c.gameObject.layer = LayerMask.NameToLayer("SelectedIngredientItem");
+        }
+    }
+
+    public void OnUnselect()
+    {
+        foreach (Collider c in allColliders)
+        {
+            c.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

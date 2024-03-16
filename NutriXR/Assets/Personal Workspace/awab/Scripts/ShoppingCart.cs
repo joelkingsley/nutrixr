@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class ShoppingCart : MonoBehaviour
     private GameObject shoppingCartGameObject;
 
     [SerializeField] private GameObject basketEntryPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,14 +31,21 @@ public class ShoppingCart : MonoBehaviour
     public void AddToCart(IngredientItem ingredientItem)
     {
         selectedItems.Add(ingredientItem);
-        ingredientItem.transform.parent = shoppingCartGameObject.transform;
+        //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
         {
             Redraw();
             _recipeSystem.RedrawRecipeUI();
         }
 
-}
+    }
+
+    public void RemoveFromCart(IngredientItem item)
+    {
+        selectedItems.Remove(item);
+        _recipeSystem.RedrawRecipeUI();
+        Redraw();
+    }
 
     public void Redraw()
     {
@@ -54,7 +63,11 @@ public class ShoppingCart : MonoBehaviour
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
+
             GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
+            itemPrefabInEntry.GetComponent<Grabbable>().enabled = false;
+
+
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -68,14 +81,5 @@ public class ShoppingCart : MonoBehaviour
             });
             itemPrefabInEntry.SetActive(true);
         }
-    }
-
-
-
-    public void RemoveFromCart(IngredientItem item)
-    {
-        selectedItems.Remove(item);
-        _recipeSystem.RedrawRecipeUI();
-        Redraw();
     }
 }
