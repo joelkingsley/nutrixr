@@ -28,13 +28,13 @@ public class UIHandler : MonoBehaviour
 
     public TMP_Dropdown activityLevel;
 
-    private ShoppingCart _shoppingCart;
+    private BasketSystem _basketSystem;
 
     private RecipeSystem _recipeSystem;
     // Start is called before the first frame update
     void Start()
     {
-        _shoppingCart = GetComponent<ShoppingCart>();
+        _basketSystem = GetComponent<BasketSystem>();
         _recipeSystem = GetComponent<RecipeSystem>();
     }
 
@@ -50,7 +50,7 @@ public class UIHandler : MonoBehaviour
             else
             {
                 leftHandUI.SetActive(true);
-                _shoppingCart.Redraw();
+                _basketSystem.Redraw();
                 _recipeSystem.RedrawRecipeUI();
             }
         }

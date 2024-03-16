@@ -13,7 +13,7 @@ public class IngredientItem : MonoBehaviour
     public string fdcName;
 
     public IngredientItemData data;
-    private ShoppingCart _shoppingCartSystem;
+    private BasketSystem _basketSystemSystem;
     private DataStorage dataStorage;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
@@ -24,7 +24,7 @@ public class IngredientItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _shoppingCartSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<ShoppingCart>();
+        _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
         startingPosition = transform.position;
@@ -60,7 +60,7 @@ public class IngredientItem : MonoBehaviour
         if (other.gameObject.CompareTag("ShoppingCart") && !isInCart)
         {
             transform.SetParent(other.gameObject.transform, true);
-            _shoppingCartSystem.AddToCart(this);
+            _basketSystemSystem.AddToCart(this);
             isInCart = true;
         }
     }
@@ -70,7 +70,7 @@ public class IngredientItem : MonoBehaviour
         if (other.gameObject.CompareTag("ShoppingCart") && isInCart)
         {
             transform.parent = null;
-            _shoppingCartSystem.RemoveFromCart(this);
+            _basketSystemSystem.RemoveFromCart(this);
             isInCart = false;
         }
     }
