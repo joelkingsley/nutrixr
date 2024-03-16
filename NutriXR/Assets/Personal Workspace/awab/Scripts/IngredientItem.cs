@@ -51,7 +51,7 @@ public class IngredientItem : MonoBehaviour
     {
         foreach (Collider c in allColliders)
         {
-            c.gameObject.layer = LayerMask.NameToLayer("Default");
+            c.gameObject.layer = LayerMask.NameToLayer("UnselectedIngredientItem");
         }
     }
 
