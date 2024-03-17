@@ -5,12 +5,12 @@ using System.Linq;
 using Meta.Voice.Audio;
 using Oculus.Haptics;
 using Oculus.Interaction;
+using UnityEditor;
 using UnityEngine;
 using InteractableState = Oculus.Interaction.InteractableState;
 
 public class IngredientItem : MonoBehaviour
 {
-    private string fdcName;
     private IngredientItemData data;
     private BasketSystem _basketSystemSystem;
     private DataStorage dataStorage;
@@ -19,11 +19,12 @@ public class IngredientItem : MonoBehaviour
     private bool isInCart = false;
     private Collider[] allColliders;
 
+    [SerializeField]
+    public string fdcName;
+
     // Start is called before the first frame update
     void Start()
     {
-        fdcName = gameObject.name;
-
         _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);

@@ -16,6 +16,8 @@ public class BasketSystem : MonoBehaviour
 
     [SerializeField] private GameObject basketEntryPrefab;
 
+    private TableItemSpawner _kitchenSceneItemSpawner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,17 @@ public class BasketSystem : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
+
+        if (scene.name == "KitchenScene")
+        {
+            _kitchenSceneItemSpawner = GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>();
+            List<IngredientItemData> itemDatas = new List<IngredientItemData>();
+            foreach (IngredientItem item in this.selectedItems)
+            {
+                itemDatas.Add(item.GetIngredientItemData());
+            }
+            _kitchenSceneItemSpawner.SpawnKitchenSceneItems(itemDatas);
+        }
     }
 
     public void AddToCart(IngredientItem ingredientItem)

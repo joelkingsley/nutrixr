@@ -18,10 +18,11 @@ public class SceneSwap : MonoBehaviour
         {
             Scene currentScene = SceneManager.GetActiveScene();
 
-            if (currentScene.name == "TestScene")
-            {
+            Debug.Log("Switching scenes..");
 
-                SceneManager.LoadScene("Personal Workspace/leo1812/SecondScene");
+            if (currentScene.name == "Supermarket")
+            {
+                SceneManager.LoadScene("Personal Workspace/fabsch/TestKitchenScene");
             }
         }
     }
