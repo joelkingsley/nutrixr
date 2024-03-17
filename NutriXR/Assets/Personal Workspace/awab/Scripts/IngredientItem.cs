@@ -10,21 +10,21 @@ using InteractableState = Oculus.Interaction.InteractableState;
 
 public class IngredientItem : MonoBehaviour
 {
-    public string fdcName;
-
-    public IngredientItemData data;
-    private ShoppingCart _shoppingCartSystem;
+    private string fdcName;
+    private IngredientItemData data;
+    private BasketSystem _basketSystemSystem;
     private DataStorage dataStorage;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
-
     private bool isInCart = false;
     private Collider[] allColliders;
 
     // Start is called before the first frame update
     void Start()
     {
-        _shoppingCartSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<ShoppingCart>();
+        fdcName = gameObject.name;
+
+        _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
         startingPosition = transform.position;
@@ -60,7 +60,7 @@ public class IngredientItem : MonoBehaviour
         if (other.gameObject.CompareTag("ShoppingCart") && !isInCart)
         {
             transform.SetParent(other.gameObject.transform, true);
-            _shoppingCartSystem.AddToCart(this);
+            _basketSystemSystem.AddToCart(this);
             isInCart = true;
         }
     }
@@ -70,7 +70,7 @@ public class IngredientItem : MonoBehaviour
         if (other.gameObject.CompareTag("ShoppingCart") && isInCart)
         {
             transform.parent = null;
-            _shoppingCartSystem.RemoveFromCart(this);
+            _basketSystemSystem.RemoveFromCart(this);
             isInCart = false;
         }
     }
@@ -79,5 +79,10 @@ public class IngredientItem : MonoBehaviour
     {
         gameObject.transform.position = startingPosition;
         gameObject.transform.rotation = startingRotation;
+    }
+
+    public IngredientItemData GetIngredientItemData()
+    {
+        return data;
     }
 }

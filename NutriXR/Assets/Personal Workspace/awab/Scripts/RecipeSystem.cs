@@ -18,13 +18,13 @@ public class RecipeSystem : MonoBehaviour
     private List<RecipeItemData> _possibleRecipes = new ();
     public List<RecipeItemData> allRecipes;
      private DataStorage dataStorage;
-    [FormerlySerializedAs("basket")] [SerializeField] private ShoppingCart shoppingCart;
+    [FormerlySerializedAs("shoppingCart")] [FormerlySerializedAs("basket")] [SerializeField] private BasketSystem basketSystem;
     [SerializeField]
     private GameObject recipeEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        _selectedItems = shoppingCart.selectedItems;
+        _selectedItems = basketSystem.selectedItems;
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         allRecipes = dataStorage.ReadAllRecipes();
     }
@@ -47,7 +47,7 @@ public class RecipeSystem : MonoBehaviour
         {
             foreach (var recipe in allRecipes)
             {
-                foreach (var id in foodItem.data.categoryIds)
+                foreach (var id in foodItem.GetIngredientItemData().categoryIds)
                 {
                     if (recipe.categoryIdsWithWeights.Select(x => x.Item1).ToList().Contains<int>(id))
                     {
