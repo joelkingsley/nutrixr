@@ -5,6 +5,7 @@ using System.Linq;
 using Meta.Voice.Audio;
 using Oculus.Haptics;
 using Oculus.Interaction;
+using TMPro;
 using UnityEngine;
 using InteractableState = Oculus.Interaction.InteractableState;
 
@@ -19,6 +20,13 @@ public class IngredientItem : MonoBehaviour
     private DataStorage dataStorage;
     private bool _readyForSelection;
 
+    public TMP_Text nameComponent;
+    public TMP_Text proteinTextComponent;
+    public TMP_Text carbohydratesTextComponent;
+    public TMP_Text fatsTextComponent;
+    public TMP_Text sugarTextComponent;
+    public TMP_Text caloriesTextComponent;
+
      void Awake()
      {
          _hapticClipPlayer = new HapticClipPlayer(hapticClipBackBag);
@@ -31,12 +39,19 @@ public class IngredientItem : MonoBehaviour
         _basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<Basket>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
+
+        nameComponent.text = data.name;
+        proteinTextComponent.text = $"{data.protein} g";
+        carbohydratesTextComponent.text = $"{data.carbohydrates} g";
+        fatsTextComponent.text = $"{data.fat} g";
+        sugarTextComponent.text = $"{data.sugar} g";
+        caloriesTextComponent.text = $"{data.caloriesInKcal} kcal";
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     void OnDestroy()
     {
