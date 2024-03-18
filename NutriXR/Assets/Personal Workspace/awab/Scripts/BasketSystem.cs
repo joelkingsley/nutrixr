@@ -36,7 +36,7 @@ public class BasketSystem : MonoBehaviour
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
 
-        if (scene.name == "TestKitchenScene")
+        if (scene.name == "Kitchen")
         {
             _kitchenSceneItemSpawner = GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>();
             List<IngredientItemData> itemDatas = new List<IngredientItemData>();
