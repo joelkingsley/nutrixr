@@ -7,6 +7,7 @@ using Personal_Workspace.joelk.Entities;
 using Personal_Workspace.joelk.Scripts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RecipeSystem : MonoBehaviour
 {
@@ -14,16 +15,16 @@ public class RecipeSystem : MonoBehaviour
     [SerializeField]
     private GameObject recipeUIScrollViewContent;
 
-    private List<IngredientItem> _possibleRecipes= new List<IngredientItem>();
+    private List<RecipeItemData> _possibleRecipes = new ();
     public List<RecipeItemData> allRecipes;
      private DataStorage dataStorage;
-    [SerializeField] private Basket basket;
+    [FormerlySerializedAs("shoppingCart")] [FormerlySerializedAs("basket")] [SerializeField] private BasketSystem basketSystem;
     [SerializeField]
     private GameObject recipeEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        _selectedItems = basket.selectedItems;
+        _selectedItems = basketSystem.selectedItems;
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         allRecipes = dataStorage.ReadAllRecipes();
     }
@@ -41,42 +42,40 @@ public class RecipeSystem : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
-        _selectedItems = new List<IngredientItem>();
+        _possibleRecipes = new List<RecipeItemData>();
         foreach (var foodItem in _selectedItems)
         {
-            //(Early vision for the code)
-            //foreach recipe in _allRecipes:
-            //  if fooditem.category in recipe.ingredients:
-            //      _possibleRecipes.Add(recipe)
             foreach (var recipe in allRecipes)
             {
-                foreach (var id in foodItem.data.categoryIds)
+                foreach (var id in foodItem.GetIngredientItemData().categoryIds)
                 {
                     if (recipe.categoryIdsWithWeights.Select(x => x.Item1).ToList().Contains<int>(id))
                     {
-                        //_possibleRecipes.Add(RecipeItemData(recipe.inputIngredientCategories));
+                        if (!_possibleRecipes.Contains(recipe))
+                        {
+                            _possibleRecipes.Add(recipe);
+                        }
                     }
                 }
             }
         }
         for (var index = 0; index < _possibleRecipes.Count; index++)
         {
-            var item = _selectedItems[index];
+            var item = _possibleRecipes[index];
             GameObject recipeEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
-            recipeEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.data.name;
+            recipeEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.name;
             var mAnchoredPosition = recipeEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
-            GameObject itemPrefabInEntry = Instantiate(item.gameObject, recipeEntry.transform);
+            /*GameObject itemPrefabInEntry = Instantiate(item.gameObject, recipeEntry.transform);
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
             itemPrefabInEntry.transform.localRotation = transform.parent.rotation;
-            itemPrefabInEntry.SetActive(true);
+            itemPrefabInEntry.SetActive(true);*/
         }
     }
 }
