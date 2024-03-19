@@ -50,6 +50,7 @@ public class BasketSystem : MonoBehaviour
 
     public void AddToCart(IngredientItem ingredientItem)
     {
+        Debug.Log("Add to cart");
         selectedItems.Add(ingredientItem);
         //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)

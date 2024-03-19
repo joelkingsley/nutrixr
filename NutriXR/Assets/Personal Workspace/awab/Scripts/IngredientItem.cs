@@ -16,8 +16,11 @@ public class IngredientItem : MonoBehaviour
     private DataStorage dataStorage;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
+    private Vector3 startingScale;
     private bool isInCart = false;
+    private bool isInPot = false;
     private Collider[] allColliders;
+    private float inPotScaleModifier = 0.5f;
 
     [SerializeField]
     public string fdcName;
@@ -30,6 +33,7 @@ public class IngredientItem : MonoBehaviour
         data = dataStorage.ReadIngredientData(fdcName);
         startingPosition = transform.position;
         startingRotation = transform.rotation;
+        startingScale = transform.localScale;
 
         allColliders = GetComponentsInChildren<Collider>(false);
     }
@@ -64,6 +68,14 @@ public class IngredientItem : MonoBehaviour
             _basketSystemSystem.AddToCart(this);
             isInCart = true;
         }
+
+        if (other.gameObject.CompareTag("PotEntry") && !isInPot)
+        {
+            other.transform.GetComponentInParent<BasketSystem>().AddToCart(this);
+            transform.localScale *= inPotScaleModifier;
+            transform.SetParent(other.GetComponentInParent<Transform>(), true);
+            isInPot = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -73,6 +85,14 @@ public class IngredientItem : MonoBehaviour
             transform.parent = null;
             _basketSystemSystem.RemoveFromCart(this);
             isInCart = false;
+        }
+
+        if (other.gameObject.CompareTag("PotExit") && isInPot)
+        {
+            transform.parent = null;
+            transform.localScale = startingScale;
+            other.transform.GetComponentInParent<BasketSystem>().RemoveFromCart(this);
+            isInPot = false;
         }
     }
 
