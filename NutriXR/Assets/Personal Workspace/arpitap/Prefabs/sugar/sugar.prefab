@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8297021514920066150
+--- !u!1001 &7557323231328551681
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -60,29 +60,29 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 00612be5470d39745b35ac1b53fe94f3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6217636995688960915}
+      addedObject: {fileID: 3350189021044805060}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 00612be5470d39745b35ac1b53fe94f3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 139463956054023389}
+      addedObject: {fileID: 8631715943791255849}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 00612be5470d39745b35ac1b53fe94f3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4222649716789056448}
+      addedObject: {fileID: 6592027306115336046}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 00612be5470d39745b35ac1b53fe94f3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 487821769982773153}
+      addedObject: {fileID: 962816543540243872}
   m_SourcePrefab: {fileID: 100100000, guid: 00612be5470d39745b35ac1b53fe94f3, type: 3}
---- !u!1 &9215940207421440311 stripped
+--- !u!1 &7214881646500675152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 00612be5470d39745b35ac1b53fe94f3, type: 3}
-  m_PrefabInstance: {fileID: 8297021514920066150}
+  m_PrefabInstance: {fileID: 7557323231328551681}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &6217636995688960915
+--- !u!54 &3350189021044805060
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215940207421440311}
+  m_GameObject: {fileID: 7214881646500675152}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -103,13 +103,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &139463956054023389
+--- !u!114 &8631715943791255849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215940207421440311}
+  m_GameObject: {fileID: 7214881646500675152}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
@@ -122,13 +122,13 @@ MonoBehaviour:
   _twoGrabTransformer: {fileID: 0}
   _targetTransform: {fileID: 0}
   _maxGrabPoints: -1
---- !u!114 &4222649716789056448
+--- !u!114 &6592027306115336046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215940207421440311}
+  m_GameObject: {fileID: 7214881646500675152}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a7676b01585ce43908639a27765dfc, type: 3}
@@ -138,8 +138,8 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
-  _pointableElement: {fileID: 139463956054023389}
-  _rigidbody: {fileID: 6217636995688960915}
+  _pointableElement: {fileID: 8631715943791255849}
+  _rigidbody: {fileID: 3350189021044805060}
   _physicsGrabbable: {fileID: 0}
   _resetGrabOnGrabsUpdated: 1
   _scoringModifier:
@@ -163,13 +163,13 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
---- !u!65 &487821769982773153
+--- !u!65 &962816543540243872
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215940207421440311}
+  m_GameObject: {fileID: 7214881646500675152}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
