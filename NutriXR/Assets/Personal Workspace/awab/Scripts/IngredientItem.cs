@@ -25,6 +25,9 @@ public class IngredientItem : MonoBehaviour
     [SerializeField]
     public string fdcName;
 
+    [SerializeField]
+    public bool spawnInFridge;
+
     // Start is called before the first frame update
     void Start()
     {

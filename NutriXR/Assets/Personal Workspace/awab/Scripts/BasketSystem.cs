@@ -16,7 +16,8 @@ public class BasketSystem : MonoBehaviour
 
     [SerializeField] private GameObject basketEntryPrefab;
 
-    private TableItemSpawner _kitchenSceneItemSpawner;
+    private TableItemSpawner _kitchenSceneTableItemSpawner;
+    private TableItemSpawner _kitchenSceneFridgeItemSpawner;
 
     // Start is called before the first frame update
     void Start()
@@ -38,13 +39,27 @@ public class BasketSystem : MonoBehaviour
 
         if (scene.name == "Kitchen")
         {
-            _kitchenSceneItemSpawner = GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>();
-            List<IngredientItemData> itemDatas = new List<IngredientItemData>();
+            _kitchenSceneTableItemSpawner = GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>();
+            List<IngredientItemData> tableItemDatas = new List<IngredientItemData>();
             foreach (IngredientItem item in this.selectedItems)
             {
-                itemDatas.Add(item.GetIngredientItemData());
+                if (item.spawnInFridge == false)
+                {
+                    tableItemDatas.Add(item.GetIngredientItemData());
+                }
             }
-            _kitchenSceneItemSpawner.SpawnKitchenSceneItems(itemDatas);
+            _kitchenSceneTableItemSpawner.SpawnKitchenSceneItems(tableItemDatas);
+
+            _kitchenSceneFridgeItemSpawner = GameObject.FindGameObjectWithTag("KitchenFridgeIngredientSpawner").GetComponent<TableItemSpawner>();
+            List<IngredientItemData> fridgeItemDatas = new List<IngredientItemData>();
+            foreach (IngredientItem item in this.selectedItems)
+            {
+                if (item.spawnInFridge)
+                {
+                    fridgeItemDatas.Add(item.GetIngredientItemData());
+                }
+            }
+            _kitchenSceneFridgeItemSpawner.SpawnKitchenSceneItems(fridgeItemDatas);
         }
     }
 
