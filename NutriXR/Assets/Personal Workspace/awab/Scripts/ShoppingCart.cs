@@ -4,19 +4,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Basket : MonoBehaviour
+public class ShoppingCart : MonoBehaviour
 {
-    public List<FoodItem> selectedItems;
+    public List<IngredientItem> selectedItems;
     [SerializeField]
     private GameObject basketUIScrollViewContent;
-
+    [SerializeField]
     private RecipeSystem _recipeSystem;
+    private GameObject shoppingCartGameObject;
 
     [SerializeField] private GameObject basketEntryPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        _recipeSystem = GetComponent<RecipeSystem>();
+        shoppingCartGameObject = GameObject.FindGameObjectWithTag("ShoppingCart");
     }
 
     // Update is called once per frame
@@ -25,9 +26,10 @@ public class Basket : MonoBehaviour
 
     }
 
-    public void AddToBasket(FoodItem foodItem)
+    public void AddToCart(IngredientItem ingredientItem)
     {
-        selectedItems.Add(foodItem);
+        selectedItems.Add(ingredientItem);
+        ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
         {
             Redraw();
@@ -54,18 +56,26 @@ public class Basket : MonoBehaviour
             mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
             GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
-            Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
+            //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-            itemPrefabInEntry.transform.localRotation = transform.parent.rotation;
+            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
-                selectedItems.Remove(item);
-                _recipeSystem.RedrawRecipeUI();
-                Redraw();
+                item.RespawnToStart();
+                RemoveFromCart(item);
             });
             itemPrefabInEntry.SetActive(true);
         }
+    }
+
+
+
+    public void RemoveFromCart(IngredientItem item)
+    {
+        selectedItems.Remove(item);
+        _recipeSystem.RedrawRecipeUI();
+        Redraw();
     }
 }

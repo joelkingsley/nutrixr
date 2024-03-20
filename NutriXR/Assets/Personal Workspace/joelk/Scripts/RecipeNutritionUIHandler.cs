@@ -27,7 +27,7 @@ namespace Personal_Workspace.joelk.Scripts
         [Serializable]
         public class RecipeList
         {
-            public List<Recipe> recipes;
+            public List<RecipeDataObject> recipes;
         }
 
         [Serializable]
@@ -39,7 +39,7 @@ namespace Personal_Workspace.joelk.Scripts
         [Serializable]
         public class IngredientChoiceList
         {
-            public List<IngredientChoice> ingredientChoices;
+            public List<IngredientDataObject> ingredientChoices;
         }
 
         // Start is called before the first frame update
@@ -62,14 +62,14 @@ namespace Personal_Workspace.joelk.Scripts
                 var ingredientItemData = new IngredientItemData(ingredientChoice);
                 ingredientItemsWithWeights.Add((ingredientItemData, inputIngredientCategory.ingredientWeight));
             }
-            var recipeItem = new RecipeItemData(firstRecipe.id, firstRecipe.name, ingredientItemsWithWeights);
+            /*var recipeItem = new RecipeItemData(firstRecipe.id, firstRecipe.name, ingredientItemsWithWeights);
 
             nameComponent.text = recipeItem.name;
             proteinTextComponent.text = $"{recipeItem.protein} g";
             carbohydratesTextComponent.text = $"{recipeItem.carbohydrates} g";
             fatsTextComponent.text = $"{recipeItem.fat} g";
             sugarTextComponent.text = $"{recipeItem.sugar} g";
-            caloriesTextComponent.text = $"{recipeItem.caloriesInKcal} kcal";
+            caloriesTextComponent.text = $"{recipeItem.caloriesInKcal} kcal";*/
         }
 
         // Update is called once per frame

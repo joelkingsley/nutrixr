@@ -16,7 +16,7 @@ public class UIHandler : MonoBehaviour
 
     public GameObject leftHandUI;
 
-    public GameDataManager gameDataManager;
+    public PersonalDataManager personalDataManager;
 
     public TMP_InputField ageInputField;
 
@@ -28,22 +28,21 @@ public class UIHandler : MonoBehaviour
 
     public TMP_Dropdown activityLevel;
 
-    private Basket _basket;
+    private ShoppingCart _shoppingCart;
 
     private RecipeSystem _recipeSystem;
     // Start is called before the first frame update
     void Start()
     {
-
+        _shoppingCart = GetComponent<ShoppingCart>();
+        _recipeSystem = GetComponent<RecipeSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // TODO move this code to another script
-        if (OVRInput.Get(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.Three))
         {
-            leftHandUI.SetActive(!leftHandUI.activeSelf);
             if (leftHandUI.activeSelf)
             {
                 leftHandUI.SetActive(false);
@@ -51,7 +50,7 @@ public class UIHandler : MonoBehaviour
             else
             {
                 leftHandUI.SetActive(true);
-                _basket.Redraw();
+                _shoppingCart.Redraw();
                 _recipeSystem.RedrawRecipeUI();
             }
         }
@@ -60,7 +59,7 @@ public class UIHandler : MonoBehaviour
     public void DoneIsClicked()
     {
         personalDataUI.SetActive(false);
-        gameDataManager.WriteFile("{"+
+        personalDataManager.WriteFile("{"+
                                   $"\"age\":{ageInputField.text}," +
                                   $"\"height\":{heightInputField.text}," +
                                   $"\"female\":{toggleFemale.isOn}," +
