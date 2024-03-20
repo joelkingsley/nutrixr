@@ -14,7 +14,7 @@ public class SceneSwap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.One))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick))
         {
             Scene currentScene = SceneManager.GetActiveScene();
 
