@@ -11,14 +11,7 @@ using InteractableState = Oculus.Interaction.InteractableState;
 
 public class IngredientItem : MonoBehaviour
 {
-    [SerializeField] private HapticClip hapticClipBackBag;
-    private HapticClipPlayer _hapticClipPlayer;
     public string fdcName;
-    public IngredientItemData data;
-    private AudioSource _audioClipPlayer;
-    private Basket _basketSystem;
-    private DataStorage dataStorage;
-    private bool _readyForSelection;
 
     public TMP_Text nameComponent;
     public TMP_Text proteinTextComponent;
@@ -32,20 +25,31 @@ public class IngredientItem : MonoBehaviour
          _hapticClipPlayer = new HapticClipPlayer(hapticClipBackBag);
          _audioClipPlayer = GetComponent<AudioSource>();
      }
+    public IngredientItemData data;
+    private ShoppingCart _shoppingCartSystem;
+    private DataStorage dataStorage;
+    private Vector3 startingPosition;
+    private Quaternion startingRotation;
+
+    private bool isInCart = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        _basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<Basket>();
+        _shoppingCartSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<ShoppingCart>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
 
+        // To be moved to a separate script
         nameComponent.text = data.name;
         proteinTextComponent.text = $"{data.protein} g";
         carbohydratesTextComponent.text = $"{data.carbohydrates} g";
         fatsTextComponent.text = $"{data.fat} g";
         sugarTextComponent.text = $"{data.sugar} g";
         caloriesTextComponent.text = $"{data.caloriesInKcal} kcal";
+
+        startingPosition = transform.position;
+        startingRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -53,61 +57,30 @@ public class IngredientItem : MonoBehaviour
     {
         
     }
-    void OnDestroy()
-    {
-        _hapticClipPlayer.Dispose();
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("ShoppingCart"))
+        if (other.gameObject.CompareTag("ShoppingCart") && !isInCart)
         {
-            var o = other.gameObject;
-            Debug.Log("other trigger name:" + o.name + "tag: " + o.tag);
-            return;
+            transform.SetParent(other.gameObject.transform, true);
+            _shoppingCartSystem.AddToCart(this);
+            isInCart = true;
         }
-
-        /*if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
-        {
-            var interactors = GetComponentInChildren<GrabInteractable>().SelectingInteractors;
-            if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
-                OVRInput.Controller.LTouch)
-            {
-                _hapticClipPlayer.Play(Oculus.Haptics.Controller.Left);
-
-            }
-            if (interactors != null && interactors.Count != 0 && interactors.First().GetComponent<ItemSelector>().controller ==
-                OVRInput.Controller.RTouch)
-            {
-                _hapticClipPlayer.Play(Oculus.Haptics.Controller.Right);
-
-            }
-            _audioClipPlayer.Play();
-            _readyForSelection = true;
-        }*/
-
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.CompareTag("ShoppingCart")) return;
-        /*if (GetComponentInChildren<GrabInteractable>().State == InteractableState.Select)
+        if (other.gameObject.CompareTag("ShoppingCart") && isInCart)
         {
-            _readyForSelection = false;
-            return;
-        }*/
-        //if (_readyForSelection)
-        //{
-            SelectFoodItem();
-        //}
-
-
+            transform.parent = null;
+            _shoppingCartSystem.RemoveFromCart(this);
+            isInCart = false;
+        }
     }
 
-    public void SelectFoodItem()
+    public void RespawnToStart()
     {
-        _basketSystem.AddToBasket(this);
-        // gameObject.SetActive(false);
+        gameObject.transform.position = startingPosition;
+        gameObject.transform.rotation = startingRotation;
     }
 }

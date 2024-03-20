@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Personal_Workspace.joelk.DTOs;
 using UnityEngine;
+
 
 public class DataStorage : MonoBehaviour
 {
@@ -13,8 +13,8 @@ public class DataStorage : MonoBehaviour
     [SerializeField] private TextAsset recipeJsonFile;
     public Dictionary<string, IngredientItemData> IngredientItems = new();
     public Dictionary<int, RecipeItemData> RecipeItems = new();
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         //fdcNames need to be hardcoded to prefabs
         _ingredientDataObjects = JsonUtility.FromJson<IngredientChoices>(ingredientJsonFile.text).ingredientChoices;
