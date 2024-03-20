@@ -22,8 +22,8 @@ public class SceneSwap : MonoBehaviour
 
             if (currentScene.name == "Supermarket")
             {
-                //SceneManager.LoadScene("Personal Workspace/fabsch/Kitchen");
-                SceneManager.LoadScene("Personal Workspace/julflips/Kitchen");
+                SceneManager.LoadScene("Personal Workspace/fabsch/Kitchen");
+                //SceneManager.LoadScene("Personal Workspace/julflips/Kitchen");
             }
         }
     }

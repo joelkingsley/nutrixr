@@ -79,7 +79,7 @@ public class BasketSystem : MonoBehaviour
         {
             var data = selectedItems[index];
             GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
-            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = data.name;
+            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = data.GetIngredientItemData().name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
