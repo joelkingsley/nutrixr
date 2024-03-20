@@ -20,11 +20,7 @@ public class IngredientItem : MonoBehaviour
     public TMP_Text sugarTextComponent;
     public TMP_Text caloriesTextComponent;
 
-     void Awake()
-     {
-         _hapticClipPlayer = new HapticClipPlayer(hapticClipBackBag);
-         _audioClipPlayer = GetComponent<AudioSource>();
-     }
+
     public IngredientItemData data;
     private ShoppingCart _shoppingCartSystem;
     private DataStorage dataStorage;
@@ -55,7 +51,7 @@ public class IngredientItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -83,4 +79,6 @@ public class IngredientItem : MonoBehaviour
         gameObject.transform.position = startingPosition;
         gameObject.transform.rotation = startingRotation;
     }
+
+    
 }
