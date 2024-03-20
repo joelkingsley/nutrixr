@@ -68,6 +68,13 @@ public class RecipeSystem : MonoBehaviour
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
+            Debug.Log("position: "+ recipeEntry.transform.position);
+            Debug.Log("localScale: "+recipeEntry.transform.localScale);
+            Debug.Log("localPosition: "+recipeEntry.transform.localPosition);
+            Debug.Log("parent localScale: "+recipeEntry.transform.parent.localScale);
+            Debug.Log("parent localPosition: "+recipeEntry.transform.parent.localPosition);
+            Debug.Log("parent position: "+recipeEntry.transform.parent.position);
+
             /*GameObject itemPrefabInEntry = Instantiate(item.gameObject, recipeEntry.transform);
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());

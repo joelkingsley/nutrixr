@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Personal_Workspace.joelk.DTOs
-{
+
     [Serializable]
     public class IngredientDataObject
     {
@@ -37,4 +36,4 @@ namespace Personal_Workspace.joelk.DTOs
             }
         }
     }
-}
+
