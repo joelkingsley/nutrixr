@@ -6,6 +6,7 @@ using Meta.Voice.Audio;
 using Oculus.Haptics;
 using Oculus.Interaction;
 using UnityEditor;
+using TMPro;
 using UnityEngine;
 using InteractableState = Oculus.Interaction.InteractableState;
 
@@ -13,6 +14,18 @@ public class IngredientItem : MonoBehaviour
 {
     private IngredientItemData data;
     private BasketSystem _basketSystemSystem;
+    public string fdcName;
+
+    public TMP_Text nameComponent;
+    public TMP_Text proteinTextComponent;
+    public TMP_Text carbohydratesTextComponent;
+    public TMP_Text fatsTextComponent;
+    public TMP_Text sugarTextComponent;
+    public TMP_Text caloriesTextComponent;
+
+
+    public IngredientItemData data;
+    private ShoppingCart _shoppingCartSystem;
     private DataStorage dataStorage;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
@@ -34,6 +47,15 @@ public class IngredientItem : MonoBehaviour
         _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
+
+        // To be moved to a separate script
+        nameComponent.text = data.name;
+        proteinTextComponent.text = $"{data.protein} g";
+        carbohydratesTextComponent.text = $"{data.carbohydrates} g";
+        fatsTextComponent.text = $"{data.fat} g";
+        sugarTextComponent.text = $"{data.sugar} g";
+        caloriesTextComponent.text = $"{data.caloriesInKcal} kcal";
+
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingScale = transform.localScale;
@@ -104,6 +126,7 @@ public class IngredientItem : MonoBehaviour
         gameObject.transform.position = startingPosition;
         gameObject.transform.rotation = startingRotation;
     }
+
 
     public IngredientItemData GetIngredientItemData()
     {
