@@ -7,8 +7,7 @@ using Personal_Workspace.joelk.Entities;
 using TMPro;
 using UnityEngine;
 
-namespace Personal_Workspace.joelk.Scripts
-{
+
     public class IngredientNutritionUIHandler : MonoBehaviour
     {
         public TMP_Text nameComponent;
@@ -69,4 +68,4 @@ namespace Personal_Workspace.joelk.Scripts
 
         }
     }
-}
+
