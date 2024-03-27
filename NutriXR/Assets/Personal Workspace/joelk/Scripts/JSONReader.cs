@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Personal_Workspace.joelk.DTOs;
-using Personal_Workspace.joelk.Entities;
 using UnityEngine;
 
 namespace Personal_Workspace.joelk

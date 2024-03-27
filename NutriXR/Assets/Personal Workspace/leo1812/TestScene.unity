@@ -334,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -342,7 +342,7 @@ PrefabInstance:
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -453,6 +453,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameComponent: {fileID: 0}
+  proteinTextComponent: {fileID: 0}
+  carbohydratesTextComponent: {fileID: 0}
+  fatsTextComponent: {fileID: 0}
+  sugarTextComponent: {fileID: 0}
+  caloriesTextComponent: {fileID: 0}
+  data:
+    name: 
+    calories: 0
+    caloriesInKcal: 0
+    carbohydrates: 0
+    protein: 0
+    fat: 0
+    sugar: 0
+    categoryIds: 
+    fdcName: 
+  fdcName: 
+  spawnInFridge: 0
 --- !u!1001 &119799525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -510,11 +528,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb3edd0d38dbf34b86518b50072b194, type: 3}
---- !u!1 &140427714 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3383418444488100666, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
-  m_PrefabInstance: {fileID: 1607109511}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &402325262 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3160112171241787054, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
@@ -562,38 +575,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &489514495
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 489514496}
-  m_Layer: 0
-  m_Name: IngredientItems
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &489514496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489514495}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9167686, y: -0.057364132, z: -4.938582}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 840551188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &530042086
@@ -1042,68 +1023,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7825185324898930547, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
   m_PrefabInstance: {fileID: 6899788892117984800}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &840551187
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 489514496}
-    m_Modifications:
-    - target: {fileID: 8711638678088333221, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_Name
-      value: Milk, whole
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.7638
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.0048
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.0795
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 66e3726681347754b8e9b61df379d929, type: 3}
---- !u!4 &840551188 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9016976769003622271, guid: 66e3726681347754b8e9b61df379d929, type: 3}
-  m_PrefabInstance: {fileID: 840551187}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &872269028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1244,7 +1163,7 @@ PrefabInstance:
     - target: {fileID: 71988361970829675, guid: 25c090698b1b94e4d9a8f6d5494bdf31, type: 3}
       propertyPath: _whenRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 71988361970829675, guid: 25c090698b1b94e4d9a8f6d5494bdf31, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1523,6 +1442,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameComponent: {fileID: 0}
+  proteinTextComponent: {fileID: 0}
+  carbohydratesTextComponent: {fileID: 0}
+  fatsTextComponent: {fileID: 0}
+  sugarTextComponent: {fileID: 0}
+  caloriesTextComponent: {fileID: 0}
+  data:
+    name: 
+    calories: 0
+    caloriesInKcal: 0
+    carbohydrates: 0
+    protein: 0
+    fat: 0
+    sugar: 0
+    categoryIds: 
+    fdcName: 
+  fdcName: 
+  spawnInFridge: 0
 --- !u!1001 &1524161298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1734,7 +1671,7 @@ PrefabInstance:
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -1742,7 +1679,7 @@ PrefabInstance:
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1750,7 +1687,7 @@ PrefabInstance:
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 8196890649205836185, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -1923,11 +1860,11 @@ PrefabInstance:
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -1935,15 +1872,15 @@ PrefabInstance:
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 5751095217352582384, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -2031,28 +1968,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3383418444488100666, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1607109516}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
 --- !u!4 &1607109512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2720035132689322368, guid: 2a54b78eced40e74db39ff12257d5702, type: 3}
   m_PrefabInstance: {fileID: 1607109511}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1607109516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140427714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f81ebc859e4732498f9e1a4b46c2209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1676308467 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6379829757502743174, guid: 1d9de9ee96c2aac4ea3458b27855f24b, type: 3}
@@ -2070,6 +1992,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameComponent: {fileID: 0}
+  proteinTextComponent: {fileID: 0}
+  carbohydratesTextComponent: {fileID: 0}
+  fatsTextComponent: {fileID: 0}
+  sugarTextComponent: {fileID: 0}
+  caloriesTextComponent: {fileID: 0}
+  data:
+    name: 
+    calories: 0
+    caloriesInKcal: 0
+    carbohydrates: 0
+    protein: 0
+    fat: 0
+    sugar: 0
+    categoryIds: 
+    fdcName: 
+  fdcName: 
+  spawnInFridge: 0
 --- !u!1 &1696550271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,11 +2291,11 @@ PrefabInstance:
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -2363,15 +2303,15 @@ PrefabInstance:
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 732246028235456904, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
       propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -2515,33 +2455,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7665534328767522528, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1933995798}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
 --- !u!4 &1887195261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7001587203448011866, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
   m_PrefabInstance: {fileID: 1887195260}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1933995794 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7665534328767522528, guid: 08bd653119f9db54fb91155eb09c459a, type: 3}
-  m_PrefabInstance: {fileID: 1887195260}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1933995798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933995794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f81ebc859e4732498f9e1a4b46c2209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1995792043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2621,7 +2541,7 @@ PrefabInstance:
     - target: {fileID: 71988361970829675, guid: 25c090698b1b94e4d9a8f6d5494bdf31, type: 3}
       propertyPath: _whenRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1607109516}
+      objectReference: {fileID: 0}
     - target: {fileID: 71988361970829675, guid: 25c090698b1b94e4d9a8f6d5494bdf31, type: 3}
       propertyPath: _whenUnselect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2900,6 +2820,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameComponent: {fileID: 0}
+  proteinTextComponent: {fileID: 0}
+  carbohydratesTextComponent: {fileID: 0}
+  fatsTextComponent: {fileID: 0}
+  sugarTextComponent: {fileID: 0}
+  caloriesTextComponent: {fileID: 0}
+  data:
+    name: 
+    calories: 0
+    caloriesInKcal: 0
+    carbohydrates: 0
+    protein: 0
+    fat: 0
+    sugar: 0
+    categoryIds: 
+    fdcName: 
+  fdcName: 
+  spawnInFridge: 0
 --- !u!1001 &6899788892117984800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3024,7 +2962,6 @@ SceneRoots:
   - {fileID: 1813753704}
   - {fileID: 872269028}
   - {fileID: 748706015}
-  - {fileID: 489514496}
   - {fileID: 6899788892117984800}
   - {fileID: 1696550275}
   - {fileID: 119799525}
