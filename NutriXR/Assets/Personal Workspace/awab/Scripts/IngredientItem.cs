@@ -12,9 +12,7 @@ using InteractableState = Oculus.Interaction.InteractableState;
 
 public class IngredientItem : MonoBehaviour
 {
-    private IngredientItemData data;
     private BasketSystem _basketSystemSystem;
-    public string fdcName;
 
     public TMP_Text nameComponent;
     public TMP_Text proteinTextComponent;
@@ -23,9 +21,7 @@ public class IngredientItem : MonoBehaviour
     public TMP_Text sugarTextComponent;
     public TMP_Text caloriesTextComponent;
 
-
     public IngredientItemData data;
-    private ShoppingCart _shoppingCartSystem;
     private DataStorage dataStorage;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
