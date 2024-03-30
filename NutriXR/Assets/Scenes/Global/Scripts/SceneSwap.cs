@@ -22,7 +22,7 @@ public class SceneSwap : MonoBehaviour
 
             if (currentScene.name == "Supermarket")
             {
-                SceneManager.LoadScene("Scenes/Kitchen");
+                SceneManager.LoadScene("Personal Workspace/fabsch/Kitchen");
             }
         }
     }
