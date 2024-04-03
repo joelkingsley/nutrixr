@@ -13,10 +13,14 @@ public class RecipeSystem : MonoBehaviour
 
     private List<RecipeItemData> _possibleRecipes = new ();
     public List<RecipeItemData> allRecipes;
+    public List<List<int>> categoriesInPossibleRecipes = new();
      private DataStorage dataStorage;
     [FormerlySerializedAs("shoppingCart")] [FormerlySerializedAs("basket")] [SerializeField] private BasketSystem basketSystem;
     [SerializeField]
     private GameObject recipeEntryPrefab;
+    [SerializeField]
+    private GameObject categoryPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,7 @@ public class RecipeSystem : MonoBehaviour
             Destroy(child.gameObject);
         }
         _possibleRecipes = new List<RecipeItemData>();
+        categoriesInPossibleRecipes = new List<List<int>>();
         foreach (var foodItem in _selectedItems)
         {
             foreach (var recipe in allRecipes)
@@ -50,11 +55,14 @@ public class RecipeSystem : MonoBehaviour
                         if (!_possibleRecipes.Contains(recipe))
                         {
                             _possibleRecipes.Add(recipe);
+                            categoriesInPossibleRecipes.Add(recipe.categoryIdsWithWeights.Select(x=>x.Item1).ToList());
                         }
                     }
                 }
             }
         }
+
+        int numberOfAddedCategories = 0;//this is used to adjust the offset of the elements
         for (var index = 0; index < _possibleRecipes.Count; index++)
         {
             var item = _possibleRecipes[index];
@@ -63,22 +71,28 @@ public class RecipeSystem : MonoBehaviour
             var mAnchoredPosition = recipeEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
-            mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
-            Debug.Log("position: "+ recipeEntry.transform.position);
-            Debug.Log("localScale: "+recipeEntry.transform.localScale);
-            Debug.Log("localPosition: "+recipeEntry.transform.localPosition);
-            Debug.Log("parent localScale: "+recipeEntry.transform.parent.localScale);
-            Debug.Log("parent localPosition: "+recipeEntry.transform.parent.localPosition);
-            Debug.Log("parent position: "+recipeEntry.transform.parent.position);
+            mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index + 10*numberOfAddedCategories)-15);
+            for (var j = 0; j < categoriesInPossibleRecipes[index].Count; j++)
+            {
+                var categoryId = categoriesInPossibleRecipes[index][j];
+                GameObject newCategoryTextGameObject = Instantiate(categoryPrefab, recipeEntry.transform);
+                 newCategoryTextGameObject.AddComponent<TextMeshProUGUI>();
 
-            /*GameObject itemPrefabInEntry = Instantiate(item.gameObject, recipeEntry.transform);
-            itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
-            Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
-            itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
-            itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-            itemPrefabInEntry.transform.localRotation = transform.parent.rotation;
-            itemPrefabInEntry.SetActive(true);*/
+                var categoryPos = newCategoryTextGameObject.GetComponent<RectTransform>();
+                var categoryX = categoryPos.anchoredPosition.x;
+                var categoryY = categoryPos.anchoredPosition.y;
+                categoryPos.anchoredPosition = new Vector2(categoryX+10, categoryY - (10 * j));
+                TextMeshProUGUI textComponent = newCategoryTextGameObject.GetComponent<TextMeshProUGUI>();
+                textComponent.text = dataStorage.GetCategoryName(categoryId);
+                foreach (var cSelectedItem in basketSystem.selectedItems)
+                {
+                    if (cSelectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
+                    {
+                        textComponent.color = Color.green;
+                    }
+                }
+                numberOfAddedCategories += 1; //this is used to adjust the offset of the elements
+            }
         }
     }
 }

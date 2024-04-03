@@ -92,15 +92,15 @@ public class BasketSystem : MonoBehaviour
 
         for (var index = 0; index < selectedItems.Count; index++)
         {
-            var data = selectedItems[index];
+            var item = selectedItems[index];
             GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
-            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = data.GetIngredientItemData().name;
+            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.GetIngredientItemData().name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
-            mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
+            mAnchoredPosition.anchoredPosition = new Vector2(x-40, y - (30 * index)+70);
 
-            GameObject itemPrefabInEntry = Instantiate(data.gameObject, newBasketEntry.transform);
+            GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
             itemPrefabInEntry.GetComponent<Grabbable>().enabled = false;
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
@@ -111,8 +111,8 @@ public class BasketSystem : MonoBehaviour
 
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
-                data.RespawnToStart();
-                RemoveFromCart(data);
+                item.RespawnToStart();
+                RemoveFromCart(item);
             });
             itemPrefabInEntry.SetActive(true);
         }
