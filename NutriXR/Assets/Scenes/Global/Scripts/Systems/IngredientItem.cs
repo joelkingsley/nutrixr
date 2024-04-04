@@ -30,6 +30,8 @@ public class IngredientItem : MonoBehaviour
         startingScale = transform.localScale;
 
         allColliders = GetComponentsInChildren<Collider>(false);
+        var foodItemCanvas = gameObject.GetComponentInChildren<FoodItemCanvas>();
+        foodItemCanvas.InitializeCanvas();
     }
 
     // Update is called once per frame
