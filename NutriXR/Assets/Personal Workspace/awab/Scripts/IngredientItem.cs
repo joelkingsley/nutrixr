@@ -5,6 +5,7 @@ using System.Linq;
 using Meta.Voice.Audio;
 using Oculus.Haptics;
 using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using TMPro;
 using UnityEngine;
 using InteractableState = Oculus.Interaction.InteractableState;
@@ -13,13 +14,14 @@ public class IngredientItem : MonoBehaviour
 {
     public string fdcName;
 
-    public TMP_Text nameComponent;
-    public TMP_Text proteinTextComponent;
-    public TMP_Text carbohydratesTextComponent;
-    public TMP_Text fatsTextComponent;
-    public TMP_Text sugarTextComponent;
-    public TMP_Text caloriesTextComponent;
+    private TMP_Text _nameComponent;
+    private TMP_Text _proteinTextComponent;
+    private TMP_Text _carbohydratesTextComponent;
+    private TMP_Text _fatsTextComponent;
+    private TMP_Text _sugarTextComponent;
+    private TMP_Text _caloriesTextComponent;
 
+    private HandGrabInteractable _handGrabInteractable;
 
     public IngredientItemData data;
     private ShoppingCart _shoppingCartSystem;
@@ -35,14 +37,24 @@ public class IngredientItem : MonoBehaviour
         _shoppingCartSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<ShoppingCart>();
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
+        _handGrabInteractable = gameObject.GetComponent<HandGrabInteractable>();
 
-        // To be moved to a separate script
-        nameComponent.text = data.name;
-        proteinTextComponent.text = $"{data.protein} g";
-        carbohydratesTextComponent.text = $"{data.carbohydrates} g";
-        fatsTextComponent.text = $"{data.fat} g";
-        sugarTextComponent.text = $"{data.sugar} g";
-        caloriesTextComponent.text = $"{data.caloriesInKcal} kcal";
+        // Setup text fields
+        var textFields = gameObject.GetComponentsInChildren<TMP_Text>();
+        _nameComponent = textFields.First(x => x.gameObject.name == "Name");
+        _proteinTextComponent = textFields.First(x => x.gameObject.name == "ProteinValue");
+        _carbohydratesTextComponent = textFields.First(x => x.gameObject.name == "CarbohydratesValue");
+        _fatsTextComponent = textFields.First(x => x.gameObject.name == "FatsValue");
+        _sugarTextComponent = textFields.First(x => x.gameObject.name == "SugarValue");
+        _caloriesTextComponent = textFields.First(x => x.gameObject.name == "CaloriesValue");
+
+        // Populate text fields
+        _nameComponent.text = data.name;
+        _proteinTextComponent.text = $"{data.protein} g";
+        _carbohydratesTextComponent.text = $"{data.carbohydrates} g";
+        _fatsTextComponent.text = $"{data.fat} g";
+        _sugarTextComponent.text = $"{data.sugar} g";
+        _caloriesTextComponent.text = $"{data.caloriesInKcal} kcal";
 
         startingPosition = transform.position;
         startingRotation = transform.rotation;
@@ -51,7 +63,26 @@ public class IngredientItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (InteractableState.Select == _handGrabInteractable.State)
+        {
+            foreach (Transform child in gameObject.transform)
+            {
+                if (child.CompareTag("ItemCanvas"))
+                {
+                    gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                }
+            }
+        }
+        else
+        {
+            foreach (Transform child in gameObject.transform)
+            {
+                if (child.CompareTag("ItemCanvas"))
+                {
+                    gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,5 +111,5 @@ public class IngredientItem : MonoBehaviour
         gameObject.transform.rotation = startingRotation;
     }
 
-    
+
 }
