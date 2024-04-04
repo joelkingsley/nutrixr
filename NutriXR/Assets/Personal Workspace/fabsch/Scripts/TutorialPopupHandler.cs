@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TutorialPopupHandler : MonoBehaviour
 {
+    [SerializeField] public GameObject nextPopup;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +21,9 @@ public class TutorialPopupHandler : MonoBehaviour
     public void HideElement()
     {
         gameObject.SetActive(false);
+        if (nextPopup != null)
+        {
+            nextPopup.SetActive(true);
+        }
     }
 }
