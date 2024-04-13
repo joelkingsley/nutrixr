@@ -66,6 +66,12 @@ public class BasketSystem : MonoBehaviour
     public void AddToCart(IngredientItem ingredientItem)
     {
         Debug.Log("Add to cart");
+        if (ingredientItem.GetIngredientItemData().name.Equals(""))
+        {
+            Debug.Log("Item without a name, wont be added to list");
+            return;
+        }
+
         selectedItems.Add(ingredientItem);
         //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
