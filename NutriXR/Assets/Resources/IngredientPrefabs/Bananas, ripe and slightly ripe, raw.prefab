@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8494847753735173115
+--- !u!1 &7345166294263720581
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,16 +8,16 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6400052812098795666}
-  - component: {fileID: 4860340004955464133}
-  - component: {fileID: 7928694841861256008}
-  - component: {fileID: 456405027180890549}
-  - component: {fileID: 5131714880170120484}
-  - component: {fileID: -1804267828050281351}
-  - component: {fileID: -3890157768456741099}
-  - component: {fileID: -6687335759330531211}
-  - component: {fileID: 4130927557622294149}
-  - component: {fileID: 929693833121127256}
+  - component: {fileID: 7972661585455001663}
+  - component: {fileID: 6416308877515407258}
+  - component: {fileID: 9146733483302669136}
+  - component: {fileID: 5765045551053391571}
+  - component: {fileID: 8422267368584631441}
+  - component: {fileID: 7061119554952729248}
+  - component: {fileID: -1627898119134811458}
+  - component: {fileID: 86359890002464036}
+  - component: {fileID: -468427639815048624}
+  - component: {fileID: 5526156700318644065}
   m_Layer: 9
   m_Name: Bananas, ripe and slightly ripe, raw
   m_TagString: Untagged
@@ -25,36 +25,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6400052812098795666
+--- !u!4 &7972661585455001663
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4860340004955464133
+--- !u!33 &6416308877515407258
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
-  m_Mesh: {fileID: -5495902117074765545, guid: f6ebd0add621e4078be1650d1dfe25c7, type: 3}
---- !u!23 &7928694841861256008
+  m_GameObject: {fileID: 7345166294263720581}
+  m_Mesh: {fileID: 8818439854984182713, guid: f966d5372e29f6d4e9bc8efd0e5f2323, type: 3}
+--- !u!23 &9146733483302669136
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: f6ebd0add621e4078be1650d1dfe25c7, type: 3}
+  - {fileID: 2100000, guid: 2635c6db7f2f7be4fa07fb8cfc02c0b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,13 +90,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &456405027180890549
+--- !u!64 &5765045551053391571
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -111,14 +111,14 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: f6ebd0add621e4078be1650d1dfe25c7, type: 3}
---- !u!54 &5131714880170120484
+  m_Mesh: {fileID: 8818439854984182713, guid: f966d5372e29f6d4e9bc8efd0e5f2323, type: 3}
+--- !u!54 &8422267368584631441
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   serializedVersion: 4
   m_Mass: 0.5
   m_Drag: 0
@@ -139,13 +139,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1804267828050281351
+--- !u!114 &7061119554952729248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
@@ -153,32 +153,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fdcName: Bananas, ripe and slightly ripe, raw
   spawnInFridge: 0
---- !u!114 &-3890157768456741099
+--- !u!114 &-1627898119134811458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transferOnSecondSelection: 1
+  _transferOnSecondSelection: 0
   _addNewPointsToFront: 0
   _forwardElement: {fileID: 0}
   _oneGrabTransformer: {fileID: 0}
   _twoGrabTransformer: {fileID: 0}
   _targetTransform: {fileID: 0}
   _maxGrabPoints: -1
---- !u!114 &-6687335759330531211
+--- !u!114 &86359890002464036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a7676b01585ce43908639a27765dfc, type: 3}
@@ -188,9 +188,9 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
-  _pointableElement: {fileID: -3890157768456741099}
-  _rigidbody: {fileID: 5131714880170120484}
-  _physicsGrabbable: {fileID: 929693833121127256}
+  _pointableElement: {fileID: -1627898119134811458}
+  _rigidbody: {fileID: 8422267368584631441}
+  _physicsGrabbable: {fileID: 0}
   _resetGrabOnGrabsUpdated: 1
   _scoringModifier:
     _positionRotationWeight: 0.8
@@ -213,19 +213,19 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 1
   _handGrabPoses: []
---- !u!114 &4130927557622294149
+--- !u!114 &-468427639815048624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2f8f6e9e6f3e114b9bf9a57c2160615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointable: {fileID: -3890157768456741099}
+  _pointable: {fileID: -1627898119134811458}
   _whenRelease:
     m_PersistentCalls:
       m_Calls: []
@@ -238,7 +238,7 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1804267828050281351}
+      - m_Target: {fileID: 7061119554952729248}
         m_TargetAssemblyTypeName: IngredientItem, Assembly-CSharp
         m_MethodName: OnSelect
         m_Mode: 1
@@ -253,7 +253,7 @@ MonoBehaviour:
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1804267828050281351}
+      - m_Target: {fileID: 7061119554952729248}
         m_TargetAssemblyTypeName: IngredientItem, Assembly-CSharp
         m_MethodName: OnUnselect
         m_Mode: 1
@@ -271,18 +271,18 @@ MonoBehaviour:
   _whenCancel:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &929693833121127256
+--- !u!114 &5526156700318644065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494847753735173115}
+  m_GameObject: {fileID: 7345166294263720581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bedaac29a943f844a7074b53c8bdf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointable: {fileID: -3890157768456741099}
-  _rigidbody: {fileID: 5131714880170120484}
-  _scaleMassWithSize: 0
+  _pointable: {fileID: -1627898119134811458}
+  _rigidbody: {fileID: 8422267368584631441}
+  _scaleMassWithSize: 1
