@@ -104,23 +104,23 @@ public class BasketSystem : MonoBehaviour
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
-            mAnchoredPosition.anchoredPosition = new Vector2(x-40, y - (30 * index)+70);
+            mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index)-15);
 
-            GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
+           /* GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
             itemPrefabInEntry.GetComponent<Grabbable>().enabled = false;
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;
+            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;*/
 
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
                 item.RespawnToStart();
                 RemoveFromCart(item);
             });
-            itemPrefabInEntry.SetActive(true);
+            //itemPrefabInEntry.SetActive(true);
         }
     }
 }
