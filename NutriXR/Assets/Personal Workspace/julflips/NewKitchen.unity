@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1810616, g: 0.22663607, b: 0.30729228, a: 1}
+  m_IndirectSpecularColor: {r: 0.18106125, g: 0.22663558, b: 0.30729157, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2623,7 +2623,7 @@ PrefabInstance:
     - target: {fileID: 8705681839519527949, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
       propertyPath: recipeUIScrollViewContent
       value: 
-      objectReference: {fileID: 1252730202}
+      objectReference: {fileID: 0}
     - target: {fileID: 8973130603323280664, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
       propertyPath: m_Name
       value: RecipeSystem
@@ -5450,11 +5450,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f6b180dffd447ad976530504f05934, type: 3}
---- !u!1 &1252730202 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8636886240549060446, guid: 42f6b180dffd447ad976530504f05934, type: 3}
-  m_PrefabInstance: {fileID: 1252730201}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1252730203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 682764804122160433, guid: 42f6b180dffd447ad976530504f05934, type: 3}
