@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4522645980724234862}
   - component: {fileID: 4972445808124530247}
   m_Layer: 7
-  m_Name: TrollyVolume
+  m_Name: CartVolume
   m_TagString: ShoppingCart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,6 +164,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.2088346, y: 2.0095851, z: 1.9544172}
   m_Center: {x: 0.016958237, y: 0.05305493, z: 0}
+--- !u!1 &1252916676773516417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1904222935938097709}
+  m_Layer: 7
+  m_Name: CartItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1904222935938097709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252916676773516417}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 887768622726171287}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1382638826136179778
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +204,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887768622726171287}
+  - component: {fileID: 3229383746694282139}
+  - component: {fileID: 8296940345353906717}
+  - component: {fileID: 7340889354662640143}
   m_Layer: 7
   m_Name: ShoppingCart
   m_TagString: ShoppingCart
@@ -196,8 +230,80 @@ Transform:
   - {fileID: 7065889825583385559}
   - {fileID: 4995037736093547389}
   - {fileID: 4522645980724234862}
+  - {fileID: 1904222935938097709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3229383746694282139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382638826136179778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eff7983f41e3624d8b8a99c5d550629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  deactivate:
+  - {fileID: 1386665188976720903}
+  basket_content: {fileID: 2491722481629654294}
+  recipes_content: {fileID: 7273890283614547374}
+  remoteCreationHook: {fileID: 1252916676773516417}
+--- !u!114 &8296940345353906717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382638826136179778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2679978254
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &7340889354662640143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382638826136179778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 887768622726171287}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 1
+  sendIntervalMultiplier: 1
+  timelineOffset: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &1386665188976720903
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +316,7 @@ GameObject:
   - component: {fileID: 5457775497153224657}
   - component: {fileID: 2395908227481904031}
   m_Layer: 7
-  m_Name: TrollyHandle
+  m_Name: CartHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1045,6 +1151,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39b0f763e9e3ff4438bee2fdb7c81aa0, type: 3}
+--- !u!1 &2491722481629654294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 878604422157513734, guid: 39b0f763e9e3ff4438bee2fdb7c81aa0, type: 3}
+  m_PrefabInstance: {fileID: 3361108588627679504}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6545106058811640247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8390748424333643943, guid: 39b0f763e9e3ff4438bee2fdb7c81aa0, type: 3}
@@ -1120,6 +1231,11 @@ PrefabInstance:
 --- !u!4 &6160697759087516865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 682764804122160433, guid: 42f6b180dffd447ad976530504f05934, type: 3}
+  m_PrefabInstance: {fileID: 6631157927063581168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7273890283614547374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4104071928889826398, guid: 42f6b180dffd447ad976530504f05934, type: 3}
   m_PrefabInstance: {fileID: 6631157927063581168}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7315442429300878396
@@ -1232,7 +1348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 34ffd8b11f33b414f81c19caaa4189e8, type: 3}
       propertyPath: m_Name
-      value: TrollyBase
+      value: CartBase
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 34ffd8b11f33b414f81c19caaa4189e8, type: 3}
       propertyPath: m_Layer

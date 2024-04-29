@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Mirror;
 using Oculus.Avatar2;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ConfigurePlayerForNetwork : NetworkBehaviour
 {
@@ -13,8 +14,8 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
     [Space] [Header("Remote Avatar")] [SerializeField]
     private SampleAvatarEntity remoteAvatar;
 
-    [Header("Remote Avatar")] [SerializeField]
-    private GameObject carts;
+    [Header("Shopping Cart Prefab")] [SerializeField]
+    private GameObject shoppingCartPrefab;
 
 
     private void Start()
@@ -35,7 +36,7 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
         remoteAvatar.gameObject.SetActive(true);
 
         //Spawn Carts and give authority
-        NetworkServer.Spawn(Instantiate(carts, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), connectionToClient);
+        NetworkServer.Spawn(Instantiate(shoppingCartPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), connectionToClient);
     }
 
     public override void OnStartClient()

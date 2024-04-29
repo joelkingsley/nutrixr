@@ -7,10 +7,8 @@ using UnityEngine;
 public class CartSync : NetworkBehaviour
 {
     //Carts
-    [Header("Local Cart")] [SerializeField]
-    private GameObject localCart;
-    [Space] [Header("Remote Cart")] [SerializeField]
-    private GameObject remoteCart;
+    [Header("Deactivate on Remote")] [SerializeField]
+    private List<GameObject> deactivate;
 
     //Basket UI
     [Header("BasketUI Content View")] [SerializeField]
@@ -27,12 +25,26 @@ public class CartSync : NetworkBehaviour
     [Header("Remote Creation Hook")] [SerializeField]
     private GameObject remoteCreationHook;
 
+    public struct Item
+    {
+        public string fdcName;
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+
+    public readonly SyncList<Item> inventory = new SyncList<Item>();
+    private List<IngredientItem> selectedIngredientItems = new List<IngredientItem>();              //items present in owner's cart
+    private List<GameObject> visibleItems = new List<GameObject>();                                 //objects present in remote cart
+    private Dictionary<IngredientItem, Item> ingToItem = new Dictionary<IngredientItem, Item>();    //used by owner of this cart
+    private Dictionary<Item, GameObject> itemToItem = new Dictionary<Item, GameObject>();           //used by remote version of cart
+    //owner: IngredientItem <--goToItem--> Item <--network--> Item <--itemToGo--> GameObject :remote
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        localCart.SetActive(false);
-        remoteCart.SetActive(true);
+        deactivate.ForEach(x => x.SetActive(false));
+
+        inventory.Callback += OnInventoryUpdate;
     }
 
     public override void OnStartClient()
@@ -41,9 +53,6 @@ public class CartSync : NetworkBehaviour
 
         if (netIdentity.isOwned)    //e.g. the shopping cart belongs to player
         {
-            localCart.SetActive(true);
-            remoteCart.SetActive(false);
-
             //Connect Shopping cart to the players local BasketSystem and RecipeSystem
             GameObject.FindWithTag("RecipeSystem").GetComponent<RecipeSystem>().recipeUIScrollViewContent = recipes_content;
             basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<BasketSystem>();
@@ -51,79 +60,82 @@ public class CartSync : NetworkBehaviour
         }
         else
         {
-            localCart.SetActive(false);
-            remoteCart.SetActive(true);
+            //e.g. the shopping cart does not belong to player
+            deactivate.ForEach(x => x.SetActive(false));
+
+            inventory.Callback += OnInventoryUpdate;
         }
     }
 
-    [Command]   //Invoked by Client, executed on Server
-    public void CmdSendCartToServer(Vector3[] positions, Quaternion[] rotations, string[] fdcNames)
+    [Client]
+    public void AddItemToCart(IngredientItem ingItem)       //executed by owner
     {
-        //Forward to all the clients
-        RpcSendCartToClient(positions, rotations, fdcNames);
-    }
-
-    [ClientRpc] //Invoked by Server, executed on Client
-    public void RpcSendCartToClient(Vector3[] positions, Quaternion[] rotations, string[] fdcNames)
-    {
-        if (!netIdentity.isOwned)
+        if (netIdentity.isOwned)
         {
-            //This is another players cart
-
-            //Update:
-            foreach (Transform child in transform) {
-                Destroy(child.gameObject);
-            }
-
-            for (int i = 0; i < positions.Length; i++)
+            selectedIngredientItems.Add(ingItem);
+            Item item = new Item
             {
-
-            }
+                fdcName = ingItem.fdcName,
+                position = ingItem.gameObject.transform.localPosition,
+                rotation = ingItem.gameObject.transform.rotation
+            };
+            ingToItem.Add(ingItem, item);
+            CmdAddItemToCart(item);
         }
     }
 
-    //Steaming Loop
-    private IEnumerator StreamCartData()
+    [Client]
+    public void RemoveItemFromCart(IngredientItem ingItem)    //executed by owner
     {
-        while (true)
+        if (netIdentity.isOwned)
         {
-            if (isLocalPlayer)
-            {
-                //collect basketSystem and turn into sync-able data array
-                Vector3[] positions = new Vector3[basketSystem.selectedItems.Count];
-                Quaternion[] rotations = new Quaternion[basketSystem.selectedItems.Count];
-                string[] fdcNames = new string[basketSystem.selectedItems.Count];
-
-                for (int i = 0; i < basketSystem.selectedItems.Count; i++)
-                {
-                    IngredientItem ingItem = basketSystem.selectedItems[i];
-                    positions[i] = ingItem.gameObject.transform.position;
-                    rotations[i] = ingItem.gameObject.transform.rotation;
-                    fdcNames[i] = ingItem.fdcName;
-                }
-                CmdSendCartToServer(positions, rotations, fdcNames);
-            }
-
-            yield return new WaitForSeconds(1f);
+            Item item;
+            ingToItem.Remove(ingItem, out item); //retrieve corresponding item
+            CmdRemoveItemFromCart(item);
         }
     }
 
-
-
-
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    [Command]
+    public void CmdAddItemToCart(Item item)
     {
-
+        inventory.Add(item);
     }
 
-    // Update is called once per frame
-    void Update()
+    [Command]
+    public void CmdRemoveItemFromCart(Item item)
     {
+        inventory.Remove(item);
+    }
 
+    void OnInventoryUpdate(SyncList<Item>.Operation op, int index, Item oldItem, Item newItem)
+    {
+        if (!netIdentity.isOwned)   //only update remote carts, not the owned one
+        {
+            switch (op)
+            {
+                case SyncList<Item>.Operation.OP_ADD:
+                    // index is where it was added into the list
+                    // newItem is the new item
+                    Debug.Log(newItem.fdcName + " was added to the Cart");
+                    break;
+                case SyncList<Item>.Operation.OP_INSERT:
+                    // index is where it was inserted into the list
+                    // newItem is the new item
+                    break;
+                case SyncList<Item>.Operation.OP_REMOVEAT:
+                    // index is where it was removed from the list
+                    // oldItem is the item that was removed
+                    Debug.Log(oldItem.fdcName + " was removed from the Cart");
+                    break;
+                case SyncList<Item>.Operation.OP_SET:
+                    // index is of the item that was changed
+                    // oldItem is the previous value for the item at the index
+                    // newItem is the new value for the item at the index
+                    break;
+                case SyncList<Item>.Operation.OP_CLEAR:
+                    // list got cleared
+                    break;
+            }
+        }
     }
 }

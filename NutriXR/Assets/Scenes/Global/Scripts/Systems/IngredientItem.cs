@@ -59,7 +59,8 @@ public class IngredientItem : MonoBehaviour
         if (other.gameObject.CompareTag("ShoppingCart") && !isInCart)
         {
             transform.SetParent(other.gameObject.transform, true);
-            _basketSystemSystem.AddToCart(this);
+            other.gameObject.GetComponentInParent<CartSync>().AddItemToCart(this);
+            //_basketSystemSystem.AddToCart(this);
             isInCart = true;
         }
 
@@ -77,7 +78,8 @@ public class IngredientItem : MonoBehaviour
         if (other.gameObject.CompareTag("ShoppingCart") && isInCart)
         {
             transform.parent = null;
-            _basketSystemSystem.RemoveFromCart(this);
+            other.gameObject.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
+            //_basketSystemSystem.RemoveFromCart(this);
             isInCart = false;
         }
 

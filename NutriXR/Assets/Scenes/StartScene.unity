@@ -270,7 +270,7 @@ MonoBehaviour:
   offlineScene: Assets/Scenes/StartScene.unity
   onlineScene: Assets/Scenes/Supermarket/Supermarket.unity
   transport: {fileID: 1541066060}
-  networkAddress: 192.168.2.111
+  networkAddress: 192.168.178.20
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
@@ -278,7 +278,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 8131397517781101268, guid: b6e75e97a4a219f49915ce3106d7fbfa, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 1382638826136179778, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
