@@ -9,7 +9,7 @@ public class RecipeSystem : MonoBehaviour
 {
     private List<IngredientItem> _selectedItems;
     [SerializeField]
-    private GameObject recipeUIScrollViewContent;
+    public GameObject recipeUIScrollViewContent;
 
     private List<RecipeItemData> _possibleRecipes = new ();
     public List<RecipeItemData> allRecipes;

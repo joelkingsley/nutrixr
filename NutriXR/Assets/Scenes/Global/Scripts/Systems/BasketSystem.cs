@@ -10,7 +10,7 @@ public class BasketSystem : MonoBehaviour
 {
     public List<IngredientItem> selectedItems;
     [SerializeField]
-    private GameObject basketUIScrollViewContent;
+    public GameObject basketUIScrollViewContent;
     [SerializeField]
     private RecipeSystem _recipeSystem;
 
