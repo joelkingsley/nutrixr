@@ -17,11 +17,7 @@ public class TableItemSpawner : MonoBehaviour
     [SerializeField]
     public int totalCols = 4;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    private int currentPos = 0;
 
     public void SpawnKitchenSceneItems(List<IngredientItemData> ingredientItems)
     {
@@ -40,6 +36,7 @@ public class TableItemSpawner : MonoBehaviour
             int col = i % totalCols;
             SpawnItemAt(row, col, prefab);
         }
+        currentPos = amount;
     }
 
     private GameObject LoadPrefab(string fdcName)
@@ -58,9 +55,16 @@ public class TableItemSpawner : MonoBehaviour
         Instantiate(prefab, spawnPosition, Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void addItem(GameObject item)
     {
+        int row = currentPos / totalCols;
+        int col = currentPos % totalCols;
+        float xOffset = (spawnAreaX / totalRows) * row;
+        float zOffset = (spawnAreaZ / totalCols) * col;
+        Vector3 spawnPosition = new Vector3(transform.position.x + xOffset, transform.position.y,
+            transform.position.z + zOffset);
 
+        item.transform.position = spawnPosition;
+        currentPos++;
     }
 }

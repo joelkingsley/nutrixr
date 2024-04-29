@@ -11,7 +11,7 @@ public class RecipeSystem : MonoBehaviour
     [SerializeField]
     private GameObject recipeUIScrollViewContent;
 
-    private List<RecipeItemData> _possibleRecipes = new ();
+    private List<RecipeItemData> _possibleRecipes = new();
     public List<RecipeItemData> allRecipes;
     public List<List<int>> categoriesInPossibleRecipes = new();
      private DataStorage dataStorage;
@@ -20,6 +20,9 @@ public class RecipeSystem : MonoBehaviour
     private GameObject recipeEntryPrefab;
     [SerializeField]
     private GameObject categoryPrefab;
+
+    [SerializeField] private TableItemSpawner recipeSpawner;
+    private List<GameObject> cookedRecipes = new();
 
     void Start()
     {
@@ -61,6 +64,8 @@ public class RecipeSystem : MonoBehaviour
             bool recipeFinished = true;
             RecipeItemData item = _possibleRecipes[index];
             GameObject recipeEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
+            recipeEntry.transform.GetChild(1).GetComponent<Cooking>().recipeSystem = this;
+            recipeEntry.transform.GetChild(1).GetComponent<Cooking>().recipeData = item;
             recipeEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.name;
             RectTransform mAnchoredPosition = recipeEntry.GetComponent<RectTransform>();
             float x = mAnchoredPosition.anchoredPosition.x;
@@ -70,7 +75,7 @@ public class RecipeSystem : MonoBehaviour
             {
                 int categoryId = categoriesInPossibleRecipes[index][j];
                 GameObject newCategoryTextGameObject = Instantiate(categoryPrefab, recipeEntry.transform);
-                 newCategoryTextGameObject.AddComponent<TextMeshProUGUI>();
+                newCategoryTextGameObject.AddComponent<TextMeshProUGUI>();
 
                 RectTransform categoryPos = newCategoryTextGameObject.GetComponent<RectTransform>();
                 float categoryX = categoryPos.anchoredPosition.x;
@@ -94,8 +99,32 @@ public class RecipeSystem : MonoBehaviour
 
             if (recipeFinished)
             {
-                //Debug.Log("Finished: " + item.name);
-                //ToDo: Add UI button to start cooking process
+                recipeEntry.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                recipeEntry.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void startCooking(RecipeItemData recipeData)
+    {
+        //Debug.Log("Cooking: " + recipeData.name);
+        GameObject prefab = (GameObject) Resources.Load("RecipePrefabs/" + recipeData.name, typeof(GameObject));
+        GameObject recipeObject = Instantiate(prefab);
+        cookedRecipes.Add(recipeObject);
+        recipeSpawner.addItem(recipeObject);
+
+        foreach (IngredientItem selectedItem in basketSystem.selectedItems)
+        {
+            List<int> categoryIDs = recipeData.categoryIdsWithWeights.Select(x => x.Item1).ToList();
+            foreach (int categoryId in categoryIDs)
+            {
+                if (selectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
+                {
+                    recipeObject.GetComponent<RecipeIngredients>().ingredients.Add(selectedItem.fdcName);
+                    basketSystem.RemoveFromCart(selectedItem);
+                    Destroy(selectedItem.gameObject);
+                    return;
+                }
             }
         }
     }
