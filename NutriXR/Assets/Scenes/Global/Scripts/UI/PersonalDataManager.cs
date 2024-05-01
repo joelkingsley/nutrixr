@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PersonalDataManager : MonoBehaviour
 {
+    //This class is redundant
     string _saveFile;
 
     void Awake()
