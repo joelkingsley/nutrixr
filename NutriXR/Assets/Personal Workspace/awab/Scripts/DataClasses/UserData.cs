@@ -11,6 +11,7 @@ public class UserData : RealmObject
     [Preserve] public string LastName { get; set; }
     [Preserve] public int Age { get; set; }
 
+    public UserData(){}
     public UserData(string firstName, string lastName, int age)
     {
         FirstName = firstName;
