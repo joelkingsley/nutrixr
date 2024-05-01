@@ -66,6 +66,12 @@ public class BasketSystem : MonoBehaviour
     public void AddToCart(IngredientItem ingredientItem)
     {
         Debug.Log("Add to cart");
+        if (ingredientItem.GetIngredientItemData().name.Equals(""))
+        {
+            Debug.Log("Item without a name, wont be added to list");
+            return;
+        }
+
         selectedItems.Add(ingredientItem);
         //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
@@ -92,29 +98,29 @@ public class BasketSystem : MonoBehaviour
 
         for (var index = 0; index < selectedItems.Count; index++)
         {
-            var data = selectedItems[index];
+            var item = selectedItems[index];
             GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
-            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = data.GetIngredientItemData().name;
+            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.GetIngredientItemData().name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
-            mAnchoredPosition.anchoredPosition = new Vector2(x, y - (30 * index));
+            mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index)-15);
 
-            GameObject itemPrefabInEntry = Instantiate(data.gameObject, newBasketEntry.transform);
+           /* GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
             itemPrefabInEntry.GetComponent<Grabbable>().enabled = false;
             itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
             //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
             itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
             itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;
+            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;*/
 
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
-                data.RespawnToStart();
-                RemoveFromCart(data);
+                item.RespawnToStart();
+                RemoveFromCart(item);
             });
-            itemPrefabInEntry.SetActive(true);
+            //itemPrefabInEntry.SetActive(true);
         }
     }
 }

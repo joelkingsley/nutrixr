@@ -9,10 +9,13 @@ public class DataStorage : MonoBehaviour
     private List<IngredientDataObject> _ingredientDataObjects;
 
     private List<RecipeDataObject> _recipeDataObjects;
+    private List<CategoryDataObject> _categoryDataObjects;
     [SerializeField] private TextAsset ingredientJsonFile;
+    [SerializeField] private TextAsset categoryJsonFile;
     [SerializeField] private TextAsset recipeJsonFile;
     public Dictionary<string, IngredientItemData> IngredientItems = new();
     public Dictionary<int, RecipeItemData> RecipeItems = new();
+    public Dictionary<int, CategoryDataObject> Categories = new();
 
     void Awake()
     {
@@ -28,6 +31,14 @@ public class DataStorage : MonoBehaviour
         {
             RecipeItems.Add(dataObject.id,new RecipeItemData(dataObject));
         }
+
+        var key = JsonUtility.FromJson<CategoryKey>(categoryJsonFile.text);
+        _categoryDataObjects = key.ingredientCategories;
+        foreach (var dataObject in _categoryDataObjects)
+        {
+            Categories.Add(dataObject.categoryId,dataObject);
+        }
+
         Debug.Log(RecipeItems.Count);
 
         Debug.Log(IngredientItems.Count);
@@ -53,5 +64,10 @@ public class DataStorage : MonoBehaviour
     public List<RecipeItemData>  ReadAllRecipes()
     {
         return RecipeItems.Values.ToList();
+    }
+
+    public string GetCategoryName(int categoryId)
+    {
+        return Categories[categoryId].name;
     }
 }
