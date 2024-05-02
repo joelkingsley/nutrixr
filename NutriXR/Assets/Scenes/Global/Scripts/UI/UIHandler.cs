@@ -14,6 +14,8 @@ public class UIHandler : MonoBehaviour
 
     public GameObject personalDataUI;
 
+    public GameObject descriptionDataUI;
+
     public GameObject leftHandUI;
 
     public PersonalDataManager personalDataManager;
@@ -36,6 +38,7 @@ public class UIHandler : MonoBehaviour
     {
         _basketSystem = GetComponent<BasketSystem>();
         _recipeSystem = GetComponent<RecipeSystem>();
+        descriptionDataUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -59,6 +62,7 @@ public class UIHandler : MonoBehaviour
     public void DoneIsClicked()
     {
         personalDataUI.SetActive(false);
+        descriptionDataUI.SetActive(true);
         personalDataManager.WriteFile("{"+
                                   $"\"age\":{ageInputField.text}," +
                                   $"\"height\":{heightInputField.text}," +
