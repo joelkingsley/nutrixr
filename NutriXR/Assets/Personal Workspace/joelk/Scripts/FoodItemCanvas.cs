@@ -10,6 +10,7 @@ public class FoodItemCanvas : MonoBehaviour
     private TMP_Text _fatsTextComponent;
     private TMP_Text _sugarTextComponent;
     private TMP_Text _caloriesTextComponent;
+    private TMP_Text _nutriScoreTextComponent;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class FoodItemCanvas : MonoBehaviour
         _fatsTextComponent = textFields.First(x => x.gameObject.name == "FatsValue");
         _sugarTextComponent = textFields.First(x => x.gameObject.name == "SugarValue");
         _caloriesTextComponent = textFields.First(x => x.gameObject.name == "CaloriesValue");
+        _nutriScoreTextComponent = textFields.First(x => x.gameObject.name == "NutriScoreValue");
 
         // Populate text fields
         var ingredientItem = gameObject.transform.parent.GetComponent<IngredientItem>();
@@ -43,5 +45,6 @@ public class FoodItemCanvas : MonoBehaviour
         _fatsTextComponent.text = $"{ingredientItemData.fat} g";
         _sugarTextComponent.text = $"{ingredientItemData.sugar} g";
         _caloriesTextComponent.text = $"{ingredientItemData.caloriesInKcal} kcal";
+        _nutriScoreTextComponent.text = $"{ingredientItemData.Nutriscorevalue}";
     }
 }

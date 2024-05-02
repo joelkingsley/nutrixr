@@ -13,6 +13,12 @@ public class IngredientItemData
     public float sugar;
     public int[] categoryIds;
     public string fdcName;
+    public char Nutriscorevalue;
+
+    // Define positive and negative points and nutriscore
+    float positivePoints = 0;
+    float negativePoints = 0;
+    float nutriScore= 0 ;
 
         public IngredientItemData(IngredientDataObject ingredientDataObject )
         {
@@ -57,6 +63,45 @@ public class IngredientItemData
             }
 
             categoryIds = ingredientDataObject.categoryIds;
+            // Calculate negative points for high-quality nutrients
+            if (protein > 0 && carbohydrates > 0)
+            {
+                // Assuming the Nutri-Score ranges from 0 to -5 for high-quality nutrients
+                negativePoints -= 5; // Assigning maximum negative points for high-quality nutrients
+            }
+
+
+            // Calculate positive points for low-quality nutrients
+            if (fat > 0 || sugar > 0 || calories> 0 || caloriesInKcal > 0)
+            {
+                // Assuming the Nutri-Score ranges from 0 to 10 for low-quality nutrients
+                positivePoints += 10; // Assigning maximum positive points for low-quality nutrients
+            }
+
+            // Calculate total Nutri score
+            nutriScore = negativePoints - positivePoints;
+
+            // Assign letter grade based on Nutri score
+            if (nutriScore <= -15)
+            {
+                Nutriscorevalue = 'A';
+            }
+            else if (nutriScore <= -10)
+            {
+                Nutriscorevalue =  'B';
+            }
+            else if (nutriScore <= -5)
+            {
+                Nutriscorevalue = 'C';
+            }
+            else if (nutriScore <= 0)
+            {
+                Nutriscorevalue ='D';
+            }
+            else
+            {
+                Nutriscorevalue='E';
+            }
         }
 
     /*public static FoodItemData CreateFromJson(string jsonString)
