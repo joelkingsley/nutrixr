@@ -80,6 +80,9 @@ public class CartSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
+
+            CmdLog("Parent Name: " + ingItem.transform.parent.gameObject.name + ", LocalPos: " + ingItem.gameObject.transform.localPosition + ", GlobPos: " + ingItem.gameObject.transform.position);
+
             Item item = new Item
             {
                 fdcName = ingItem.fdcName,
@@ -102,6 +105,12 @@ public class CartSync : NetworkBehaviour
                 CmdRemoveItemFromCart(item);
             }
         }
+    }
+
+    [Command]
+    public void CmdLog(string msg)
+    {
+        Debug.Log("[Client]: " + msg);
     }
 
     [Command]
