@@ -80,18 +80,22 @@ public class CartSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
-
             CmdLog("Parent Name: " + ingItem.transform.parent.gameObject.name + ", LocalPos: " + ingItem.gameObject.transform.localPosition + ", GlobPos: " + ingItem.gameObject.transform.position);
-
-            Item item = new Item
-            {
-                fdcName = ingItem.fdcName,
-                position = ingItem.gameObject.transform.localPosition,
-                rotation = ingItem.gameObject.transform.localRotation
-            };
-            ingToItem.Add(ingItem, item);
-            CmdAddItemToCart(item);
+            StartCoroutine(ReadAndSend(ingItem));
         }
+    }
+
+    private IEnumerator ReadAndSend(IngredientItem ingItem)
+    {
+        yield return new WaitForSeconds(2.0f);
+        Item item = new Item
+        {
+            fdcName = ingItem.fdcName,
+            position = ingItem.gameObject.transform.localPosition,
+            rotation = ingItem.gameObject.transform.localRotation
+        };
+        ingToItem.Add(ingItem, item);
+        CmdAddItemToCart(item);
     }
 
     [Client]

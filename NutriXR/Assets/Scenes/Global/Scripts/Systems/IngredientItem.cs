@@ -60,7 +60,7 @@ public class IngredientItem : MonoBehaviour
         {
             transform.SetParent(other.gameObject.transform, true);
             other.gameObject.GetComponentInParent<CartSync>().AddItemToCart(this);
-            //_basketSystemSystem.AddToCart(this);
+            _basketSystemSystem.AddToCart(this);
             isInCart = true;
         }
 
