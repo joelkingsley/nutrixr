@@ -11,7 +11,7 @@ public class RecipeSystem : MonoBehaviour
     [SerializeField]
     public GameObject recipeUIScrollViewContent;
 
-    private List<RecipeItemData> _possibleRecipes = new ();
+    private List<RecipeItemData> _possibleRecipes = new();
     public List<RecipeItemData> allRecipes;
     public List<List<int>> categoriesInPossibleRecipes = new();
      private DataStorage dataStorage;
@@ -21,18 +21,14 @@ public class RecipeSystem : MonoBehaviour
     [SerializeField]
     private GameObject categoryPrefab;
 
-    // Start is called before the first frame update
+    [SerializeField] private TableItemSpawner recipeSpawner;
+    private List<GameObject> cookedRecipes = new();
+
     void Start()
     {
         _selectedItems = basketSystem.selectedItems;
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         allRecipes = dataStorage.ReadAllRecipes();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void RedrawRecipeUI()
@@ -44,11 +40,11 @@ public class RecipeSystem : MonoBehaviour
         }
         _possibleRecipes = new List<RecipeItemData>();
         categoriesInPossibleRecipes = new List<List<int>>();
-        foreach (var foodItem in _selectedItems)
+        foreach (IngredientItem foodItem in _selectedItems)
         {
-            foreach (var recipe in allRecipes)
+            foreach (RecipeItemData recipe in allRecipes)
             {
-                foreach (var id in foodItem.GetIngredientItemData().categoryIds)
+                foreach (int id in foodItem.GetIngredientItemData().categoryIds)
                 {
                     if (recipe.categoryIdsWithWeights.Select(x => x.Item1).ToList().Contains<int>(id))
                     {
@@ -63,35 +59,72 @@ public class RecipeSystem : MonoBehaviour
         }
 
         int numberOfAddedCategories = 0;//this is used to adjust the offset of the elements
-        for (var index = 0; index < _possibleRecipes.Count; index++)
+        for (int index = 0; index < _possibleRecipes.Count; index++)
         {
-            var item = _possibleRecipes[index];
+            bool recipeFinished = true;
+            RecipeItemData item = _possibleRecipes[index];
             GameObject recipeEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
+            recipeEntry.transform.GetChild(1).GetComponent<Cooking>().recipeSystem = this;
+            recipeEntry.transform.GetChild(1).GetComponent<Cooking>().recipeData = item;
             recipeEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.name;
-            var mAnchoredPosition = recipeEntry.GetComponent<RectTransform>();
-            var x = mAnchoredPosition.anchoredPosition.x;
-            var y = mAnchoredPosition.anchoredPosition.y;
+            RectTransform mAnchoredPosition = recipeEntry.GetComponent<RectTransform>();
+            float x = mAnchoredPosition.anchoredPosition.x;
+            float y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index + 10*numberOfAddedCategories)-15);
-            for (var j = 0; j < categoriesInPossibleRecipes[index].Count; j++)
+            for (int j = 0; j < categoriesInPossibleRecipes[index].Count; j++)
             {
-                var categoryId = categoriesInPossibleRecipes[index][j];
+                int categoryId = categoriesInPossibleRecipes[index][j];
                 GameObject newCategoryTextGameObject = Instantiate(categoryPrefab, recipeEntry.transform);
-                 newCategoryTextGameObject.AddComponent<TextMeshProUGUI>();
+                newCategoryTextGameObject.AddComponent<TextMeshProUGUI>();
 
-                var categoryPos = newCategoryTextGameObject.GetComponent<RectTransform>();
-                var categoryX = categoryPos.anchoredPosition.x;
-                var categoryY = categoryPos.anchoredPosition.y;
+                RectTransform categoryPos = newCategoryTextGameObject.GetComponent<RectTransform>();
+                float categoryX = categoryPos.anchoredPosition.x;
+                float categoryY = categoryPos.anchoredPosition.y;
                 categoryPos.anchoredPosition = new Vector2(categoryX+10, categoryY - (10 * j));
                 TextMeshProUGUI textComponent = newCategoryTextGameObject.GetComponent<TextMeshProUGUI>();
                 textComponent.text = dataStorage.GetCategoryName(categoryId);
-                foreach (var cSelectedItem in basketSystem.selectedItems)
+                bool foundIngrediendCategory = false;
+                foreach (IngredientItem cSelectedItem in basketSystem.selectedItems)
                 {
                     if (cSelectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
                     {
                         textComponent.color = Color.green;
+                        foundIngrediendCategory = true;
                     }
                 }
+
+                if (!foundIngrediendCategory) recipeFinished = false;
                 numberOfAddedCategories += 1; //this is used to adjust the offset of the elements
+            }
+
+            if (recipeFinished)
+            {
+                recipeEntry.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                recipeEntry.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void startCooking(RecipeItemData recipeData)
+    {
+        //Debug.Log("Cooking: " + recipeData.name);
+        GameObject prefab = (GameObject) Resources.Load("RecipePrefabs/" + recipeData.name, typeof(GameObject));
+        GameObject recipeObject = Instantiate(prefab);
+        cookedRecipes.Add(recipeObject);
+        recipeSpawner.addItem(recipeObject);
+
+        foreach (IngredientItem selectedItem in basketSystem.selectedItems)
+        {
+            List<int> categoryIDs = recipeData.categoryIdsWithWeights.Select(x => x.Item1).ToList();
+            foreach (int categoryId in categoryIDs)
+            {
+                if (selectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
+                {
+                    recipeObject.GetComponent<RecipeIngredients>().ingredients.Add(selectedItem.fdcName);
+                    basketSystem.RemoveFromCart(selectedItem);
+                    Destroy(selectedItem.gameObject);
+                    return;
+                }
             }
         }
     }

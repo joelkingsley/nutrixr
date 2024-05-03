@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IngredientItem : MonoBehaviour
 {
@@ -19,10 +20,12 @@ public class IngredientItem : MonoBehaviour
     [SerializeField]
     public bool spawnInFridge;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
+        {
+            _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
+        }
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
         startingPosition = transform.position;
@@ -30,12 +33,6 @@ public class IngredientItem : MonoBehaviour
         startingScale = transform.localScale;
 
         allColliders = GetComponentsInChildren<Collider>(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void OnSelect()
