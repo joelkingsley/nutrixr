@@ -15,7 +15,6 @@ using UnityEngine;
         public TMP_Text fatsTextComponent;
         public TMP_Text sugarTextComponent;
         public TMP_Text caloriesTextComponent;
-        public TMP_Text nutriScoreTextComponent;
 
         public RecipeList recipeList;
         public IngredientCategoryList ingredientCategoryList;
@@ -60,7 +59,6 @@ using UnityEngine;
             fatsTextComponent.text = $"{ingredientItems.First().fat} g";
             sugarTextComponent.text = $"{ingredientItems.First().sugar} g";
             caloriesTextComponent.text = $"{ingredientItems.First().caloriesInKcal} kcal";
-            nutriScoreTextComponent.text = $"{ingredientItems.First().Nutriscorevalue}";
         }
 
         // Update is called once per frame
