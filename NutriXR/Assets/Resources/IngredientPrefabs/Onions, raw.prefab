@@ -120,7 +120,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4828320633687233110}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -190,7 +190,7 @@ MonoBehaviour:
   _data: {fileID: 0}
   _pointableElement: {fileID: 1368642194258804552}
   _rigidbody: {fileID: 6033110693489573164}
-  _physicsGrabbable: {fileID: 0}
+  _physicsGrabbable: {fileID: 3292704264909272153}
   _resetGrabOnGrabsUpdated: 1
   _scoringModifier:
     _positionRotationWeight: 0.8
@@ -285,4 +285,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pointable: {fileID: 1368642194258804552}
   _rigidbody: {fileID: 6033110693489573164}
-  _scaleMassWithSize: 1
+  _scaleMassWithSize: 0
