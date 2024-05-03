@@ -14,6 +14,8 @@ public class UIHandler : MonoBehaviour
 
     public GameObject personalDataUI;
 
+    public GameObject descriptionDataUI;
+
     public GameObject leftHandUI;
 
     public PersonalDataManager personalDataManager;
@@ -31,11 +33,15 @@ public class UIHandler : MonoBehaviour
     private BasketSystem _basketSystem;
 
     private RecipeSystem _recipeSystem;
+
+    private UserDataController _userDataController;
     // Start is called before the first frame update
     void Start()
     {
         _basketSystem = GetComponent<BasketSystem>();
         _recipeSystem = GetComponent<RecipeSystem>();
+        descriptionDataUI.SetActive(false);
+        _userDataController = GameObject.FindGameObjectWithTag("UserDataController").GetComponent<UserDataController>();
     }
 
     // Update is called once per frame
@@ -59,13 +65,15 @@ public class UIHandler : MonoBehaviour
     public void DoneIsClicked()
     {
         personalDataUI.SetActive(false);
-        personalDataManager.WriteFile("{"+
+        descriptionDataUI.SetActive(true);
+        /*personalDataManager.WriteFile("{"+
                                   $"\"age\":{ageInputField.text}," +
                                   $"\"height\":{heightInputField.text}," +
                                   $"\"female\":{toggleFemale.isOn}," +
                                   $"\"male\":{toggleMale.isOn}," +
                                   $"\"activity\":{activityLevel.value}"+
-                                  "}");
+                                  "}");*/
+        _userDataController.WriteUserData(new UserData("Max", "Mustermann", int.Parse(ageInputField.text)));
 
     }
 

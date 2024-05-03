@@ -14,7 +14,9 @@ public class RecipeCalculatedData
     public float Protein ;
     public float CaloriesInKcal ;
     public float Calories ;
-    public  RecipeCalculatedData(RecipeItemData recipeItemData, List<IngredientItemData> ingredientItemDataList)
+
+
+    public RecipeCalculatedData(RecipeItemData recipeItemData, List<IngredientItemData> ingredientItemDataList)
     {
          RecipeName = recipeItemData.name;
          RecipeId = recipeItemData.id;
@@ -37,8 +39,12 @@ public class RecipeCalculatedData
 
                 }
             }
+
+
         }
 
     }
 
 }
+
+
