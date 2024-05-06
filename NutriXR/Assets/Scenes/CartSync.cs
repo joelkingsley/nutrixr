@@ -50,9 +50,7 @@ public class CartSync : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        deactivate.ForEach(x => x.SetActive(false));
-
-        inventory.Callback += OnInventoryUpdate;
+        SetUpForRemote();
     }
 
     public override void OnStartClient()
@@ -68,12 +66,31 @@ public class CartSync : NetworkBehaviour
         }
         else
         {
-            //e.g. the shopping cart does not belong to player
-            deactivate.ForEach(x => x.SetActive(false));
-
-            inventory.Callback += OnInventoryUpdate;
+            SetUpForRemote();
         }
     }
+
+    /// <summary>
+    /// This function just deactivates and sets up all the stuff needed to turn the standard shopping cart into a remote one
+    /// </summary>
+    private void SetUpForRemote()
+    {
+        //e.g. the shopping cart does not belong to player
+        deactivate.ForEach(x => x.SetActive(false));
+
+        //delete all tags and layers
+        gameObject.tag = "Untagged";
+        gameObject.layer = LayerMask.NameToLayer("Remote");
+        foreach (GameObject child in transform)
+        {
+            child.tag = "Untagged";
+            child.layer = LayerMask.NameToLayer("Remote");
+        }
+
+        //Subscribe to updates
+        inventory.Callback += OnInventoryUpdate;
+    }
+
 
     [Client]
     public void AddItemToCart(IngredientItem ingItem)       //executed by owner
@@ -145,10 +162,13 @@ public class CartSync : NetworkBehaviour
                     spawned.transform.localPosition = item.position;
                     spawned.transform.localRotation = item.rotation;
 
-                    //Make it not grabbable
+                    //Deactivate unnessecary gameobjects
                     spawned.GetComponent<IngredientItem>().enabled = false;
                     spawned.GetComponent<Grabbable>().enabled = false;
                     spawned.GetComponent<Rigidbody>().isKinematic = true;
+
+                    //Change physics layer
+                    spawned.layer = LayerMask.NameToLayer("Remote");
 
                     //Add to the references
                     itemToPrefab.Add(item, spawned);

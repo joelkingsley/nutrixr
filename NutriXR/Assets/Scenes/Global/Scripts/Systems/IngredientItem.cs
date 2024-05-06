@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class IngredientItem : MonoBehaviour
 {
     private IngredientItemData data;
-    private BasketSystem _basketSystemSystem;
+    private BasketSystem basketSystem;
     private DataStorage dataStorage;
+    private GameObject shoppingCart;
+
     private Vector3 startingPosition;
     private Quaternion startingRotation;
     private Vector3 startingScale;
-    private bool isInCart = false;
-    private bool isInPot = false;
+
     private Collider[] allColliders;
     private float inPotScaleModifier = 0.5f;
 
@@ -24,10 +26,11 @@ public class IngredientItem : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            _basketSystemSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
+            basketSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
         }
         dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
         data = dataStorage.ReadIngredientData(fdcName);
+
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingScale = transform.localScale;
@@ -35,64 +38,84 @@ public class IngredientItem : MonoBehaviour
         allColliders = GetComponentsInChildren<Collider>(false);
     }
 
-    public void OnSelect()
+    private void ChangeAllLayers(string newLayer)
     {
+        gameObject.layer = LayerMask.NameToLayer(newLayer);
         foreach (Collider c in allColliders)
         {
-            c.gameObject.layer = LayerMask.NameToLayer("SelectedIngredientItem");
+            c.gameObject.layer = LayerMask.NameToLayer(newLayer);
         }
+    }
+
+    public void OnSelect()
+    {
+        ChangeAllLayers("SelectedIngredientItem");
+
+        //transform.parent = null;
+        //shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
+        //basketSystem.RemoveFromCart(this);
     }
 
     public void OnUnselect()
     {
-        foreach (Collider c in allColliders)
-        {
-            c.gameObject.layer = LayerMask.NameToLayer("UnselectedIngredientItem");
-        }
+        ChangeAllLayers("PendingIngredientItem");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("ShoppingCart") && !isInCart)
+        //UnselectedIngredientItem: No behaviour
+        //SelectedIngredientItem: No behaviour
+        //ShoppingCart: No behaviour
+
+        if (shoppingCart == null)
         {
-            transform.SetParent(other.gameObject.transform, true);
-            other.gameObject.GetComponentInParent<CartSync>().AddItemToCart(this);
-            _basketSystemSystem.AddToCart(this);
-            isInCart = true;
+            shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
         }
 
-        if (other.gameObject.CompareTag("PotEntry") && !isInPot)
+        if (gameObject.layer == LayerMask.NameToLayer("PendingIngredientItem")
+            && other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
         {
-            other.transform.GetComponentInParent<BasketSystem>().AddToCart(this);
-            transform.localScale *= inPotScaleModifier;
-            transform.SetParent(other.GetComponentInParent<Transform>(), true);
-            isInPot = true;
+            //PendingIngredientItem <-> ShoppingCart: The pending item becomes part of shopping cart
+            transform.SetParent(shoppingCart.transform, true);
+            shoppingCart.GetComponentInParent<CartSync>().AddItemToCart(this);
+            basketSystem.AddToCart(this);
+            ChangeAllLayers("ShoppingCart");
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (gameObject.layer == LayerMask.NameToLayer("PendingIngredientItem")
+            && other.gameObject.layer == LayerMask.NameToLayer("Default"))
+        {
+            //PendingIngredientItem <-> Default: The pending item is dropped and thus unselected
+            ChangeAllLayers("UnselectedIngredientItem");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("ShoppingCart") && isInCart)
+        if (shoppingCart == null)
         {
-            transform.parent = null;
-            other.gameObject.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
-            //_basketSystemSystem.RemoveFromCart(this);
-            isInCart = false;
+            shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
         }
 
-        if (other.gameObject.CompareTag("PotExit") && isInPot)
+        if (other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
         {
             transform.parent = null;
-            transform.localScale = startingScale;
-            other.transform.GetComponentInParent<BasketSystem>().RemoveFromCart(this);
-            isInPot = false;
+            shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
+            basketSystem.RemoveFromCart(this);
+            if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
+            {
+                ChangeAllLayers("PendingIngredientItem");
+            }
         }
     }
 
     public void RespawnToStart()
     {
-        gameObject.transform.position = startingPosition;
-        gameObject.transform.rotation = startingRotation;
+        //gameObject.transform.position = startingPosition;
+        //gameObject.transform.rotation = startingRotation;
     }
 
     public IngredientItemData GetIngredientItemData()
