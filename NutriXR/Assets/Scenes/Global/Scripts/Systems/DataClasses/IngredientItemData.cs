@@ -14,6 +14,7 @@ public class IngredientItemData
     public int[] categoryIds;
     public string fdcName;
     public char Nutriscorevalue;
+    public string foodGroup;
 
     // Define positive and negative points and nutriscore
     float positivePoints = 0;
@@ -25,6 +26,7 @@ public class IngredientItemData
             //IngredientDataObject ingredientDataObject = JsonUtility.FromJson<IngredientDataObject>(jsonString);
             name = ingredientDataObject.name;
             fdcName = ingredientDataObject.fdcName;
+            foodGroup = ingredientDataObject.foodGroup;
             var fatIndex = ingredientDataObject.data.foodNutrients.FindIndex(
                     nutrient => nutrient.nutrient.name == "Total fat (NLEA)" | nutrient.nutrient.name == "Total lipid (fat)");
             if (fatIndex >= 0)

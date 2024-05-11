@@ -7,6 +7,7 @@ using System.Collections.Generic;
     {
         public string fdcName;
         public string name;
+        public string foodGroup;
         public FdcData data;
         public int[] categoryIds;
 
