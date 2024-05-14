@@ -453,22 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameComponent: {fileID: 0}
-  proteinTextComponent: {fileID: 0}
-  carbohydratesTextComponent: {fileID: 0}
-  fatsTextComponent: {fileID: 0}
-  sugarTextComponent: {fileID: 0}
-  caloriesTextComponent: {fileID: 0}
-  data:
-    name: 
-    calories: 0
-    caloriesInKcal: 0
-    carbohydrates: 0
-    protein: 0
-    fat: 0
-    sugar: 0
-    categoryIds: 
-    fdcName: 
   fdcName: 
   spawnInFridge: 0
 --- !u!1001 &119799525
@@ -528,11 +512,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb3edd0d38dbf34b86518b50072b194, type: 3}
---- !u!1 &402325262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3160112171241787054, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
-  m_PrefabInstance: {fileID: 6899788892117984800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &403758730
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +976,7 @@ PrefabInstance:
     - target: {fileID: 8438848977342016856, guid: 4dcb5817ef5afaf49a3276151e44b6b3, type: 3}
       propertyPath: basketUIScrollViewContent
       value: 
-      objectReference: {fileID: 823262764}
+      objectReference: {fileID: 0}
     - target: {fileID: 8438848977342016856, guid: 4dcb5817ef5afaf49a3276151e44b6b3, type: 3}
       propertyPath: selectedItems.Array.data[0]
       value: 
@@ -1018,72 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfc15542e6f8524d8fef8c9bf93e090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &823262764 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7825185324898930547, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
-  m_PrefabInstance: {fileID: 6899788892117984800}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &872269028
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.286
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.4405122
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924217248748339626, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5258922934311064319, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_Name
-      value: Oven
-      objectReference: {fileID: 0}
-    - target: {fileID: 5258922934311064319, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3b40ede2d68ef2f4d9752cd150f6dc04, type: 3}
 --- !u!1001 &977334930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1442,24 +1355,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameComponent: {fileID: 0}
-  proteinTextComponent: {fileID: 0}
-  carbohydratesTextComponent: {fileID: 0}
-  fatsTextComponent: {fileID: 0}
-  sugarTextComponent: {fileID: 0}
-  caloriesTextComponent: {fileID: 0}
-  data:
-    name: 
-    calories: 0
-    caloriesInKcal: 0
-    carbohydrates: 0
-    protein: 0
-    fat: 0
-    sugar: 0
-    categoryIds: 
-    fdcName: 
   fdcName: 
   spawnInFridge: 0
+--- !u!1 &1331811902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1331811903}
+  m_Layer: 0
+  m_Name: Recipes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1331811903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331811902}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1860839728}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1524161298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1992,22 +1921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameComponent: {fileID: 0}
-  proteinTextComponent: {fileID: 0}
-  carbohydratesTextComponent: {fileID: 0}
-  fatsTextComponent: {fileID: 0}
-  sugarTextComponent: {fileID: 0}
-  caloriesTextComponent: {fileID: 0}
-  data:
-    name: 
-    calories: 0
-    caloriesInKcal: 0
-    carbohydrates: 0
-    protein: 0
-    fat: 0
-    sugar: 0
-    categoryIds: 
-    fdcName: 
   fdcName: 
   spawnInFridge: 0
 --- !u!1 &1696550271
@@ -2178,7 +2091,7 @@ PrefabInstance:
     - target: {fileID: 8705681839519527949, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
       propertyPath: recipeUIScrollViewContent
       value: 
-      objectReference: {fileID: 402325262}
+      objectReference: {fileID: 0}
     - target: {fileID: 8973130603323280664, guid: 7c39ed59816785345bac93b68463cd71, type: 3}
       propertyPath: m_Name
       value: RecipeSystem
@@ -2256,6 +2169,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d102573385ce73c4cb5b2ef335b809b3, type: 3}
+--- !u!1001 &1860839727
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1331811903}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+      propertyPath: m_Name
+      value: bean_salad
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+--- !u!4 &1860839728 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 523f7f97ccfe73542abf25ed64446601, type: 3}
+  m_PrefabInstance: {fileID: 1860839727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1887195260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2820,22 +2795,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameComponent: {fileID: 0}
-  proteinTextComponent: {fileID: 0}
-  carbohydratesTextComponent: {fileID: 0}
-  fatsTextComponent: {fileID: 0}
-  sugarTextComponent: {fileID: 0}
-  caloriesTextComponent: {fileID: 0}
-  data:
-    name: 
-    calories: 0
-    caloriesInKcal: 0
-    carbohydrates: 0
-    protein: 0
-    fat: 0
-    sugar: 0
-    categoryIds: 
-    fdcName: 
   fdcName: 
   spawnInFridge: 0
 --- !u!1001 &6899788892117984800
@@ -2889,6 +2848,10 @@ PrefabInstance:
     - target: {fileID: 1382638826136179778, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
       propertyPath: m_Name
       value: ShoppingCart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296940345353906717, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
+      propertyPath: sceneId
+      value: 1849090628
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2960,7 +2923,6 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 710228157}
   - {fileID: 1813753704}
-  - {fileID: 872269028}
   - {fileID: 748706015}
   - {fileID: 6899788892117984800}
   - {fileID: 1696550275}
@@ -2969,3 +2931,4 @@ SceneRoots:
   - {fileID: 1726114679}
   - {fileID: 530042089}
   - {fileID: 403758732}
+  - {fileID: 1331811903}
