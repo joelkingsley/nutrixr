@@ -7,33 +7,9 @@ using System.Collections.Generic;
     {
         public string fdcName;
         public string name;
-        public FdcData data;
+        public string nutriScore;
+        public string foodGroup;
         public int[] categoryIds;
 
-        [Serializable]
-        public class FdcData
-        {
-            public string fdcId;
-            public List<FdcFoodNutrient> foodNutrients;
-
-            [Serializable]
-            public class FdcFoodNutrient
-            {
-                public string type;
-                public double id;
-                public FdcNutrient nutrient;
-                public float amount;
-
-                [Serializable]
-                public class FdcNutrient
-                {
-                    public double id;
-                    public string number;
-                    public string name;
-                    public double rank;
-                    public string unitName;
-                }
-            }
-        }
     }
 

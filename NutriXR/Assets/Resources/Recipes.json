@@ -37,14 +37,6 @@
                 {
                     "id": 8,
                     "ingredientWeight": 46
-                },
-                {
-                    "id": 9,
-                    "ingredientWeight": 30
-                },
-                {
-                    "id": 10,
-                    "ingredientWeight": 62.5
                 }
             ]
         },
@@ -54,16 +46,6 @@
             "inputIngredientCategories": [
                 {
                     "id": 11,
-                    "ingredientWeight": 100
-                }
-            ]
-        },
-        {
-            "id": 4,
-            "name": "Doughnut",
-            "inputIngredientCategories": [
-                {
-                    "id": 12,
                     "ingredientWeight": 100
                 }
             ]
@@ -140,19 +122,15 @@
         },
         {
             "id": 8,
-            "name": "Yoghurt and fruit (apple)",
+            "name": "Yoghurt and fruit",
             "inputIngredientCategories": [
                 {
                     "id": 20,
                     "ingredientWeight": 227
                 },
                 {
-                    "id": 6,
+                    "id": 21,
                     "ingredientWeight": 113
-                },
-                {
-                    "id": 9,
-                    "ingredientWeight": 20
                 }
             ]
         },
@@ -163,10 +141,6 @@
                 {
                     "id": 22,
                     "ingredientWeight": 360
-                },
-                {
-                    "id": 23,
-                    "ingredientWeight": 164
                 },
                 {
                     "id": 24,
@@ -209,94 +183,6 @@
             ]
         },
         {
-            "id": 11,
-            "name": "Hot dog",
-            "inputIngredientCategories": [
-                {
-                    "id": 25,
-                    "ingredientWeight": 45
-                },
-                {
-                    "id": 26,
-                    "ingredientWeight": 86.6
-                },
-                {
-                    "id": 27,
-                    "ingredientWeight": 15
-                }
-            ]
-        },
-        {
-            "id": 12,
-            "name": "Meat Burger",
-            "inputIngredientCategories": [
-                {
-                    "id": 25,
-                    "ingredientWeight": 52
-                },
-                {
-                    "id": 27,
-                    "ingredientWeight": 15
-                },
-                {
-                    "id": 28,
-                    "ingredientWeight": 40
-                },
-                {
-                    "id": 17,
-                    "ingredientWeight": 20
-                },
-                {
-                    "id": 30,
-                    "ingredientWeight": 15.82
-                }
-            ]
-        },
-        {
-            "id": 13,
-            "name": "Vegetable Burger",
-            "inputIngredientCategories": [
-                {
-                    "id": 25,
-                    "ingredientWeight": 52
-                },
-                {
-                    "id": 16,
-                    "ingredientWeight": 66.45
-                },
-                {
-                    "id": 29,
-                    "ingredientWeight": 5.06
-                },
-                {
-                    "id": 30,
-                    "ingredientWeight": 15.82
-                },
-                {
-                    "id": 15,
-                    "ingredientWeight": 6.32
-                },
-                {
-                    "id": 1,
-                    "ingredientWeight": 15.8
-                }
-            ]
-        },
-        {
-            "id": 14,
-            "name": "Yoghurt with Oats",
-            "inputIngredientCategories": [
-                {
-                    "id": 31,
-                    "ingredientWeight": 20
-                },
-                {
-                    "id": 20,
-                    "ingredientWeight": 80
-                }
-            ]
-        },
-        {
             "id": 15,
             "name": "Fried chicken wing",
             "inputIngredientCategories": [
@@ -307,20 +193,6 @@
                 {
                     "id": 18,
                     "ingredientWeight": 0.8
-                },
-                {
-                    "id": 1,
-                    "ingredientWeight": 10
-                }
-            ]
-        },
-        {
-            "id": 16,
-            "name": "Chicken nuggets",
-            "inputIngredientCategories": [
-                {
-                    "id": 35,
-                    "ingredientWeight": 100
                 },
                 {
                     "id": 1,
@@ -396,10 +268,6 @@
                     "ingredientWeight": 60
                 },
                 {
-                    "id": 39,
-                    "ingredientWeight": 10
-                },
-                {
                     "id": 15,
                     "ingredientWeight": 15
                 },
@@ -450,7 +318,8 @@
                 },
                 {
                     "id": 40,
-                    "ingredientWeight": 8
+                    "ingredientWeight": 8,
+                    "isOptional": true
                 }
             ]
         },
@@ -461,16 +330,6 @@
                 {
                     "id": 33,
                     "ingredientWeight": 100
-                }
-            ]
-        },
-        {
-            "id": 24,
-            "name": "Nut",
-            "inputIngredientCategories": [
-                {
-                    "id": 9,
-                    "ingredientWeight": 50
                 }
             ]
         },
@@ -512,32 +371,122 @@
                     "isOptional": true
                 }
             ]
+        },
+        {
+            "id": 28,
+            "name": "Fried sausage",
+            "inputIngredientCategories": [
+                {
+                    "id": 26,
+                    "ingredientWeight": 38
+                },
+                {
+                    "id": 1,
+                    "ingredientWeight": 5.69
+                }
+            ]
+        },
+        {
+            "id": 29,
+            "name": "Sushi",
+            "inputIngredientCategories": [
+                {
+                    "id": 43,
+                    "ingredientWeight": 150
+                }
+            ]
+        },
+        {
+            "id": 30,
+            "name": "Cutlet",
+            "inputIngredientCategories": [
+                {
+                    "id": 44,
+                    "ingredientWeight": 44
+                }
+            ]
+        },
+        {
+            "id": 31,
+            "name": "Chips",
+            "inputIngredientCategories": [
+                {
+                    "id": 45,
+                    "ingredientWeight": 227
+                }
+            ]
+        },
+        {
+            "id": 32,
+            "name": "Rice and beans",
+            "inputIngredientCategories": [
+                {
+                    "id": 46,
+                    "ingredientWeight": 40
+                },
+                {
+                    "id": 13,
+                    "ingredientWeight": 45
+                }
+            ]
+        },
+        {
+            "id": 33,
+            "name": "Rice and beans with meat",
+            "inputIngredientCategories": [
+                {
+                    "id": 46,
+                    "ingredientWeight": 20
+                },
+                {
+                    "id": 13,
+                    "ingredientWeight": 45
+                },
+                {
+                    "id": 28,
+                    "ingredientWeight": 20
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "name": "Doughnut",
+            "inputIngredientCategories": [
+                {
+                    "id": 47,
+                    "ingredientWeight": 75
+                }
+            ]
+        },
+        {
+            "id": 35,
+            "name": "Cashew nut",
+            "inputIngredientCategories": [
+                {
+                    "id": 48,
+                    "ingredientWeight": 100
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "name": "Sprite",
+            "inputIngredientCategories": [
+                {
+                    "id": 49,
+                    "ingredientWeight": 258
+                }
+            ]
+        },
+        {
+            "id": 37,
+            "name": "Spaghetti",
+            "inputIngredientCategories": [
+                {
+                    "id": 50,
+                    "ingredientWeight": 135
+                }
+            ]
         }
     ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
