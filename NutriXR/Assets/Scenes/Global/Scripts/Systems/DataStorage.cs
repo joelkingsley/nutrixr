@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +54,14 @@ public class DataStorage : MonoBehaviour
 
     public IngredientItemData ReadIngredientData(string fdcName)
     {
-        return IngredientItems[fdcName];
+        try
+        {
+            return IngredientItems[fdcName];
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     public RecipeItemData ReadRecipeData(int recipeId)

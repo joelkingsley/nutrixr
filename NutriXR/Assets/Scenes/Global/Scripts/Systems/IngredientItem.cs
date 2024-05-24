@@ -8,7 +8,7 @@ public class IngredientItem : MonoBehaviour
     private BasketSystem basketSystem;
     private DataStorage dataStorage;
     private GameObject shoppingCart;
-    private NutriScoreUI nutriScoreUI;
+    public NutriScoreUI nutriScoreUI;
     private EnvScoreUI envScoreUI;
 
     private Vector3 startingPosition;
@@ -41,8 +41,11 @@ public class IngredientItem : MonoBehaviour
         startingScale = transform.localScale;
 
         allColliders = GetComponentsInChildren<Collider>(false);
-        var foodItemCanvas = gameObject.GetComponentInChildren<FoodItemCanvas>();
-        foodItemCanvas.InitializeCanvas();
+
+        if (nutriScoreUI == null)
+        {
+            Debug.LogError("IS NULL!");
+        }
     }
 
     private void ChangeAllLayers(string newLayer)
@@ -60,6 +63,7 @@ public class IngredientItem : MonoBehaviour
 
         nutriScoreUI.setNutriScore(data.Nutriscorevalue);
         envScoreUI.ShowEnvScore(data.environmentScore);
+
         //transform.parent = null;
         //shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
         //basketSystem.RemoveFromCart(this);
