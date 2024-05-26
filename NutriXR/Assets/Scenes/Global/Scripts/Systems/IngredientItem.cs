@@ -1,15 +1,16 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class IngredientItem : MonoBehaviour
 {
-    private IngredientItemData data;
+    public Ingredient ingredient;
+
     private BasketSystem basketSystem;
-    private DataStorage dataStorage;
     private GameObject shoppingCart;
-    public NutriScoreUI nutriScoreUI;
-    private EnvScoreUI envScoreUI;
+    private ScoreUI scoreUI;
 
     private Vector3 startingPosition;
     private Quaternion startingRotation;
@@ -19,33 +20,19 @@ public class IngredientItem : MonoBehaviour
     private float inPotScaleModifier = 0.5f;
     private bool isInPot = false;
 
-    [SerializeField]
-    public string fdcName;
-
-    [SerializeField]
-    public bool spawnInFridge;
-
     void Start()
     {
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
             basketSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
-            nutriScoreUI = GameObject.FindGameObjectWithTag("NutriScoreUI").GetComponent<NutriScoreUI>();
-            envScoreUI = GameObject.FindGameObjectWithTag("EnvScoreUI").GetComponent<EnvScoreUI>();
+            scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
         }
-        dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
-        data = dataStorage.ReadIngredientData(fdcName);
 
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingScale = transform.localScale;
 
         allColliders = GetComponentsInChildren<Collider>(false);
-
-        if (nutriScoreUI == null)
-        {
-            Debug.LogError("IS NULL!");
-        }
     }
 
     private void ChangeAllLayers(string newLayer)
@@ -61,8 +48,8 @@ public class IngredientItem : MonoBehaviour
     {
         ChangeAllLayers("SelectedIngredientItem");
 
-        nutriScoreUI.setNutriScore(data.Nutriscorevalue);
-        envScoreUI.ShowEnvScore(data.environmentScore);
+        scoreUI.ShowNutriScore(ingredient.nutriScore);
+        scoreUI.ShowEnvScore(ingredient.environmentScore);
 
         //transform.parent = null;
         //shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
@@ -72,9 +59,7 @@ public class IngredientItem : MonoBehaviour
     public void OnUnselect()
     {
         ChangeAllLayers("PendingIngredientItem");
-
-        nutriScoreUI.setNutriScore('Z');
-        envScoreUI.HideScore();
+        scoreUI.Hide();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -149,10 +134,5 @@ public class IngredientItem : MonoBehaviour
     {
         //gameObject.transform.position = startingPosition;
         //gameObject.transform.rotation = startingRotation;
-    }
-
-    public IngredientItemData GetIngredientItemData()
-    {
-        return data;
     }
 }

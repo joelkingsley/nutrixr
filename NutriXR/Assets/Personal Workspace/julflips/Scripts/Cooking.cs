@@ -6,7 +6,7 @@ using UnityEngine;
 public class Cooking : MonoBehaviour
 {
     public RecipeSystem recipeSystem;
-    public RecipeItemData recipeData;
+    public Recipe recipeData;
 
     public void StartCooking()
     {

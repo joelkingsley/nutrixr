@@ -8,16 +8,11 @@ using UnityEngine.UI;
 
 public class BasketSystem : MonoBehaviour
 {
-    public List<IngredientItem> selectedItems;
-    [SerializeField]
-    public GameObject basketUIScrollViewContent;
-    [SerializeField]
-    private RecipeSystem _recipeSystem;
-
+    [SerializeField] public GameObject basketUIScrollViewContent;
+    [SerializeField] private RecipeSystem _recipeSystem;
     [SerializeField] private GameObject basketEntryPrefab;
 
-    private TableItemSpawner _kitchenSceneTableItemSpawner;
-    private TableItemSpawner _kitchenSceneFridgeItemSpawner;
+    public List<IngredientItem> selectedItems;
 
     // Start is called before the first frame update
     void Start()
@@ -39,34 +34,34 @@ public class BasketSystem : MonoBehaviour
 
         if (scene.name == "Kitchen")
         {
-            _kitchenSceneTableItemSpawner = GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>();
-            List<IngredientItemData> tableItemDatas = new List<IngredientItemData>();
+            //Un-cooled Ingredients
+            List<Ingredient> tableItemDatas = new List<Ingredient>();
             foreach (IngredientItem item in this.selectedItems)
             {
-                if (item.spawnInFridge == false)
+                if (item.ingredient.cooled == false)
                 {
-                    tableItemDatas.Add(item.GetIngredientItemData());
+                    tableItemDatas.Add(item.ingredient);
                 }
             }
-            _kitchenSceneTableItemSpawner.SpawnKitchenSceneItems(tableItemDatas);
+            GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>().SpawnKitchenSceneItems(tableItemDatas);
 
-            _kitchenSceneFridgeItemSpawner = GameObject.FindGameObjectWithTag("KitchenFridgeIngredientSpawner").GetComponent<TableItemSpawner>();
-            List<IngredientItemData> fridgeItemDatas = new List<IngredientItemData>();
+            //Cooled Ingredients
+            List<Ingredient> fridgeItemDatas = new List<Ingredient>();
             foreach (IngredientItem item in this.selectedItems)
             {
-                if (item.spawnInFridge)
+                if (item.ingredient.cooled)
                 {
-                    fridgeItemDatas.Add(item.GetIngredientItemData());
+                    fridgeItemDatas.Add(item.ingredient);
                 }
             }
-            _kitchenSceneFridgeItemSpawner.SpawnKitchenSceneItems(fridgeItemDatas);
+            GameObject.FindGameObjectWithTag("KitchenFridgeIngredientSpawner").GetComponent<TableItemSpawner>().SpawnKitchenSceneItems(fridgeItemDatas);
         }
     }
 
     public void AddToCart(IngredientItem ingredientItem)
     {
         Debug.Log("Add to cart");
-        if (ingredientItem.GetIngredientItemData().name.Equals(""))
+        if (ingredientItem.ingredient.name.Equals(""))
         {
             Debug.Log("Item without a name, wont be added to list");
             return;
@@ -100,7 +95,7 @@ public class BasketSystem : MonoBehaviour
         {
             var item = selectedItems[index];
             GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
-            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.GetIngredientItemData().name;
+            newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.ingredient.name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;

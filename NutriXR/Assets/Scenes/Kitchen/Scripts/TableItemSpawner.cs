@@ -19,18 +19,18 @@ public class TableItemSpawner : MonoBehaviour
 
     private int currentPos = 0;
 
-    public void SpawnKitchenSceneItems(List<IngredientItemData> ingredientItems)
+    public void SpawnKitchenSceneItems(List<Ingredient> ingredientItems)
     {
         Debug.Log("Kitchen Scene items");
         SpawnItems(ingredientItems);
     }
 
-    void SpawnItems(List<IngredientItemData> ingredientItems)
+    void SpawnItems(List<Ingredient> ingredientItems)
     {
         int amount = ingredientItems.Count;
         for (int i = 0; i < amount; i++)
         {
-            GameObject prefab = LoadPrefab(ingredientItems[i].fdcName);
+            GameObject prefab = LoadPrefab(ingredientItems[i].name);
 
             int row = i / totalCols;
             int col = i % totalCols;
@@ -41,7 +41,7 @@ public class TableItemSpawner : MonoBehaviour
 
     private GameObject LoadPrefab(string fdcName)
     {
-        return (GameObject)Resources.Load("IngredientPrefabs/" + fdcName, typeof(GameObject));
+        return (GameObject)Resources.Load("Ingredients/Prefabs" + fdcName, typeof(GameObject));
     }
 
     void SpawnItemAt(int row, int col, GameObject prefab)

@@ -8,7 +8,8 @@ public class StartNetwork : MonoBehaviour
         #if UNITY_EDITOR
         GetComponent<NetworkManager>().StartServer();
         #else
-        GetComponent<NetworkManager>().StartClient();
+        //GetComponent<NetworkManager>().StartClient();
+        GetComponent<NetworkManager>().StartHost();
         #endif
     }
 

@@ -7,62 +7,82 @@ using UnityEngine.Serialization;
 
 public class RecipeSystem : MonoBehaviour
 {
-    private List<IngredientItem> _selectedItems;
-    [SerializeField]
-    public GameObject recipeUIScrollViewContent;
+    [SerializeField]  public GameObject recipeUIScrollViewContent;
 
-    private List<RecipeItemData> _possibleRecipes = new();
-    public List<RecipeItemData> allRecipes;
-    public List<List<int>> categoriesInPossibleRecipes = new();
-     private DataStorage dataStorage;
-    [FormerlySerializedAs("shoppingCart")] [FormerlySerializedAs("basket")] [SerializeField] private BasketSystem basketSystem;
-    [SerializeField]
-    private GameObject recipeEntryPrefab;
-    [SerializeField]
-    private GameObject categoryPrefab;
+    private Ingredient[] selectedIngredients;     //Array of all selected Ingredients
+    private Recipe[] allRecipes;            //Array of all recipes
+    private List<Recipe> possibleRecipes;   //List of all recipes that are possible
+
+    [SerializeField] private BasketSystem basketSystem;
+    [SerializeField] private GameObject recipeEntryPrefab;
+    [SerializeField] private GameObject categoryPrefab;
 
     [SerializeField] private TableItemSpawner recipeSpawner;
     private List<GameObject> cookedRecipes = new();
 
     void Start()
     {
-        _selectedItems = basketSystem.selectedItems;
-        dataStorage = GameObject.FindGameObjectWithTag("DataStorage").GetComponent<DataStorage>();
-        allRecipes = dataStorage.ReadAllRecipes();
+        allRecipes = Resources.LoadAll<Recipe>("Ingredients/ScriptableObjects");
+    }
+
+    /// <summary>
+    /// This method checks which Recipes can be made from the Ingredients bought by the user
+    /// </summary>
+    private void CheckRecipes()
+    {
+        selectedIngredients = basketSystem.selectedItems.Select(x => x.ingredient).ToArray();
+        possibleRecipes = new List<Recipe>();
+
+        foreach (Recipe recipe in allRecipes)
+        {
+            //Check if Recipe is possible
+            bool possible = true;
+            foreach (Ingredient ingredient in recipe.ingredients)
+            {
+                //Check if this ingredient was selected by user
+                bool contained = false;
+                foreach (Ingredient selectedIngredient in selectedIngredients)
+                {
+                    if (ingredient.name.Equals(selectedIngredient.name))
+                    {
+                        contained = true;
+                        break;
+                    }
+                }
+                if (!contained)
+                {
+                    //Ingredient is not contained. The recipe is thus not possible
+                    possible = false;
+                    break;
+                }
+            }
+
+            //Recipe is possible to make with the bough Ingredients
+            if (possible)
+            {
+                possibleRecipes.Add(recipe);
+            }
+        }
+        //possibleRecipes now holds a List of all Recipes that can be made from the bough Ingredients
     }
 
     public void RedrawRecipeUI()
     {
+        /* DEACTIVATED FOR DEBUGGING PURPOSES
         //clear the UI
         foreach(Transform child in recipeUIScrollViewContent.transform)
         {
             Destroy(child.gameObject);
         }
-        _possibleRecipes = new List<RecipeItemData>();
-        categoriesInPossibleRecipes = new List<List<int>>();
-        foreach (IngredientItem foodItem in _selectedItems)
-        {
-            foreach (RecipeItemData recipe in allRecipes)
-            {
-                foreach (int id in foodItem.GetIngredientItemData().categoryIds)
-                {
-                    if (recipe.categoryIdsWithWeights.Select(x => x.Item1).ToList().Contains<int>(id))
-                    {
-                        if (!_possibleRecipes.Contains(recipe))
-                        {
-                            _possibleRecipes.Add(recipe);
-                            categoriesInPossibleRecipes.Add(recipe.categoryIdsWithWeights.Select(x=>x.Item1).ToList());
-                        }
-                    }
-                }
-            }
-        }
 
+        CheckRecipes();
+
+        //Redraw GUI
         int numberOfAddedCategories = 0;//this is used to adjust the offset of the elements
-        for (int index = 0; index < _possibleRecipes.Count; index++)
+        for (int index = 0; index < possibleRecipes.Count; index++)
         {
             bool recipeFinished = true;
-            RecipeItemData item = _possibleRecipes[index];
+            Recipe item = possibleRecipes[index];
             GameObject recipeEntry = Instantiate(recipeEntryPrefab, recipeUIScrollViewContent.transform);
             recipeEntry.transform.GetChild(1).GetComponent<Cooking>().recipeSystem = this;
             recipeEntry.transform.GetChild(1).GetComponent<Cooking>().recipeData = item;
@@ -86,11 +106,11 @@ public class RecipeSystem : MonoBehaviour
                 bool foundIngrediendCategory = false;
                 foreach (IngredientItem cSelectedItem in basketSystem.selectedItems)
                 {
-                    if (cSelectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
-                    {
-                        textComponent.color = Color.green;
-                        foundIngrediendCategory = true;
-                    }
+                    //if (cSelectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
+                    //{
+                    //    textComponent.color = Color.green;
+                    //    foundIngrediendCategory = true;
+                    //}
                 }
 
                 if (!foundIngrediendCategory) recipeFinished = false;
@@ -103,10 +123,12 @@ public class RecipeSystem : MonoBehaviour
                 recipeEntry.transform.GetChild(1).gameObject.SetActive(true);
             }
         }
+        */
     }
 
-    public void startCooking(RecipeItemData recipeData)
+    public void startCooking(Recipe recipe)
     {
+        /* DEACTIVATED FOR DEBUGGING PURPOSES
         //Debug.Log("Cooking: " + recipeData.name);
         GameObject prefab = (GameObject) Resources.Load("RecipePrefabs/" + recipeData.name, typeof(GameObject));
         GameObject recipeObject = Instantiate(prefab);
@@ -127,5 +149,6 @@ public class RecipeSystem : MonoBehaviour
                 }
             }
         }
+        */
     }
 }

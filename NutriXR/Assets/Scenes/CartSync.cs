@@ -107,7 +107,7 @@ public class CartSync : NetworkBehaviour
         yield return new WaitForSeconds(2.0f);
         Item item = new Item
         {
-            fdcName = ingItem.fdcName,
+            fdcName = ingItem.ingredient.name,
             position = ingItem.gameObject.transform.localPosition,
             rotation = ingItem.gameObject.transform.localRotation
         };
