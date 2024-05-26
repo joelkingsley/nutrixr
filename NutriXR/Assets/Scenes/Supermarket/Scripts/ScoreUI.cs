@@ -55,10 +55,10 @@ public class ScoreUI : MonoBehaviour
 
     public void ShowEnvScore(Ingredient.EnvScore score)
     {
+        text.SetActive(false);
         if (score == Ingredient.EnvScore.None)
         {
             circles.SetActive(false);
-            text.SetActive(false);
             return;
         }
 
