@@ -28,7 +28,7 @@ public class CartSync : NetworkBehaviour
 
     public struct Item
     {
-        public string fdcName;
+        public string name;
         public Vector3 position;
         public Quaternion rotation;
     }
@@ -50,7 +50,10 @@ public class CartSync : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        SetUpForRemote();
+        if (!netIdentity.isOwned)
+        {
+            SetUpForRemote();
+        }
     }
 
     public override void OnStartClient()
@@ -107,7 +110,7 @@ public class CartSync : NetworkBehaviour
         yield return new WaitForSeconds(2.0f);
         Item item = new Item
         {
-            fdcName = ingItem.ingredient.name,
+            name = ingItem.ingredient.name,
             position = ingItem.gameObject.transform.localPosition,
             rotation = ingItem.gameObject.transform.localRotation
         };
@@ -153,10 +156,10 @@ public class CartSync : NetworkBehaviour
             switch (op)
             {
                 case SyncHashSet<Item>.Operation.OP_ADD:
-                    Debug.Log(item.fdcName + " was added to the Cart at pos " + item.position);
+                    Debug.Log(item.name + " was added to the Cart at pos " + item.position);
 
                     //Instantiate
-                    GameObject toSpawn = (GameObject)Resources.Load("IngredientPrefabs/" + item.fdcName, typeof(GameObject));
+                    GameObject toSpawn = (GameObject)Resources.Load("IngredientPrefabs/" + item.name, typeof(GameObject));
                     GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
                     spawned.transform.SetParent(remoteCreationHook);
                     spawned.transform.localPosition = item.position;
@@ -175,7 +178,7 @@ public class CartSync : NetworkBehaviour
 
                     break;
                 case SyncHashSet<Item>.Operation.OP_REMOVE:
-                    Debug.Log(item.fdcName + " was removed from the Cart");
+                    Debug.Log(item.name + " was removed from the Cart");
 
                     //Find and remove corresponding gameObject
                     GameObject go;

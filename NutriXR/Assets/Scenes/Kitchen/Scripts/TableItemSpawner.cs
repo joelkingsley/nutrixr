@@ -39,9 +39,9 @@ public class TableItemSpawner : MonoBehaviour
         currentPos = amount;
     }
 
-    private GameObject LoadPrefab(string fdcName)
+    private GameObject LoadPrefab(string prefabName)
     {
-        return (GameObject)Resources.Load("Ingredients/Prefabs" + fdcName, typeof(GameObject));
+        return (GameObject)Resources.Load("Ingredients/Prefabs" + prefabName, typeof(GameObject));
     }
 
     void SpawnItemAt(int row, int col, GameObject prefab)

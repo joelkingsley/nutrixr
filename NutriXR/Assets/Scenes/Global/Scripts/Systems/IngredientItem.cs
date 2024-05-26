@@ -49,7 +49,7 @@ public class IngredientItem : MonoBehaviour
         ChangeAllLayers("SelectedIngredientItem");
 
         scoreUI.ShowNutriScore(ingredient.nutriScore);
-        scoreUI.ShowEnvScore(ingredient.environmentScore);
+        //scoreUI.ShowEnvScore(ingredient.environmentScore);
 
         //transform.parent = null;
         //shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);

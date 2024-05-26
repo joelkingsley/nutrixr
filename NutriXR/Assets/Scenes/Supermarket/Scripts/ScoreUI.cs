@@ -33,6 +33,8 @@ public class ScoreUI : MonoBehaviour
         colorDict.Add(Ingredient.NutriScore.C, backgrounds[2]);
         colorDict.Add(Ingredient.NutriScore.D, backgrounds[3]);
         colorDict.Add(Ingredient.NutriScore.E, backgrounds[4]);
+
+        Hide();
     }
 
     public void ShowNutriScore(Ingredient.NutriScore score)
@@ -53,6 +55,13 @@ public class ScoreUI : MonoBehaviour
 
     public void ShowEnvScore(Ingredient.EnvScore score)
     {
+        if (score == Ingredient.EnvScore.None)
+        {
+            circles.SetActive(false);
+            text.SetActive(false);
+            return;
+        }
+
         circles.SetActive(true);
         disableAll();
         //We misuse the NutriScore to show the EnvScore
@@ -76,7 +85,8 @@ public class ScoreUI : MonoBehaviour
 
     public void Hide()
     {
-        //TODO
+        circles.SetActive(false);
+        text.SetActive(false);
     }
 
     private void disableAll()
