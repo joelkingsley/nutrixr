@@ -9,7 +9,7 @@ public class Ingredient : ScriptableObject
 
     public enum NutriScore { A,B,C,D,E, None }
     public enum EnvScore { Green,Yellow,Red, None }
-    public enum FoodGroup { FruitVegetable, Juice, Legume, NutSeed, Potato, GrainBreadNoodle, PlantOil, Butter, Milk, Fish, Meat, Sausage, Egg }
+    public enum FoodGroup { FruitVegetable, Juice, Legume, NutSeed, Potato, GrainBreadNoodle, PlantOil, Butter, Milk, Fish, Meat, Sausage, Egg, None }
 
     //###   NutriScore  ###
     [Header("Nutritional Health")]
