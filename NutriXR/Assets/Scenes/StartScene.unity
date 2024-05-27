@@ -6440,49 +6440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0634860494b938c4c8a074e0e52d1f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  runInBackground: 1
-  headlessStartMode: 0
-  editorAutoStart: 0
-  sendRate: 60
-  autoStartServerBuild: 0
-  autoConnectClientBuild: 0
-  offlineScene: Assets/Scenes/StartScene.unity
-  onlineScene: Assets/Scenes/Supermarket/Supermarket.unity
-  transport: {fileID: 1776611715}
-  networkAddress: localhost
-  maxConnections: 100
-  disconnectInactiveConnections: 0
-  disconnectInactiveTimeout: 60
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 8131397517781101268, guid: b6e75e97a4a219f49915ce3106d7fbfa, type: 3}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs:
-  - {fileID: 1382638826136179778, guid: 25c58c46919530446bc7ce5eb6e3f2d4, type: 3}
-  exceptionsDisconnect: 1
-  snapshotSettings:
-    bufferTimeMultiplier: 2
-    bufferLimit: 32
-    catchupNegativeThreshold: -1
-    catchupPositiveThreshold: 1
-    catchupSpeed: 0.019999999552965164
-    slowdownSpeed: 0.03999999910593033
-    driftEmaDuration: 1
-    dynamicAdjustment: 1
-    dynamicAdjustmentTolerance: 1
-    deliveryTimeEmaDuration: 2
-  evaluationMethod: 0
-  evaluationInterval: 3
-  timeInterpolationGui: 0
-  clientLoadedScene: 0
-  <mode>k__BackingField: 0
-  finishStartHostPending: 0
-  clientSceneOperation: 0
-  serverSearchTime: 10
-  infoDisplayTime: 3
-  tmp: {fileID: 251981251}
-  nc: {fileID: 0}
 --- !u!4 &1776611717
 Transform:
   m_ObjectHideFlags: 0
