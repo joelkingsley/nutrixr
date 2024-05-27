@@ -17,7 +17,8 @@ public class BasketSystem : MonoBehaviour
     void Start()
     {
         selectedItems = new List<IngredientItem>();
-        DontDestroyOnLoad(this.gameObject);
+        Debug.Log("Size of List: " + selectedItems.Count);
+        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -36,7 +37,7 @@ public class BasketSystem : MonoBehaviour
         {
             //Un-cooled Ingredients
             List<Ingredient> tableItemDatas = new List<Ingredient>();
-            foreach (IngredientItem item in this.selectedItems)
+            foreach (IngredientItem item in selectedItems)
             {
                 if (item.ingredient.cooled == false)
                 {
@@ -47,7 +48,7 @@ public class BasketSystem : MonoBehaviour
 
             //Cooled Ingredients
             List<Ingredient> fridgeItemDatas = new List<Ingredient>();
-            foreach (IngredientItem item in this.selectedItems)
+            foreach (IngredientItem item in selectedItems)
             {
                 if (item.ingredient.cooled)
                 {
@@ -60,6 +61,11 @@ public class BasketSystem : MonoBehaviour
 
     public void AddToCart(IngredientItem ingredientItem)
     {
+        if (ingredientItem == null)
+        {
+            Debug.LogError("Tried to add a null Ingredient to shopping cart");
+            return;
+        }
         //TODO NullPointer
         Debug.Log("Add to cart");
         if (ingredientItem.ingredient.name.Equals(""))
@@ -67,8 +73,9 @@ public class BasketSystem : MonoBehaviour
             Debug.Log("Item without a name, wont be added to list");
             return;
         }
-
+        Debug.Log("Size of List before Add: " + selectedItems.Count);
         selectedItems.Add(ingredientItem);
+        Debug.Log("Size of List after Add: " + selectedItems.Count);
         //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
         {
@@ -80,6 +87,11 @@ public class BasketSystem : MonoBehaviour
 
     public void RemoveFromCart(IngredientItem ingredientItem)
     {
+        if (ingredientItem == null)
+        {
+            Debug.LogError("Tried to remove a null Ingredient from shopping cart");
+            return;
+        }
         selectedItems.Remove(ingredientItem);
         _recipeSystem.RedrawRecipeUI();
         Redraw();
@@ -92,9 +104,9 @@ public class BasketSystem : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        for (var index = 0; index < selectedItems.Count; index++)
+        int index = 0;
+        foreach (IngredientItem item in selectedItems)
         {
-            var item = selectedItems[index];
             GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
             newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.ingredient.name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
@@ -102,21 +114,11 @@ public class BasketSystem : MonoBehaviour
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index)-15);
 
-           /* GameObject itemPrefabInEntry = Instantiate(item.gameObject, newBasketEntry.transform);
-            itemPrefabInEntry.GetComponent<Grabbable>().enabled = false;
-            itemPrefabInEntry.GetComponent<Rigidbody>().isKinematic = false;
-            //Destroy(itemPrefabInEntry.GetComponent<BoxCollider>());
-            itemPrefabInEntry.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            itemPrefabInEntry.transform.localScale = new Vector3(10, 10, 10);
-            itemPrefabInEntry.transform.localPosition = new Vector3(0, 0, 0);
-            itemPrefabInEntry.transform.localRotation = itemPrefabInEntry.transform.parent.rotation;*/
-
             newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
-                item.RespawnToStart();
-                RemoveFromCart(item);
+                //TODO
             });
-            //itemPrefabInEntry.SetActive(true);
+            index++;
         }
     }
 }
