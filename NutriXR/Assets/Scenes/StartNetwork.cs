@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using Mirror.Discovery;
+using Oculus.Avatar2;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,32 +20,26 @@ public class StartNetwork : MonoBehaviour
     private void Start()
     {
         networkDiscovery = GetComponent<NetworkDiscovery>();
-
+        NetworkManagerWithActions.singleton.OnStartServerAction += StartAdvertise;
         #if UNITY_EDITOR
         //This app runs in the Unity Editor
-        //GetComponent<NetworkManager>().StartServer();
+        //NetworkManager.singleton.StartServer();
         NetworkManager.singleton.StartHost();
-        networkDiscovery.AdvertiseServer();
+
         Debug.Log("Is Editor. Start Hoste, Advertise");
         #endif
     }
-
-#if UNITY_EDITOR
-    void OnValidate()
-    {
-        if (networkDiscovery == null)
-        {
-            networkDiscovery = GetComponent<NetworkDiscovery>();
-            UnityEditor.Events.UnityEventTools.AddPersistentListener(networkDiscovery.OnServerFound, OnDiscoveredServer);
-            UnityEditor.Undo.RecordObjects(new Object[] { this, networkDiscovery }, "Set NetworkDiscovery");
-        }
-    }
-#endif
 
     // Update is called once per frame
     private void Update()
     {
 
+    }
+
+    private void StartAdvertise()
+    {
+        Debug.LogError("I am in pain");
+        networkDiscovery.AdvertiseServer();
     }
 
     public void StartDiscovery()
@@ -62,17 +57,20 @@ public class StartNetwork : MonoBehaviour
     {
         yield return new WaitForSeconds(timeout);
         networkDiscovery.StopDiscovery();
-        scanButton.GetComponentInChildren<TextMeshProUGUI>().text = "Scan";
-        scanButton.GetComponent<Button>().interactable = true;
+
+        if (!NetworkManagerWithActions.singleton.isNetworkActive)
+        {
+            scanButton.GetComponentInChildren<TextMeshProUGUI>().text = "Scan";
+            scanButton.GetComponent<Button>().interactable = true;
+        }
     }
 
-    public void StartSingleplayer()
+    public void StartServer()
     {
         NetworkManager.singleton.StartHost();
-        networkDiscovery.AdvertiseServer();
     }
 
-    public void StartMultiplayer()
+    public void ConnectServer()
     {
         networkDiscovery.StopDiscovery();
         NetworkManager.singleton.StartClient(serverResponse.uri);

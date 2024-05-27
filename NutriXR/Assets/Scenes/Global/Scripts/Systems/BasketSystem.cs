@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using Oculus.Interaction;
 using TMPro;
@@ -17,6 +16,7 @@ public class BasketSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        selectedItems = new List<IngredientItem>();
         DontDestroyOnLoad(this.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -60,6 +60,7 @@ public class BasketSystem : MonoBehaviour
 
     public void AddToCart(IngredientItem ingredientItem)
     {
+        //TODO NullPointer
         Debug.Log("Add to cart");
         if (ingredientItem.ingredient.name.Equals(""))
         {

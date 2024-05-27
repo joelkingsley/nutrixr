@@ -84,10 +84,10 @@ public class CartSync : NetworkBehaviour
         //delete all tags and layers
         gameObject.tag = "Untagged";
         gameObject.layer = LayerMask.NameToLayer("Remote");
-        foreach (GameObject child in transform)
+        foreach (Transform child in transform)
         {
-            child.tag = "Untagged";
-            child.layer = LayerMask.NameToLayer("Remote");
+            child.gameObject.tag = "Untagged";
+            child.gameObject.layer = LayerMask.NameToLayer("Remote");
         }
 
         //Subscribe to updates
