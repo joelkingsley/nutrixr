@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -2594149716411854235}
   - component: {fileID: -1008912822650348071}
   m_Layer: 9
-  m_Name: Cereal, chocolate crispy
+  m_Name: Cereal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,8 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f9b6a472e47e439d638483a70f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fdcName: Cereal, chocolate crispy
-  spawnInFridge: 0
+  ingredient: {fileID: 11400000, guid: dd346fa70035a4a43a8f731cf0a56196, type: 2}
 --- !u!114 &-7928391156018756237
 MonoBehaviour:
   m_ObjectHideFlags: 0
