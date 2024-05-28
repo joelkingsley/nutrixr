@@ -21,13 +21,12 @@ public class StartNetwork : MonoBehaviour
     {
         networkDiscovery = GetComponent<NetworkDiscovery>();
         NetworkManagerWithActions.singleton.OnStartServerAction += StartAdvertise;
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         //This app runs in the Unity Editor
         //NetworkManager.singleton.StartServer();
-        NetworkManager.singleton.StartHost();
-
-        Debug.Log("Is Editor. Start Hoste, Advertise");
-        #endif
+        //NetworkManager.singleton.StartHost();
+        StartCoroutine(EditorAutomaticStart());
+#endif
     }
 
     // Update is called once per frame
@@ -35,6 +34,20 @@ public class StartNetwork : MonoBehaviour
     {
 
     }
+
+#if UNITY_EDITOR
+    private IEnumerator EditorAutomaticStart()
+    {
+        StartDiscovery();
+        yield return new WaitForSeconds(10.0f);
+        if (!NetworkManagerWithActions.singleton.isNetworkActive)
+        {
+            Debug.Log("Not connected after 10s. Starting Host");
+            NetworkManager.singleton.StartHost();
+            //NetworkManager.singleton.StartServer();
+        }
+    }
+#endif
 
     private void StartAdvertise()
     {
@@ -85,5 +98,9 @@ public class StartNetwork : MonoBehaviour
         scanButton.SetActive(false);
         joinButton.SetActive(true);
         joinButton.GetComponentInChildren<TextMeshProUGUI>().text = info.uri.ToString();
+#if UNITY_EDITOR
+        Debug.Log("Server found. Connecting");
+        ConnectServer();
+#endif
     }
 }
