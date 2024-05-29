@@ -275,6 +275,7 @@ public class NetworkManagerWithActions : NetworkManager
     /// <summary>
     /// Called on client when connection quality changes. Override to show your own warnings or UI visuals.
     /// </summary>
+    [Obsolete]
     public override void CalculateConnectionQuality()
     {
         base.CalculateConnectionQuality();
