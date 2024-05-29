@@ -12,8 +12,6 @@ public class IngredientItem : MonoBehaviour
     private GameObject shoppingCart;
     private ScoreUI scoreUI;
 
-    private Vector3 startingPosition;
-    private Quaternion startingRotation;
     private Vector3 startingScale;
 
     private Collider[] allColliders;
@@ -28,8 +26,6 @@ public class IngredientItem : MonoBehaviour
             scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
         }
 
-        startingPosition = transform.position;
-        startingRotation = transform.rotation;
         startingScale = transform.localScale;
 
         allColliders = GetComponentsInChildren<Collider>(false);
@@ -128,11 +124,5 @@ public class IngredientItem : MonoBehaviour
             isInPot = false;
         }
 
-    }
-
-    public void RespawnToStart()
-    {
-        //gameObject.transform.position = startingPosition;
-        //gameObject.transform.rotation = startingRotation;
     }
 }
