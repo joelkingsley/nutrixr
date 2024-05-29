@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,10 +85,10 @@ public class CartSync : NetworkBehaviour
         //delete all tags and layers
         gameObject.tag = "Untagged";
         gameObject.layer = LayerMask.NameToLayer("Remote");
-        foreach (GameObject child in transform)
+        foreach (Transform child in transform)
         {
-            child.tag = "Untagged";
-            child.layer = LayerMask.NameToLayer("Remote");
+            child.gameObject.tag = "Untagged";
+            child.gameObject.layer = LayerMask.NameToLayer("Remote");
         }
 
         //Subscribe to updates
@@ -158,8 +159,16 @@ public class CartSync : NetworkBehaviour
                 case SyncHashSet<Item>.Operation.OP_ADD:
                     Debug.Log(item.name + " was added to the Cart at pos " + item.position);
 
+                    if (itemToPrefab.ContainsKey(item))
+                    {
+                        //In case this script is run as Host, this method is called twice: Once as client and once as server.
+                        //This causes the prefabs to be instantiated twice and causes an exception when trying to add
+                        //the key "item" to the itemToPrefab dictionary twice.
+                        return;
+                    }
+
                     //Instantiate
-                    GameObject toSpawn = (GameObject)Resources.Load("IngredientPrefabs/" + item.name, typeof(GameObject));
+                    GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + item.name, typeof(GameObject));
                     GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
                     spawned.transform.SetParent(remoteCreationHook);
                     spawned.transform.localPosition = item.position;
@@ -175,8 +184,8 @@ public class CartSync : NetworkBehaviour
 
                     //Add to the references
                     itemToPrefab.Add(item, spawned);
-
                     break;
+
                 case SyncHashSet<Item>.Operation.OP_REMOVE:
                     Debug.Log(item.name + " was removed from the Cart");
 
@@ -186,8 +195,8 @@ public class CartSync : NetworkBehaviour
                     {
                         Destroy(go);
                     }
-
                     break;
+
                 case SyncHashSet<Item>.Operation.OP_CLEAR:
                     // list got cleared
                     break;

@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using Oculus.Interaction;
 using TMPro;
@@ -17,7 +16,9 @@ public class BasketSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        selectedItems = new List<IngredientItem>();
+        Debug.Log("Size of List: " + selectedItems.Count);
+        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -36,7 +37,7 @@ public class BasketSystem : MonoBehaviour
         {
             //Un-cooled Ingredients
             List<Ingredient> tableItemDatas = new List<Ingredient>();
-            foreach (IngredientItem item in this.selectedItems)
+            foreach (IngredientItem item in selectedItems)
             {
                 if (item.ingredient.cooled == false)
                 {
@@ -47,7 +48,7 @@ public class BasketSystem : MonoBehaviour
 
             //Cooled Ingredients
             List<Ingredient> fridgeItemDatas = new List<Ingredient>();
-            foreach (IngredientItem item in this.selectedItems)
+            foreach (IngredientItem item in selectedItems)
             {
                 if (item.ingredient.cooled)
                 {
@@ -60,14 +61,22 @@ public class BasketSystem : MonoBehaviour
 
     public void AddToCart(IngredientItem ingredientItem)
     {
+        if (ingredientItem == null)
+        {
+            Debug.LogError("Tried to add a null Ingredient to shopping cart");
+            return;
+        }
+        //TODO NullPointer
         Debug.Log("Add to cart");
         if (ingredientItem.ingredient.name.Equals(""))
         {
             Debug.Log("Item without a name, wont be added to list");
             return;
         }
-
+        Debug.Log("Size of List before Add: " + selectedItems.Count);
         selectedItems.Add(ingredientItem);
+        Debug.Log("Size of List after Add: " + selectedItems.Count);
+        //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
         {
             Redraw();
@@ -78,6 +87,11 @@ public class BasketSystem : MonoBehaviour
 
     public void RemoveFromCart(IngredientItem ingredientItem)
     {
+        if (ingredientItem == null)
+        {
+            Debug.LogError("Tried to remove a null Ingredient from shopping cart");
+            return;
+        }
         selectedItems.Remove(ingredientItem);
         _recipeSystem.RedrawRecipeUI();
         Redraw();
@@ -90,15 +104,21 @@ public class BasketSystem : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        for (var index = 0; index < selectedItems.Count; index++)
+        int index = 0;
+        foreach (IngredientItem item in selectedItems)
         {
-            var item = selectedItems[index];
             GameObject newBasketEntry = Instantiate(basketEntryPrefab, basketUIScrollViewContent.transform);
             newBasketEntry.GetComponentInChildren<TextMeshProUGUI>().text = item.ingredient.name;
             var mAnchoredPosition = newBasketEntry.GetComponent<RectTransform>();
             var x = mAnchoredPosition.anchoredPosition.x;
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index)-15);
+
+            newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
+            {
+                //TODO
+            });
+            index++;
         }
     }
 }
