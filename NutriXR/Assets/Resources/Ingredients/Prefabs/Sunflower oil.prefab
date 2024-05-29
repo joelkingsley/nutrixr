@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8217175927955289148}
   - component: {fileID: 5018873026086009753}
   - component: {fileID: 7080337171792891731}
-  - component: {fileID: 2346522436192167060}
+  - component: {fileID: 2814786467753596870}
   - component: {fileID: 5803715213032638151}
   - component: {fileID: 5004124221272854678}
   - component: {fileID: -1471165048521025663}
@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7083692969539672965}
   - component: {fileID: -6434790874428882001}
   m_Layer: 9
-  m_Name: Sunflower Oil
+  m_Name: Sunflower oil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,8 +90,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2346522436192167060
-MeshCollider:
+--- !u!65 &2814786467753596870
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,10 +108,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4402878072012257719, guid: 6ecd5dcba59d4554b8e45bb286db6808, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.07080966, y: 0.2544773, z: 0.070202515}
+  m_Center: {x: 0.0010323226, y: 0.12722589, z: 0.000043459237}
 --- !u!54 &5803715213032638151
 Rigidbody:
   m_ObjectHideFlags: 0
