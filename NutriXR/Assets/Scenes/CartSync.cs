@@ -12,17 +12,6 @@ public class CartSync : NetworkBehaviour
     [Header("Deactivate on Remote")] [SerializeField]
     private List<GameObject> deactivate;
 
-    //Basket UI
-    [Header("BasketUI Content View")] [SerializeField]
-    private GameObject basket_content;
-
-    //Recipes UI
-    [Header("RecipesUI Content View")] [SerializeField]
-    private GameObject recipes_content;
-
-    //Basket System
-    private BasketSystem basketSystem;
-
     //Remote Basket Item Creation Hook
     [Header("Remote Creation Hook")] [SerializeField]
     private Transform remoteCreationHook;
@@ -61,14 +50,7 @@ public class CartSync : NetworkBehaviour
     {
         base.OnStartClient();
 
-        if (netIdentity.isOwned)    //e.g. the shopping cart belongs to player
-        {
-            //Connect Shopping cart to the players local BasketSystem and RecipeSystem
-            GameObject.FindWithTag("RecipeSystem").GetComponent<RecipeSystem>().recipeUIScrollViewContent = recipes_content;
-            basketSystem = GameObject.FindWithTag("BasketSystem").GetComponent<BasketSystem>();
-            basketSystem.basketUIScrollViewContent = basket_content;
-        }
-        else
+        if (!netIdentity.isOwned)    //e.g. the shopping cart does not belong to player
         {
             SetUpForRemote();
         }

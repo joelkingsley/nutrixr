@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Cooking : MonoBehaviour
 {
-    public RecipeSystem recipeSystem;
+    [FormerlySerializedAs("recipeSystem")] public BasketRecipeSystem basketRecipeSystem;
     public Recipe recipeData;
 
     public void StartCooking()
     {
-        recipeSystem.startCooking(recipeData);
+        basketRecipeSystem.startCooking(recipeData);
     }
 }

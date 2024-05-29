@@ -8,7 +8,7 @@ public class IngredientItem : MonoBehaviour
 {
     public Ingredient ingredient;
 
-    private BasketSystem basketSystem;
+    private BasketRecipeSystem basketRecipeSystem;
     private GameObject shoppingCart;
     private ScoreUI scoreUI;
 
@@ -22,7 +22,6 @@ public class IngredientItem : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            basketSystem = GameObject.FindGameObjectWithTag("BasketSystem").GetComponent<BasketSystem>();
             scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
         }
 
@@ -49,7 +48,7 @@ public class IngredientItem : MonoBehaviour
 
         //transform.parent = null;
         //shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
-        //basketSystem.RemoveFromCart(this);
+        //basketRecipeSystem.RemoveFromCart(this);
     }
 
     public void OnUnselect()
@@ -67,6 +66,7 @@ public class IngredientItem : MonoBehaviour
         if (shoppingCart == null)
         {
             shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
+            basketRecipeSystem = shoppingCart.GetComponentInParent<CartSync>().GetComponentInChildren<BasketRecipeSystem>();
         }
 
         if (gameObject.layer == LayerMask.NameToLayer("PendingIngredientItem")
@@ -75,13 +75,13 @@ public class IngredientItem : MonoBehaviour
             //PendingIngredientItem <-> ShoppingCart: The pending item becomes part of shopping cart
             transform.SetParent(shoppingCart.transform, true);
             shoppingCart.GetComponentInParent<CartSync>().AddItemToCart(this);
-            basketSystem.AddToCart(this);
+            basketRecipeSystem.AddToBasket(this);
             ChangeAllLayers("ShoppingCart");
         }
 
         if (other.gameObject.CompareTag("PotEntry") && !isInPot)
         {
-            other.transform.GetComponentInParent<BasketSystem>().AddToCart(this);
+            other.transform.GetComponentInParent<BasketRecipeSystem>().AddToBasket(this);
             transform.localScale *= inPotScaleModifier;
             transform.SetParent(other.GetComponentInParent<Transform>(), true);
             isInPot = true;
@@ -109,7 +109,7 @@ public class IngredientItem : MonoBehaviour
         {
             transform.parent = null;
             shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
-            basketSystem.RemoveFromCart(this);
+            basketRecipeSystem.RemoveFromBasket(this);
             if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
             {
                 ChangeAllLayers("PendingIngredientItem");
@@ -120,7 +120,7 @@ public class IngredientItem : MonoBehaviour
         {
             transform.parent = null;
             transform.localScale = startingScale;
-            other.transform.GetComponentInParent<BasketSystem>().RemoveFromCart(this);
+            other.transform.GetComponentInParent<BasketRecipeSystem>().RemoveFromBasket(this);
             isInPot = false;
         }
 
