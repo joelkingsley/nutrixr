@@ -15,6 +15,7 @@ public class IngredientItem : MonoBehaviour
     private Vector3 startingPosition;
     private Quaternion startingRotation;
     private Vector3 startingScale;
+    private Transform startingParent;
 
     private Collider[] allColliders;
     private float inPotScaleModifier = 0.5f;
@@ -31,6 +32,7 @@ public class IngredientItem : MonoBehaviour
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingScale = transform.localScale;
+        startingParent = transform.parent;
 
         allColliders = GetComponentsInChildren<Collider>(false);
     }
@@ -111,7 +113,7 @@ public class IngredientItem : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
         {
-            transform.parent = null;
+            transform.SetParent(startingParent, true);
             shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
             basketSystem.RemoveFromCart(this);
             if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
@@ -127,7 +129,8 @@ public class IngredientItem : MonoBehaviour
             other.transform.GetComponentInParent<BasketSystem>().RemoveFromCart(this);
             isInPot = false;
         }
-
+        Debug.Log("Local: " + transform.localPosition);
+        Debug.Log("Global: " + transform.position);
     }
 
     public void RespawnToStart()

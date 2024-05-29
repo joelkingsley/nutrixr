@@ -36,15 +36,14 @@ public class CartSync : NetworkBehaviour
 
     //-----#####-----
     public readonly SyncHashSet<Item> inventory = new SyncHashSet<Item>();
-    //-----#####-----
 
     //-----OWNER-----
-    //private List<IngredientItem> selectedIngredientItems = new List<IngredientItem>();              //IngredientItems present in owner's cart
-    private Dictionary<IngredientItem, Item> ingToItem = new Dictionary<IngredientItem, Item>();    //used by owner of this cart
+    private Dictionary<IngredientItem, Item> ingToItem = new Dictionary<IngredientItem, Item>();    //Used by owner of the cart
+    //Maps an IngredientItem, which is not synced, to an Item, which is synced
 
     //-----REMOTE-----
-    //private List<Item> visibleItems = new List<Item>();                                             //Items present in remote cart
-    private Dictionary<Item, GameObject> itemToPrefab = new Dictionary<Item, GameObject>();           //used by remote version of cart
+    private Dictionary<Item, GameObject> itemToPrefab = new Dictionary<Item, GameObject>();         //used by remote version of cart
+    //Maps an item, which is synced, to a GameObject, which is not synced and spawned in remote cart
 
     //owner: IngredientItem --> ingToItem --> Item <--network--> Item --itemToItem--> GameObject :remote
 
@@ -115,14 +114,21 @@ public class CartSync : NetworkBehaviour
             position = ingItem.gameObject.transform.localPosition,
             rotation = ingItem.gameObject.transform.localRotation
         };
-        ingToItem.Add(ingItem, item);
-        CmdAddItemToCart(item);
+        if (!ingToItem.ContainsKey(ingItem))
+        {
+            ingToItem.Add(ingItem, item);
+            CmdAddItemToCart(item);
+        }
+        else
+        {
+            Debug.LogWarning("IngredientItem already contained in ingToItem");
+        }
     }
 
     [Client]
     public void RemoveItemFromCart(IngredientItem ingItem)    //executed by owner
     {
-        if (netIdentity.isOwned)
+        if (netIdentity.isOwned && ingToItem.ContainsKey(ingItem))
         {
             Item item;
             if (ingToItem.Remove(ingItem, out item))        //retrieve corresponding item
@@ -141,7 +147,10 @@ public class CartSync : NetworkBehaviour
     [Command]
     public void CmdAddItemToCart(Item item)
     {
-        inventory.Add(item);
+        if (!inventory.Contains(item))
+        {
+            inventory.Add(item);
+        }
     }
 
     [Command]
