@@ -76,7 +76,6 @@ public class BasketSystem : MonoBehaviour
         Debug.Log("Size of List before Add: " + selectedItems.Count);
         selectedItems.Add(ingredientItem);
         Debug.Log("Size of List after Add: " + selectedItems.Count);
-        //ingredientItem.transform.parent = shoppingCartGameObject.transform;
         if (basketUIScrollViewContent.activeSelf)
         {
             Redraw();
@@ -114,10 +113,6 @@ public class BasketSystem : MonoBehaviour
             var y = mAnchoredPosition.anchoredPosition.y;
             mAnchoredPosition.anchoredPosition = new Vector2(x+52, y - (30 * index)-15);
 
-            newBasketEntry.GetComponentInChildren<Button>().onClick.AddListener(() =>
-            {
-                //TODO
-            });
             index++;
         }
     }
