@@ -286,6 +286,7 @@ public class NetworkManagerWithActions : NetworkManager
     /// </summary>
     /// <param name="previous">previous connection quality</param>
     /// <param name="current">new connection quality</param>
+    [Obsolete]
     public override void OnConnectionQualityChanged(ConnectionQuality previous, ConnectionQuality current)
     {
         OnConnectionQualityChangedAction?.Invoke(previous, current);
