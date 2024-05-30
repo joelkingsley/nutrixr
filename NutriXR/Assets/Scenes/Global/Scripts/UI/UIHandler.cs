@@ -30,16 +30,12 @@ public class UIHandler : MonoBehaviour
 
     public TMP_Dropdown activityLevel;
 
-    private BasketSystem _basketSystem;
-
-    private RecipeSystem _recipeSystem;
+    private BasketRecipeSystem _basketRecipeSystem;
 
     private UserDataController _userDataController;
     // Start is called before the first frame update
     void Start()
     {
-        _basketSystem = GetComponent<BasketSystem>();
-        _recipeSystem = GetComponent<RecipeSystem>();
         descriptionDataUI.SetActive(false);
         _userDataController = GameObject.FindGameObjectWithTag("UserDataController").GetComponent<UserDataController>();
     }
@@ -56,8 +52,6 @@ public class UIHandler : MonoBehaviour
             else
             {
                 leftHandUI.SetActive(true);
-                _basketSystem.Redraw();
-                _recipeSystem.RedrawRecipeUI();
             }
         }
     }
