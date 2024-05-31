@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 4793847443318867792}
   - component: {fileID: 6482713019192992088}
   - component: {fileID: 8006659995311256996}
-  - component: {fileID: 4222273138626511911}
+  - component: {fileID: 5946286885734571981}
   m_Layer: 0
   m_Name: CookButton
   m_TagString: Untagged
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4222273138626511911}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Cooking, Assembly-CSharp
         m_MethodName: StartCooking
         m_Mode: 1
@@ -535,7 +535,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4222273138626511911
+--- !u!114 &5946286885734571981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

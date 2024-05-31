@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class BasketRecipeSystem : MonoBehaviour
 {
@@ -34,7 +35,6 @@ public class BasketRecipeSystem : MonoBehaviour
         {
             recipesCanBePrepared = true;
         }
-
 
     }
 
@@ -127,7 +127,7 @@ public class BasketRecipeSystem : MonoBehaviour
     /// <summary>
     /// This method checks which Recipes can be made from the Ingredients bought by the user
     /// </summary>
-    private List<Recipe> RefreshPossibleRecipes()
+    private List<Recipe> GetPossibleRecipes()
     {
         List<Recipe> possibleRecipes = new List<Recipe>();
 
@@ -166,6 +166,32 @@ public class BasketRecipeSystem : MonoBehaviour
         //possibleRecipes now holds a List of all Recipes that can be made from the bough Ingredients
     }
 
+    private List<Recipe> GetRecipesToShow()
+    {
+        List<Recipe> recipesToShow = new List<Recipe>();
+
+        foreach (Recipe recipe in allRecipes)
+        {
+            bool contained = false;
+            foreach (Ingredient recipeIngredient in recipe.ingredients)
+            {
+                foreach (IngredientItem selectedItem in ingredientItemsInBasket)
+                {
+                    if (recipeIngredient.name.Equals(selectedItem.ingredient.name))
+                    {
+                        recipesToShow.Add(recipe);
+                        contained = true;
+                        break;
+                    }
+                }
+
+                if (contained) break;
+            }
+        }
+
+        return recipesToShow;
+    }
+
     public void RedrawRecipeUI()
     {
         foreach(Transform child in recipeUIMenuBody.transform)
@@ -176,15 +202,30 @@ public class BasketRecipeSystem : MonoBehaviour
             }
         }
 
-        List<Recipe> possibleRecipes = RefreshPossibleRecipes();
+        List<Recipe> possibleRecipes = GetPossibleRecipes();
+        List<Recipe> recipesToShow = GetRecipesToShow();
 
         //Redraw GUI
-        foreach (Recipe recipeData in allRecipes)
+        foreach (Recipe recipeData in recipesToShow)
         {
-            bool recipePossible = possibleRecipes.Contains(recipeData);
+            bool recipePossible = false;
+            foreach (Recipe possibleRecipe in possibleRecipes)
+            {
+                if (possibleRecipe.name.Equals(recipeData.name))
+                {
+                    recipePossible = true;
+                    break;
+                }
+            }
 
             spawnRecipeUIEntry(recipeData, recipePossible);
         }
+    }
+
+    private void cookBtnClicked(Recipe recipe)
+    {
+        Debug.Log("Start cooking " + recipe.name);
+        startCooking(recipe);
     }
 
     private void spawnRecipeUIEntry(Recipe recipeData, bool recipePossible)
@@ -195,7 +236,19 @@ public class BasketRecipeSystem : MonoBehaviour
 
         if (recipePossible)
         {
-            newRecipeElement.transform.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = Color.green;
+            newRecipeElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = Color.green;
+        }
+
+        if (recipesCanBePrepared)
+        {
+            newRecipeElement.GetComponentInChildren<Button>().onClick.AddListener(() =>
+            {
+                cookBtnClicked(recipeData);
+            });
+        }
+        else
+        {
+            newRecipeElement.GetComponentInChildren<Button>().gameObject.SetActive(false);
         }
 
         foreach (Ingredient ingredient in recipeData.ingredients)
@@ -204,6 +257,21 @@ public class BasketRecipeSystem : MonoBehaviour
                 GameObject.Instantiate(recipeUIIngredientElementTemplate, recipeUIMenuBody.transform);
             newIngredientElement.transform.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ingredient.name;
             newIngredientElement.SetActive(true);
+
+            bool contained = false;
+            foreach (IngredientItem item in ingredientItemsInBasket)
+            {
+                if (ingredient.name.Equals(item.ingredient.name))
+                {
+                    contained = true;
+                    break;
+                }
+            }
+
+            if (contained)
+            {
+                newIngredientElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = Color.green;
+            }
         }
     }
 
