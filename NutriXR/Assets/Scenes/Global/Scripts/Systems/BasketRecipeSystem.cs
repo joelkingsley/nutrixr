@@ -1,6 +1,8 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Realms;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,21 +18,58 @@ public class BasketRecipeSystem : MonoBehaviour
     [SerializeField] private GameObject recipeUIRecipeEntryTemplate;
     [SerializeField] private GameObject recipeUIIngredientElementTemplate;
 
-    private List<IngredientItem> ingredientItemsInBasket; //Array of all stored ingredients
-    private List<Recipe> allRecipes;  //Array of all recipes
+    private List<IngredientItem> ingredientItemsInBasket = new List<IngredientItem>(); //Array of all stored ingredients
+
+    private Dictionary<string, Ingredient> allIngredients = new Dictionary<string, Ingredient>();
+    private Dictionary<string, Recipe> allRecipes = new Dictionary<string, Recipe>();
 
     [SerializeField] private TableItemSpawner recipeSpawner = null;
     private bool recipesCanBePrepared = false;
     private List<GameObject> preparedRecipes = new();
+
+    public struct RecipeIngredientRenderData
+    {
+        public Recipe recipeData;
+        public List<Tuple<Ingredient, bool>> ingredientsAvailableData;
+        public bool preparable; // recipe can be cooked
+
+        public int ingredientsMissingCount;
+
+        public RecipeIngredientRenderData(Recipe r, List<Tuple<Ingredient, bool>> ingAvailData, bool p)
+        {
+            recipeData = r;
+            ingredientsAvailableData = ingAvailData;
+            preparable = p;
+
+            ingredientsMissingCount = 0;
+            foreach (Tuple<Ingredient, bool> pair in ingAvailData)
+            {
+                if (pair.Item2 == false)
+                {
+                    ingredientsMissingCount += 1;
+                }
+            }
+        }
+    }
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        ingredientItemsInBasket = new List<IngredientItem>();
+        List<Ingredient> loadedIngredientList = new List<Ingredient>(Resources.LoadAll<Ingredient>("Ingredients/ScriptableObjects"));
+        List<Recipe> loadedRecipeList = new List<Recipe>(Resources.LoadAll<Recipe>("Recipes/ScriptableObjects"));
 
-        allRecipes = new List<Recipe>(Resources.LoadAll<Recipe>("Recipes/ScriptableObjects"));
+        foreach (Ingredient ingredient in loadedIngredientList)
+        {
+            allIngredients.Add(ingredient.name, ingredient);
+        }
+
+        foreach (Recipe recipe in loadedRecipeList)
+        {
+            allRecipes.Add(recipe.name, recipe);
+        }
+
         if (recipeSpawner != null)
         {
             recipesCanBePrepared = true;
@@ -101,6 +140,24 @@ public class BasketRecipeSystem : MonoBehaviour
         RedrawBasketUI();
     }
 
+    private Dictionary<string, int> GetBasketRenderData()
+    {
+        Dictionary<string, int> ingredientCountDict = new Dictionary<string, int>();
+
+        foreach (IngredientItem item in ingredientItemsInBasket)
+        {
+            Ingredient ingredient = item.ingredient;
+            if (!ingredientCountDict.ContainsKey(ingredient.name))
+            {
+                ingredientCountDict.Add(ingredient.name, 0);
+            }
+
+            ingredientCountDict[ingredient.name] += 1;
+        }
+
+        return ingredientCountDict;
+    }
+
     public void RedrawBasketUI()
     {
         foreach(Transform child in basketUIMenuBody.transform)
@@ -111,81 +168,65 @@ public class BasketRecipeSystem : MonoBehaviour
             }
         }
 
-        foreach (IngredientItem item in ingredientItemsInBasket)
+        Dictionary<string, int> basketEntryCountDict = GetBasketRenderData();
+        List<Tuple<Ingredient, int>> basketRenderData = new List<Tuple<Ingredient, int>>();
+
+        foreach(KeyValuePair<string, int> kv in basketEntryCountDict)
         {
-            spawnBasketUIEntry(item.ingredient);
+            basketRenderData.Add(new Tuple<Ingredient, int>(allIngredients[kv.Key], kv.Value)); // load ingredient from ingredients dict
+        }
+        basketRenderData.Sort((Tuple<Ingredient, int> x, Tuple<Ingredient, int> y) =>
+        {
+            return x.Item1.name.CompareTo(y.Item1.name);
+        });
+
+        foreach (Tuple<Ingredient, int> ingredientCountPair in basketRenderData)
+        {
+            spawnBasketUIEntry(ingredientCountPair.Item1, ingredientCountPair.Item2);
         }
     }
 
-    private void spawnBasketUIEntry(Ingredient itemData)
+    private void spawnBasketUIEntry(Ingredient itemData, int ingredientCount)
     {
         GameObject newIngredientElement = GameObject.Instantiate(basketUIIngredientElementTemplate, basketUIMenuBody.transform);
-        newIngredientElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = itemData.name;
+        newIngredientElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = itemData.name + " x" + ingredientCount;
         newIngredientElement.SetActive(true);
     }
 
-    /// <summary>
-    /// This method checks which Recipes can be made from the Ingredients bought by the user
-    /// </summary>
-    private List<Recipe> GetPossibleRecipes()
+    private List<RecipeIngredientRenderData> GetRecipesToShow()
     {
-        List<Recipe> possibleRecipes = new List<Recipe>();
+        List<RecipeIngredientRenderData> recipesToShow = new List<RecipeIngredientRenderData>();
 
-        foreach (Recipe recipe in allRecipes)
+        foreach (KeyValuePair<string, Recipe> kv in allRecipes)
         {
-            //Check if Recipe is possible
-            bool possible = true;
-            foreach (Ingredient ingredient in recipe.ingredients)
-            {
-                //Check if this ingredient was selected by user
-                bool contained = false;
-                foreach (IngredientItem selectedItem in ingredientItemsInBasket)
-                {
-                    if (ingredient.name.Equals(selectedItem.ingredient.name))
-                    {
-                        contained = true;
-                        break;
-                    }
-                }
-                if (!contained)
-                {
-                    //Ingredient is not contained. The recipe is thus not possible
-                    possible = false;
-                    break;
-                }
-            }
+            Recipe recipe = kv.Value;
 
-            //Recipe is possible to make with the bough Ingredients
-            if (possible)
-            {
-                possibleRecipes.Add(recipe);
-            }
-        }
+            List<Tuple<Ingredient, bool>> ingredientsAvailableData = new List<Tuple<Ingredient, bool>>();
+            int ingredientsAvailable = 0;
 
-        return possibleRecipes;
-        //possibleRecipes now holds a List of all Recipes that can be made from the bough Ingredients
-    }
-
-    private List<Recipe> GetRecipesToShow()
-    {
-        List<Recipe> recipesToShow = new List<Recipe>();
-
-        foreach (Recipe recipe in allRecipes)
-        {
-            bool contained = false;
             foreach (Ingredient recipeIngredient in recipe.ingredients)
             {
+                bool contained = false;
                 foreach (IngredientItem selectedItem in ingredientItemsInBasket)
                 {
                     if (recipeIngredient.name.Equals(selectedItem.ingredient.name))
                     {
-                        recipesToShow.Add(recipe);
                         contained = true;
                         break;
                     }
                 }
 
-                if (contained) break;
+                Tuple<Ingredient, bool> available = new Tuple<Ingredient, bool>(recipeIngredient, contained);
+                ingredientsAvailableData.Add(available);
+                if (contained)
+                {
+                    ingredientsAvailable += 1;
+                }
+            }
+
+            if (ingredientsAvailable > 0)
+            {
+                recipesToShow.Add(new RecipeIngredientRenderData(recipe, ingredientsAvailableData, recipe.ingredients.Length == ingredientsAvailable));
             }
         }
 
@@ -202,23 +243,23 @@ public class BasketRecipeSystem : MonoBehaviour
             }
         }
 
-        List<Recipe> possibleRecipes = GetPossibleRecipes();
-        List<Recipe> recipesToShow = GetRecipesToShow();
+        List<RecipeIngredientRenderData> recipesToShow = GetRecipesToShow();
+        recipesToShow.Sort((RecipeIngredientRenderData x, RecipeIngredientRenderData y) =>
+        {
+            if (x.ingredientsMissingCount == y.ingredientsMissingCount)
+            {
+                return x.recipeData.name.CompareTo(y.recipeData.name);
+            }
+            else
+            {
+                return x.ingredientsMissingCount - y.ingredientsMissingCount;
+            }
+        });
 
         //Redraw GUI
-        foreach (Recipe recipeData in recipesToShow)
+        foreach (RecipeIngredientRenderData recipeData in recipesToShow)
         {
-            bool recipePossible = false;
-            foreach (Recipe possibleRecipe in possibleRecipes)
-            {
-                if (possibleRecipe.name.Equals(recipeData.name))
-                {
-                    recipePossible = true;
-                    break;
-                }
-            }
-
-            spawnRecipeUIEntry(recipeData, recipePossible);
+            spawnRecipeUIEntry(recipeData);
         }
     }
 
@@ -228,8 +269,12 @@ public class BasketRecipeSystem : MonoBehaviour
         startCooking(recipe);
     }
 
-    private void spawnRecipeUIEntry(Recipe recipeData, bool recipePossible)
+    private void spawnRecipeUIEntry(RecipeIngredientRenderData renderData)
     {
+        Recipe recipeData = renderData.recipeData;
+        List<Tuple<Ingredient, bool>> ingredientsAvailableData = renderData.ingredientsAvailableData;
+        bool recipePossible = renderData.preparable;
+
         GameObject newRecipeElement = GameObject.Instantiate(recipeUIRecipeEntryTemplate, recipeUIMenuBody.transform);
         newRecipeElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = recipeData.name;
         newRecipeElement.SetActive(true);
@@ -251,24 +296,17 @@ public class BasketRecipeSystem : MonoBehaviour
             newRecipeElement.GetComponentInChildren<Button>().gameObject.SetActive(false);
         }
 
-        foreach (Ingredient ingredient in recipeData.ingredients)
+        foreach (Tuple<Ingredient, bool> ingredientAvailablePair in ingredientsAvailableData)
         {
+            Ingredient ingredient = ingredientAvailablePair.Item1;
+            bool ingredientAvailable = ingredientAvailablePair.Item2;
+
             GameObject newIngredientElement =
                 GameObject.Instantiate(recipeUIIngredientElementTemplate, recipeUIMenuBody.transform);
             newIngredientElement.transform.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = ingredient.name;
             newIngredientElement.SetActive(true);
 
-            bool contained = false;
-            foreach (IngredientItem item in ingredientItemsInBasket)
-            {
-                if (ingredient.name.Equals(item.ingredient.name))
-                {
-                    contained = true;
-                    break;
-                }
-            }
-
-            if (contained)
+            if (ingredientAvailable)
             {
                 newIngredientElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = Color.green;
             }
