@@ -34,50 +34,7 @@ public class NutritionFeedbackCircle : MonoBehaviour
         ComputeValuesByAddingIngredientWeights(consumedRecipes);
     }
 
-    void ComputeValuesByCountingIngredients(List<Ingredient> ingredients)
-    {
-        // Compute values
-        var numberOfFruitVegetable = 0f;
-        var numberOfLegumeNutSeed = 0f;
-        var numberOfCerealsAndPotato = 0f;
-        var numberOfOilAndFats = 0f;
-        var numberOfMilkDiary = 0f;
-        var numberOfMeatSausageFishEgg = 0f;
-        foreach (var ingredient in ingredients)
-        {
-            switch (ingredient.foodGroup)
-            {
-                case Ingredient.FoodGroup.FruitVegetable:
-                case Ingredient.FoodGroup.Juice:
-                    numberOfFruitVegetable += 1;
-                    break;
-                case Ingredient.FoodGroup.Legume:
-                case Ingredient.FoodGroup.NutSeed:
-                    numberOfLegumeNutSeed += 1;
-                    break;
-                case Ingredient.FoodGroup.Potato:
-                case Ingredient.FoodGroup.GrainBreadNoodle:
-                    numberOfCerealsAndPotato += 1;
-                    break;
-                case Ingredient.FoodGroup.Butter:
-                case Ingredient.FoodGroup.PlantOil:
-                    numberOfOilAndFats += 1;
-                    break;
-                case Ingredient.FoodGroup.Milk:
-                    numberOfMilkDiary += 1;
-                    break;
-                case Ingredient.FoodGroup.Egg:
-                case Ingredient.FoodGroup.Fish:
-                case Ingredient.FoodGroup.Meat:
-                case Ingredient.FoodGroup.Sausage:
-                    numberOfMeatSausageFishEgg += 1;
-                    break;
-            }
-        }
-        SetValues(new []{numberOfFruitVegetable, numberOfLegumeNutSeed, numberOfCerealsAndPotato, numberOfOilAndFats, numberOfMilkDiary, numberOfMeatSausageFishEgg});
-    }
-
-    void ComputeValuesByAddingIngredientWeights(List<Recipe> recipes)
+    private void ComputeValuesByAddingIngredientWeights(List<Recipe> recipes)
     {
         // Compute values
         var fractionOfFruitVegetable = 0f;

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class KitchenFeedbackSystem : MonoBehaviour
 {
-    [SerializeField]
-    public NutritionFeedbackCircle nutritionFeedbackCircle;
+    [SerializeField] private NutritionFeedbackCircle nutritionFeedbackCircle;
+    [SerializeField] private EnvironmentFeedbackBars environmentFeedbackBars;
 
     private List<Recipe> consumedRecipes;
 
@@ -23,7 +23,8 @@ public class KitchenFeedbackSystem : MonoBehaviour
         List<Recipe> loadedRecipeList = new List<Recipe>(Resources.LoadAll<Recipe>("Recipes/ScriptableObjects"));
         consumedRecipes = loadedRecipeList;
 
-        StartFeedback("Nutrition");
+        //StartFeedback("Nutrition");
+        StartFeedback("NotNutritionBecauseItOnlyComparesForNutritionSoThisShouldStillWork");
     }
 
     public void TrackConsumedRecipe(Recipe consumedRecipe)
@@ -36,11 +37,14 @@ public class KitchenFeedbackSystem : MonoBehaviour
         if (feedbackMode.Equals("Nutrition"))
         {
             nutritionFeedbackCircle.RenderConsumedRecipes(consumedRecipes);
+            environmentFeedbackBars.Hide();
             nutritionFeedbackCircle.Show();
         }
         else
         {
-            throw new NotImplementedException();
+            environmentFeedbackBars.RenderConsumedRecipes(consumedRecipes);
+            nutritionFeedbackCircle.Hide();
+            environmentFeedbackBars.Show();
         }
     }
 }
