@@ -43,6 +43,7 @@ public class IngredientItem : MonoBehaviour
 
     public void OnSelect()
     {
+        if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
 
         scoreUI.ShowNutriScore(ingredient.nutriScore);
@@ -55,6 +56,7 @@ public class IngredientItem : MonoBehaviour
 
     public void OnUnselect()
     {
+        if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("PendingIngredientItem");
         scoreUI.Hide();
     }
