@@ -43,6 +43,7 @@ public class IngredientItem : MonoBehaviour
 
     public void OnSelect()
     {
+        if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
 
         scoreUI.ShowNutriScore(ingredient.nutriScore);
@@ -55,6 +56,7 @@ public class IngredientItem : MonoBehaviour
 
     public void OnUnselect()
     {
+        if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("PendingIngredientItem");
         scoreUI.Hide();
     }
@@ -65,28 +67,34 @@ public class IngredientItem : MonoBehaviour
         //SelectedIngredientItem: No behaviour
         //ShoppingCart: No behaviour
 
-        if (shoppingCart == null)
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
-            basketRecipeSystem = shoppingCart.GetComponentInParent<CartSync>().GetComponentInChildren<BasketRecipeSystem>();
+            if (shoppingCart == null)
+            {
+                shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
+                basketRecipeSystem = shoppingCart.GetComponentInParent<CartSync>().GetComponentInChildren<BasketRecipeSystem>();
+            }
+
+            if (gameObject.layer == LayerMask.NameToLayer("PendingIngredientItem")
+                && other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
+            {
+                //PendingIngredientItem <-> ShoppingCart: The pending item becomes part of shopping cart
+                transform.SetParent(shoppingCart.transform, true);
+                shoppingCart.GetComponentInParent<CartSync>().AddItemToCart(this);
+                basketRecipeSystem.AddToBasket(this);
+                ChangeAllLayers("ShoppingCart");
+            }
         }
 
-        if (gameObject.layer == LayerMask.NameToLayer("PendingIngredientItem")
-            && other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
+        if (SceneManager.GetActiveScene().name.Equals("Kitchen"))
         {
-            //PendingIngredientItem <-> ShoppingCart: The pending item becomes part of shopping cart
-            transform.SetParent(shoppingCart.transform, true);
-            shoppingCart.GetComponentInParent<CartSync>().AddItemToCart(this);
-            basketRecipeSystem.AddToBasket(this);
-            ChangeAllLayers("ShoppingCart");
-        }
-
-        if (other.gameObject.CompareTag("PotEntry") && !isInPot)
-        {
-            other.transform.GetComponentInParent<BasketRecipeSystem>().AddToBasket(this);
-            transform.localScale *= inPotScaleModifier;
-            transform.SetParent(other.GetComponentInParent<Transform>(), true);
-            isInPot = true;
+            if (other.gameObject.CompareTag("PotEntry") && !isInPot)
+            {
+                other.transform.parent.parent.GetComponentInChildren<BasketRecipeSystem>().AddToBasket(this);
+                transform.localScale *= inPotScaleModifier;
+                transform.SetParent(other.GetComponentInParent<Transform>(), true);
+                isInPot = true;
+            }
         }
     }
 
@@ -102,30 +110,34 @@ public class IngredientItem : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (shoppingCart == null)
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
-        {
-            transform.SetParent(startingParent, true);
-            shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
-            basketRecipeSystem.RemoveFromBasket(this);
-            if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
+            if (shoppingCart == null)
             {
-                ChangeAllLayers("PendingIngredientItem");
+                shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
+            }
+
+            if (other.gameObject.layer == LayerMask.NameToLayer("ShoppingCart"))
+            {
+                transform.SetParent(startingParent, true);
+                shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
+                basketRecipeSystem.RemoveFromBasket(this);
+                if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
+                {
+                    ChangeAllLayers("PendingIngredientItem");
+                }
             }
         }
 
-        if (other.gameObject.CompareTag("PotExit") && isInPot)
+        if (SceneManager.GetActiveScene().name.Equals("Kitchen"))
         {
-            transform.parent = null;
-            transform.localScale = startingScale;
-            other.transform.GetComponentInParent<BasketRecipeSystem>().RemoveFromBasket(this);
-            isInPot = false;
+            if (other.gameObject.CompareTag("PotExit") && isInPot)
+            {
+                transform.parent = null;
+                transform.localScale = startingScale;
+                other.transform.parent.parent.GetComponentInChildren<BasketRecipeSystem>().RemoveFromBasket(this);
+                isInPot = false;
+            }
         }
-        Debug.Log("Local: " + transform.localPosition);
-        Debug.Log("Global: " + transform.position);
     }
 }
