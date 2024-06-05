@@ -25,7 +25,8 @@ public class BasketRecipeSystem : MonoBehaviour
 
     [SerializeField] private TableItemSpawner recipeSpawner = null;
     private bool recipesCanBePrepared = false;
-    private List<GameObject> preparedRecipes = new();
+
+    [SerializeField] private CookedRecipes cookedRecipes;
 
     public struct RecipeIngredientRenderData
     {
@@ -284,7 +285,7 @@ public class BasketRecipeSystem : MonoBehaviour
             newRecipeElement.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = Color.green;
         }
 
-        if (recipesCanBePrepared)
+        if (recipesCanBePrepared && recipePossible)
         {
             newRecipeElement.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
@@ -316,27 +317,14 @@ public class BasketRecipeSystem : MonoBehaviour
     public void startCooking(Recipe recipe)
     {
         if (!recipesCanBePrepared) return;
-        /* DEACTIVATED FOR DEBUGGING PURPOSES
-        //Debug.Log("Cooking: " + recipeData.name);
-        GameObject prefab = (GameObject) Resources.Load("RecipePrefabs/" + recipeData.name, typeof(GameObject));
+        GameObject prefab = (GameObject) Resources.Load("Recipes/Prefabs/" + recipe.name, typeof(GameObject));
         GameObject recipeObject = Instantiate(prefab);
-        cookedRecipes.Add(recipeObject);
+        //cookedRecipes.Add(recipeObject);
         recipeSpawner.addItem(recipeObject);
-
-        foreach (IngredientItem selectedItem in basketSystem.selectedItems)
-        {
-            List<int> categoryIDs = recipeData.categoryIdsWithWeights.Select(x => x.Item1).ToList();
-            foreach (int categoryId in categoryIDs)
-            {
-                if (selectedItem.GetIngredientItemData().categoryIds.Contains(categoryId))
-                {
-                    recipeObject.GetComponent<RecipeIngredients>().ingredients.Add(selectedItem.fdcName);
-                    basketSystem.RemoveFromCart(selectedItem);
-                    Destroy(selectedItem.gameObject);
-                    return;
-                }
-            }
-        }
-        */
+        cookedRecipes.addRecipe(recipe);
+        ingredientItemsInBasket.Clear();
+        RedrawRecipeUI();
+        RedrawBasketUI();
+        //ToDo: Reset ingredient positions
     }
 }
