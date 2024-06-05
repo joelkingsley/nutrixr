@@ -18,6 +18,8 @@ public class TableItemSpawner : MonoBehaviour
     public int totalCols = 4;
 
     private int currentPos = 0;
+    private List<GameObject> spawnedIngredients = new List<GameObject>();
+    private List<Ingredient> lastSpawned = new List<Ingredient>();
 
     public void SpawnKitchenSceneItems(List<Ingredient> ingredientItems)
     {
@@ -25,8 +27,18 @@ public class TableItemSpawner : MonoBehaviour
         SpawnItems(ingredientItems);
     }
 
+    public void ResetItems()
+    {
+        foreach (GameObject ingredient in spawnedIngredients)
+        {
+            Destroy(ingredient);
+        }
+        SpawnKitchenSceneItems(lastSpawned);
+    }
+
     void SpawnItems(List<Ingredient> ingredientItems)
     {
+        lastSpawned = ingredientItems;
         int amount = ingredientItems.Count;
         for (int i = 0; i < amount; i++)
         {
@@ -41,7 +53,7 @@ public class TableItemSpawner : MonoBehaviour
 
     private GameObject LoadPrefab(string prefabName)
     {
-        return (GameObject)Resources.Load("Ingredients/Prefabs" + prefabName, typeof(GameObject));
+        return (GameObject)Resources.Load("Ingredients/Prefabs/" + prefabName, typeof(GameObject));
     }
 
     void SpawnItemAt(int row, int col, GameObject prefab)
@@ -52,7 +64,7 @@ public class TableItemSpawner : MonoBehaviour
         Vector3 spawnPosition = new Vector3(transform.position.x + xOffset, transform.position.y,
             transform.position.z + zOffset);
 
-        Instantiate(prefab, spawnPosition, Quaternion.identity);
+        spawnedIngredients.Add(Instantiate(prefab, spawnPosition, Quaternion.identity));
     }
 
     public void addItem(GameObject item)

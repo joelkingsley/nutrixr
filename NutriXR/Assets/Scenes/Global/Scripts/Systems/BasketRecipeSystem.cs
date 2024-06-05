@@ -319,12 +319,11 @@ public class BasketRecipeSystem : MonoBehaviour
         if (!recipesCanBePrepared) return;
         GameObject prefab = (GameObject) Resources.Load("Recipes/Prefabs/" + recipe.name, typeof(GameObject));
         GameObject recipeObject = Instantiate(prefab);
-        //cookedRecipes.Add(recipeObject);
         recipeSpawner.addItem(recipeObject);
         cookedRecipes.addRecipe(recipe);
+        GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>().ResetItems();
         ingredientItemsInBasket.Clear();
         RedrawRecipeUI();
         RedrawBasketUI();
-        //ToDo: Reset ingredient positions
     }
 }
