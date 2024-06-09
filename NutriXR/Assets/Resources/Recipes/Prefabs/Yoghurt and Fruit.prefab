@@ -2172,7 +2172,8 @@ GameObject:
   - component: {fileID: 8125978526619084115}
   - component: {fileID: -3278006593077676421}
   - component: {fileID: -6879937654708040712}
-  m_Layer: 0
+  - component: {fileID: 3336236804579091210}
+  m_Layer: 9
   m_Name: Yoghurt and Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2355,6 +2356,18 @@ MonoBehaviour:
   _pointable: {fileID: 8125978526619084115}
   _rigidbody: {fileID: -3677579454901185544}
   _scaleMassWithSize: 1
+--- !u!114 &3336236804579091210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610500351309134075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ed36ce91aeb14f940a19c228ef251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5765711937393240990
 GameObject:
   m_ObjectHideFlags: 0

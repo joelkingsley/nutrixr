@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 5141502535635449917}
   - component: {fileID: 3679628856569751624}
   - component: {fileID: -5546622119039305086}
-  m_Layer: 0
+  - component: {fileID: 5859990839699580036}
+  m_Layer: 9
   m_Name: sausage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,3 +212,15 @@ MonoBehaviour:
   _pointable: {fileID: 5141502535635449917}
   _rigidbody: {fileID: -605936811379062208}
   _scaleMassWithSize: 1
+--- !u!114 &5859990839699580036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277582754341701636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ed36ce91aeb14f940a19c228ef251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

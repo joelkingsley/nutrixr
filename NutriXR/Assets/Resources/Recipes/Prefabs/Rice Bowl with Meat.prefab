@@ -3251,7 +3251,8 @@ GameObject:
   - component: {fileID: -757165170145760997}
   - component: {fileID: 3724257163271745989}
   - component: {fileID: -3077965319901332417}
-  m_Layer: 0
+  - component: {fileID: -6044131839403294114}
+  m_Layer: 9
   m_Name: Rice Bowl with Meat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3437,6 +3438,18 @@ MonoBehaviour:
   _pointable: {fileID: -757165170145760997}
   _rigidbody: {fileID: 4537159238111811334}
   _scaleMassWithSize: 1
+--- !u!114 &-6044131839403294114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8682185944748152776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ed36ce91aeb14f940a19c228ef251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8803344739646482919
 GameObject:
   m_ObjectHideFlags: 0

@@ -1425,7 +1425,8 @@ GameObject:
   - component: {fileID: -7901087932787567891}
   - component: {fileID: 2303745903433350949}
   - component: {fileID: -1053502060202425319}
-  m_Layer: 0
+  - component: {fileID: 3943524501606844857}
+  m_Layer: 9
   m_Name: french_toast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1590,6 +1591,18 @@ MonoBehaviour:
   _pointable: {fileID: -7901087932787567891}
   _rigidbody: {fileID: 4507196473921795154}
   _scaleMassWithSize: 1
+--- !u!114 &3943524501606844857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464809708742280495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ed36ce91aeb14f940a19c228ef251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7684767935943923681
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,8 +26,6 @@ public class BasketRecipeSystem : MonoBehaviour
     [SerializeField] private TableItemSpawner recipeSpawner = null;
     private bool recipesCanBePrepared = false;
 
-    [SerializeField] private CookedRecipes cookedRecipes;
-
     public struct RecipeIngredientRenderData
     {
         public Recipe recipeData;
@@ -319,8 +317,8 @@ public class BasketRecipeSystem : MonoBehaviour
         if (!recipesCanBePrepared) return;
         GameObject prefab = (GameObject) Resources.Load("Recipes/Prefabs/" + recipe.name, typeof(GameObject));
         GameObject recipeObject = Instantiate(prefab);
+        recipeObject.GetComponent<CookedRecipe>().setRecipe(recipe);
         recipeSpawner.addItem(recipeObject);
-        cookedRecipes.addRecipe(recipe);
         GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>().ResetItems();
         ingredientItemsInBasket.Clear();
         RedrawRecipeUI();
