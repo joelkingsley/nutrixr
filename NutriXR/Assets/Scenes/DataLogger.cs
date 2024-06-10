@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class DataLogger
+public static class DataLogger
 {
     private static bool newSessionStarted = false;
     private static readonly string path = Path.Combine(Application.persistentDataPath, "LogData.txt");
@@ -16,8 +16,13 @@ public class DataLogger
     public static string GENDER;
     public static string GOAL;
 
-    public DataLogger()
+    public static void Load()
     {
+        if (!File.Exists(path))
+        {
+            File.Create(path);
+        }
+        
         if (IsPersonalDataAvailabe())
         {
             foreach (string line in File.ReadAllLines(path))
@@ -43,13 +48,13 @@ public class DataLogger
             HEIGHT = height;
             GENDER = gender;
             GOAL = goal;
-            Log("[PERSONAL]", "$" + id + "$" + age + "$" + height + "$" + gender + "$" + goal);
+            Log("PERSONAL", "$" + id + "$" + age + "$" + height + "$" + gender + "$" + goal);
         }
     }
 
     public static bool IsPersonalDataAvailabe()
     {
-        if (File.ReadAllLines(path).Any(line => line.StartsWith("[PERSONAL]")))
+        if (File.Exists(path) && File.ReadAllLines(path).Any(line => line.StartsWith("[PERSONAL]")))
         {
             return true;
         }

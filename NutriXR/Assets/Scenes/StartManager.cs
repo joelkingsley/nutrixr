@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartNetwork : MonoBehaviour
+public class StartManager : MonoBehaviour
 {
     //readonly Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
     public NetworkDiscovery networkDiscovery;
@@ -15,7 +15,13 @@ public class StartNetwork : MonoBehaviour
 
     [SerializeField] private GameObject scanButton;
     [SerializeField] private GameObject joinButton;
+
     [SerializeField] private GameObject personalDataMenu;
+    [SerializeField] private TextMeshProUGUI IDField;
+    [SerializeField] private TextMeshProUGUI AgeField;
+    [SerializeField] private TextMeshProUGUI HeightField;
+    [SerializeField] private TextMeshProUGUI GenderField;
+    [SerializeField] private TextMeshProUGUI GoalField;
 
     // Start is called before the first frame update
     private void Start()
@@ -28,8 +34,6 @@ public class StartNetwork : MonoBehaviour
         //NetworkManager.singleton.StartHost();
         //StartCoroutine(EditorAutomaticStart());
         NetworkManagerWithActions.singleton.StartServer();
-        #else
-        NetworkManagerWithActions.singleton.StartClient();
 #endif
     }
 
@@ -110,8 +114,8 @@ public class StartNetwork : MonoBehaviour
 
     public void StartMenuClicked()
     {
-        bool personalDataAlreadyThere = false;
-        if (!personalDataAlreadyThere)
+        DataLogger.Load();
+        if (!DataLogger.IsPersonalDataAvailabe())
         {
             personalDataMenu.SetActive(true);
         }
@@ -123,6 +127,7 @@ public class StartNetwork : MonoBehaviour
 
     public void PersonalDataJoinClicked()
     {
+        DataLogger.LogPersonal(IDField.text, AgeField.text, HeightField.text, GenderField.text, GoalField.text);
         NetworkManagerWithActions.singleton.StartClient();
     }
 }

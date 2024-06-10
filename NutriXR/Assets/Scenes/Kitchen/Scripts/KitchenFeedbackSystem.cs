@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KitchenFeedbackSystem : MonoBehaviour
@@ -11,8 +12,6 @@ public class KitchenFeedbackSystem : MonoBehaviour
 
     private List<Recipe> consumedRecipes;
 
-    private bool temp = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +21,9 @@ public class KitchenFeedbackSystem : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick) && temp)
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick))
         {
-            StartFeedback("Nutrition");
-            temp = false;
-        } else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick) && !temp)
-        {
-            StartFeedback("sdgsdg");
-            temp = true;
+            StartFeedback(DataLogger.GOAL);
         }
     }
 
