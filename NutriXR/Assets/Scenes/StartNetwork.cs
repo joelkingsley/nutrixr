@@ -20,12 +20,15 @@ public class StartNetwork : MonoBehaviour
     private void Start()
     {
         networkDiscovery = GetComponent<NetworkDiscovery>();
-        NetworkManagerWithActions.singleton.OnStartServerAction += StartAdvertise;
+        //NetworkManagerWithActions.singleton.OnStartServerAction += StartAdvertise;
 #if UNITY_EDITOR
         //This app runs in the Unity Editor
         //NetworkManager.singleton.StartServer();
         //NetworkManager.singleton.StartHost();
-        StartCoroutine(EditorAutomaticStart());
+        //StartCoroutine(EditorAutomaticStart());
+        NetworkManagerWithActions.singleton.StartServer();
+        #else
+        NetworkManagerWithActions.singleton.StartClient();
 #endif
     }
 

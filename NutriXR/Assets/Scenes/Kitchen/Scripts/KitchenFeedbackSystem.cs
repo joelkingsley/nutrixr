@@ -5,26 +5,32 @@ using UnityEngine;
 
 public class KitchenFeedbackSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject Canvas;
     [SerializeField] private NutritionFeedbackCircle nutritionFeedbackCircle;
     [SerializeField] private EnvironmentFeedbackBars environmentFeedbackBars;
 
     private List<Recipe> consumedRecipes;
 
+    private bool temp = false;
+
     // Start is called before the first frame update
     void Start()
     {
         consumedRecipes = new List<Recipe>();
-
-        Debug();
+        Canvas.SetActive(false);
     }
 
-    void Debug()
+    void Update()
     {
-        List<Recipe> loadedRecipeList = new List<Recipe>(Resources.LoadAll<Recipe>("Recipes/ScriptableObjects"));
-        consumedRecipes = loadedRecipeList;
-
-        //StartFeedback("Nutrition");
-        StartFeedback("NotNutritionBecauseItOnlyComparesForNutritionSoThisShouldStillWork");
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick) && temp)
+        {
+            StartFeedback("Nutrition");
+            temp = false;
+        } else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick) && !temp)
+        {
+            StartFeedback("sdgsdg");
+            temp = true;
+        }
     }
 
     public void TrackConsumedRecipe(Recipe consumedRecipe)
@@ -34,6 +40,7 @@ public class KitchenFeedbackSystem : MonoBehaviour
 
     public void StartFeedback(string feedbackMode)
     {
+        Canvas.SetActive(true);
         if (feedbackMode.Equals("Nutrition"))
         {
             nutritionFeedbackCircle.RenderConsumedRecipes(consumedRecipes);
