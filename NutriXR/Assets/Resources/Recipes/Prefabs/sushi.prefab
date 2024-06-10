@@ -595,8 +595,9 @@ GameObject:
   - component: {fileID: -985708592267059083}
   - component: {fileID: 2614245196009470931}
   - component: {fileID: 6958245731223439006}
-  m_Layer: 0
-  m_Name: Sushi
+  - component: {fileID: -1756134178836859240}
+  m_Layer: 9
+  m_Name: sushi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,6 +750,18 @@ MonoBehaviour:
   _pointable: {fileID: -985708592267059083}
   _rigidbody: {fileID: -7015840701176950287}
   _scaleMassWithSize: 1
+--- !u!114 &-1756134178836859240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635824099236517488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ed36ce91aeb14f940a19c228ef251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7735450006845536025
 GameObject:
   m_ObjectHideFlags: 0
