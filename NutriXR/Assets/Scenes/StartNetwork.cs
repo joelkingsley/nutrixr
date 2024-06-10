@@ -15,6 +15,7 @@ public class StartNetwork : MonoBehaviour
 
     [SerializeField] private GameObject scanButton;
     [SerializeField] private GameObject joinButton;
+    [SerializeField] private GameObject personalDataMenu;
 
     // Start is called before the first frame update
     private void Start()
@@ -105,5 +106,23 @@ public class StartNetwork : MonoBehaviour
         Debug.Log("Server found. Connecting");
         ConnectServer();
 #endif
+    }
+
+    public void StartMenuClicked()
+    {
+        bool personalDataAlreadyThere = false;
+        if (!personalDataAlreadyThere)
+        {
+            personalDataMenu.SetActive(true);
+        }
+        else
+        {
+            NetworkManagerWithActions.singleton.StartClient();
+        }
+    }
+
+    public void PersonalDataJoinClicked()
+    {
+        NetworkManagerWithActions.singleton.StartClient();
     }
 }
