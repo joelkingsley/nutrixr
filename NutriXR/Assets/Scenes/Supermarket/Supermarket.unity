@@ -40123,8 +40123,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1760425730}
   - component: {fileID: 1760425729}
+  - component: {fileID: 1760425731}
   m_Layer: 0
-  m_Name: SceneSwapper
+  m_Name: CheckoutArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40151,12 +40152,33 @@ Transform:
   m_GameObject: {fileID: 1760425728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.615, y: 0.923, z: -4.743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1760425731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760425728}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: -0.26118326}
 --- !u!1001 &1761143305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50815,8 +50837,8 @@ SceneRoots:
   - {fileID: 1804484739}
   - {fileID: 1931149093}
   - {fileID: 1277871847}
-  - {fileID: 1760425730}
   - {fileID: 1993448879}
   - {fileID: 1062991373}
   - {fileID: 7218132118276427338}
   - {fileID: 2049484335}
+  - {fileID: 1760425730}

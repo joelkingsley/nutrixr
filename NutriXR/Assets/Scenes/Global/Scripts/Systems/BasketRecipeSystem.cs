@@ -232,6 +232,18 @@ public class BasketRecipeSystem : MonoBehaviour
         return recipesToShow;
     }
 
+    public bool containsOneRecipe()
+    {
+        foreach (RecipeIngredientRenderData recipeData in GetRecipesToShow())
+        {
+            if (recipeData.preparable)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void RedrawRecipeUI()
     {
         foreach(Transform child in recipeUIMenuBody.transform)

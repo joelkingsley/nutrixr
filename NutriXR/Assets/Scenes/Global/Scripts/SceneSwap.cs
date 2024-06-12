@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,25 +6,37 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwap : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick))
         {
-            Scene currentScene = SceneManager.GetActiveScene();
+            switchScene();
+        }
+    }*/
 
-            Debug.Log("Switching scenes..");
+    public void switchScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
 
-            if (currentScene.name == "Supermarket")
-            {
-                SceneManager.LoadScene("Scenes/Kitchen/Kitchen");
-            }
+        Debug.Log("Switching scenes..");
+
+        if (currentScene.name == "Supermarket")
+        {
+            SceneManager.LoadScene("Scenes/Kitchen/Kitchen");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        BasketRecipeSystem basketSystem = GameObject.FindGameObjectWithTag("BasketRecipeSystem").GetComponent<BasketRecipeSystem>();
+        if (other.gameObject.layer == 6 && basketSystem.containsOneRecipe())
+        {
+            switchScene();
         }
     }
 }
