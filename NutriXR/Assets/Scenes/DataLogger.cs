@@ -16,15 +16,18 @@ public static class DataLogger
     public static string GENDER;
     public static string GOAL;
 
+    public static bool IsFirstRun = true;
+
     public static void Load()
     {
         if (!File.Exists(path))
         {
             File.Create(path);
         }
-        
+
         if (IsPersonalDataAvailabe())
         {
+            IsFirstRun = false;
             foreach (string line in File.ReadAllLines(path))
             {
                 if (line.StartsWith("[PERSONAL]"))
