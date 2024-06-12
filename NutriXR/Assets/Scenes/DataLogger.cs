@@ -64,6 +64,11 @@ public static class DataLogger
         return false;
     }
 
+    public static void DeleteLogFile()
+    {
+        File.Delete(path);
+    }
+
     public static void Log(string sender, string msg)
     {
         //First message that gets logged will be started after some space to quickly detect new sessions.
