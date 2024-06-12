@@ -21,7 +21,7 @@ public class KitchenFeedbackSystem : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick) && consumedRecipes.Count > 0)
         {
             StartFeedback(DataLogger.GOAL);
         }
