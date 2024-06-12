@@ -37,7 +37,7 @@ public class ScoreUI : MonoBehaviour
         Hide();
     }
 
-    public void ShowNutriScore(Ingredient.NutriScore score)
+    private void ShowNutriScore(Ingredient.NutriScore score)
     {
         if (score == Ingredient.NutriScore.None)
         {
@@ -53,7 +53,7 @@ public class ScoreUI : MonoBehaviour
         text.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
     }
 
-    public void ShowEnvScore(Ingredient.EnvScore score)
+    private void ShowEnvScore(Ingredient.EnvScore score)
     {
         text.SetActive(false);
         if (score == Ingredient.EnvScore.None)
@@ -80,6 +80,21 @@ public class ScoreUI : MonoBehaviour
                 circles.SetActive(false);
                 text.SetActive(false);
                 break;
+        }
+    }
+
+    public void Show(Ingredient ingredient)
+    {
+        if (!DataLogger.IsFirstRun)
+        {
+            if (DataLogger.GOAL == "Nutrition")
+            {
+                ShowNutriScore(ingredient.nutriScore);
+            }
+            else
+            {
+                ShowEnvScore(ingredient.environmentScore);
+            }
         }
     }
 

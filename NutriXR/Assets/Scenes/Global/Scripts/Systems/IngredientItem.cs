@@ -46,12 +46,7 @@ public class IngredientItem : MonoBehaviour
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
 
-        scoreUI.ShowNutriScore(ingredient.nutriScore);
-        //scoreUI.ShowEnvScore(ingredient.environmentScore);
-
-        //transform.parent = null;
-        //shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
-        //basketRecipeSystem.RemoveFromCart(this);
+        scoreUI.Show(ingredient);
     }
 
     public void OnUnselect()
