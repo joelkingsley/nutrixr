@@ -130,4 +130,9 @@ public class StartManager : MonoBehaviour
         DataLogger.LogPersonal(IDField.text, AgeField.text, HeightField.text, GenderField.text, GoalField.text);
         NetworkManagerWithActions.singleton.StartClient();
     }
+
+    public void DeleteLogFile()
+    {
+        DataLogger.DeleteLogFile();
+    }
 }
