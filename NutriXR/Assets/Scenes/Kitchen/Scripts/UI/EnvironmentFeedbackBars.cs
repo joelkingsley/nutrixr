@@ -42,8 +42,8 @@ public class EnvironmentFeedbackBars : MonoBehaviour
         {
             foreach (var ingredientWithWeight in recipe.ingredients.Zip(recipe.weights, Tuple.Create))
             {
-                //CO2Emission is normed to 100g. Weight is gramm ofr Ingredient
-                float normedWeight = (ingredientWithWeight.Item2 / 100);
+                //CO2Emission is normed to 1 KG. Weight is gramm of Ingredient
+                float normedWeight = (ingredientWithWeight.Item2 / 1000);
                 co2Emission += ingredientWithWeight.Item1.CO2Emission * normedWeight;
                 landUse += ingredientWithWeight.Item1.LandUse * normedWeight;
                 waterUse += ingredientWithWeight.Item1.WaterUse * normedWeight;

@@ -22,7 +22,7 @@ public class Ingredient : ScriptableObject
     [Space(10)]
 
     //###   Environment ###
-    [Header("Environmental Impact (Based on 100g)")]
+    [Header("Environmental Impact (Based on 1 KG and OurWorldInData.org / Clark et. al)")]
 
     [Tooltip("Traffic Light system for evaluating environmental impact")]
     public EnvScore environmentScore;
@@ -32,6 +32,9 @@ public class Ingredient : ScriptableObject
     public float LandUse;       //In m^2
     [Tooltip("Liter")]
     public float WaterUse;      //In L
+
+    [Tooltip("Liter")]
+    public float ScarcityWeightedWaterUse;      //In L
 
     [Space(10)]
 
