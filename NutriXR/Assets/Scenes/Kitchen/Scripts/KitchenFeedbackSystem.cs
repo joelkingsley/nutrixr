@@ -19,21 +19,16 @@ public class KitchenFeedbackSystem : MonoBehaviour
         Canvas.SetActive(false);
     }
 
-    void Update()
-    {
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick) && consumedRecipes.Count > 0)
-        {
-            StartFeedback(DataLogger.GOAL);
-        }
-    }
-
     public void TrackConsumedRecipe(Recipe consumedRecipe)
     {
         consumedRecipes.Add(consumedRecipe);
     }
 
-    public void StartFeedback(string feedbackMode)
+    public void StartFeedback()
     {
+        if (consumedRecipes.Count == 0) return;
+        GetComponent<AudioSource>().Play();
+        string feedbackMode = DataLogger.GOAL;
         Canvas.SetActive(true);
         if (feedbackMode.Equals("Nutrition"))
         {
