@@ -20,8 +20,18 @@ public class SpawnManager : NetworkBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.5f);
-        CameraRig.transform.position = SpawnPositions[numPlayers-1 % SpawnPositions.Length].transform.position;
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject localPlayer = NetworkClient.localPlayer.gameObject;
+        Transform spawnPos = SpawnPositions[numPlayers - 1 % SpawnPositions.Length].transform;
+
+        //Teleport camera and player prefab to spawn location
+        CameraRig.transform.position = spawnPos.position;
+        CameraRig.transform.rotation = spawnPos.rotation;
+        //localPlayer.transform.position = spawnPos;
+
+        //Spawn ShoppingCart at new location
+        localPlayer.GetComponent<ConfigurePlayerForNetwork>().SpawnShoppingCart(spawnPos.position + new Vector3(-1, 0, 0), Quaternion.Euler(0, 180, 0));
     }
 
     [Command(requiresAuthority = false)]
