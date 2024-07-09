@@ -27,6 +27,7 @@ public class SceneSwap : MonoBehaviour
 
         if (currentScene.name == "Supermarket")
         {
+            DataLogger.Log("SceneSwap", "Changing to kitchen...");
             SceneManager.LoadScene("Scenes/Kitchen/Kitchen");
         }
     }
@@ -36,7 +37,12 @@ public class SceneSwap : MonoBehaviour
         BasketRecipeSystem basketSystem = GameObject.FindGameObjectWithTag("BasketRecipeSystem").GetComponent<BasketRecipeSystem>();
         if (other.gameObject.layer == 6 && basketSystem.containsOneRecipe())
         {
+            DataLogger.Log("SceneSwap", "User can sawp to kitchen.");
             switchScene();
+        }
+        else
+        {
+            DataLogger.Log("SceneSwap", "User tried to go to kitchen but has no recipes");
         }
     }
 }

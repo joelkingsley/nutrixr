@@ -46,6 +46,8 @@ public class IngredientItem : MonoBehaviour
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
 
+        DataLogger.Log("IngredientItem", "Grabbed " + name + ".");
+
         scoreUI.Show(ingredient);
     }
 
@@ -53,6 +55,9 @@ public class IngredientItem : MonoBehaviour
     {
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("PendingIngredientItem");
+
+        DataLogger.Log("IngredientItem", "Dropped " + name + ".");
+
         scoreUI.Hide();
     }
 
@@ -77,6 +82,7 @@ public class IngredientItem : MonoBehaviour
                 transform.SetParent(shoppingCart.transform, true);
                 shoppingCart.GetComponentInParent<CartSync>().AddItemToCart(this);
                 basketRecipeSystem.AddToBasket(this);
+                DataLogger.Log("IngredientItem", name + " collided with shopping cart volume in supermarket.");
                 ChangeAllLayers("ShoppingCart");
             }
         }
@@ -89,6 +95,7 @@ public class IngredientItem : MonoBehaviour
                 transform.localScale *= inPotScaleModifier;
                 transform.SetParent(other.GetComponentInParent<Transform>(), true);
                 isInPot = true;
+                DataLogger.Log("IngredientItem", name + " collided with pot volume in kitchen.");
             }
         }
     }
@@ -100,6 +107,7 @@ public class IngredientItem : MonoBehaviour
         {
             //PendingIngredientItem <-> Default: The pending item is dropped and thus unselected
             ChangeAllLayers("UnselectedIngredientItem");
+            DataLogger.Log("IngredientItem", name + " dropped on floor.");
         }
     }
 
@@ -117,6 +125,7 @@ public class IngredientItem : MonoBehaviour
                 transform.SetParent(startingParent, true);
                 shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
                 basketRecipeSystem.RemoveFromBasket(this);
+                DataLogger.Log("IngredientItem", name + " exited shopping cart volume in supermarket.");
                 if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
                 {
                     ChangeAllLayers("PendingIngredientItem");

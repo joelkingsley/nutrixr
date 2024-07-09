@@ -4,6 +4,7 @@ using Mirror;
 using Mirror.Discovery;
 using Oculus.Avatar2;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -118,15 +119,18 @@ public class StartManager : MonoBehaviour
         if (!DataLogger.IsPersonalDataAvailabe())
         {
             personalDataMenu.SetActive(true);
+            DataLogger.Log("StartManager", "Personal data is not available. Promting PersonalDataUI.");
         }
         else
         {
+            DataLogger.Log("StartManager", "Personal data is available. Starting client.");
             NetworkManagerWithActions.singleton.StartClient();
         }
     }
 
     public void PersonalDataJoinClicked()
     {
+        DataLogger.Log("StartManager", "Logging Personal Data:");
         DataLogger.LogPersonal(IDField.text, AgeField.text, HeightField.text, GenderField.text, GoalField.text);
         NetworkManagerWithActions.singleton.StartClient();
     }

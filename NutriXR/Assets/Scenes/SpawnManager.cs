@@ -25,6 +25,8 @@ public class SpawnManager : NetworkBehaviour
         GameObject localPlayer = NetworkClient.localPlayer.gameObject;
         Transform spawnPos = SpawnPositions[numPlayers - 1 % SpawnPositions.Length].transform;
 
+        DataLogger.Log("SpawnManager", "Spawning player at location " + (numPlayers - 1 % SpawnPositions.Length) + ". NumPlayers is " + numPlayers);
+
         //Teleport camera and player prefab to spawn location
         CameraRig.transform.position = spawnPos.position;
         CameraRig.transform.rotation = spawnPos.rotation;

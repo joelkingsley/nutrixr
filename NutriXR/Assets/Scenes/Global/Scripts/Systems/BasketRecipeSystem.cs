@@ -78,9 +78,6 @@ public class BasketRecipeSystem : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
-
         if (scene.name == "Kitchen")
         {
             //Un-cooled Ingredients
@@ -122,6 +119,7 @@ public class BasketRecipeSystem : MonoBehaviour
             return;
         }
         ingredientItemsInBasket.Add(ingredientItem);
+        DataLogger.Log("BasketRecipeSystem", "Added " + ingredientItem.name + " to basket.");
 
         RedrawRecipeUI();
         RedrawBasketUI();
@@ -135,6 +133,7 @@ public class BasketRecipeSystem : MonoBehaviour
             return;
         }
         ingredientItemsInBasket.Remove(ingredientItem);
+        DataLogger.Log("BasketRecipeSystem", "Removed " + ingredientItem.name + " from basket.");
         RedrawRecipeUI();
         RedrawBasketUI();
     }
@@ -276,7 +275,7 @@ public class BasketRecipeSystem : MonoBehaviour
 
     private void cookBtnClicked(Recipe recipe)
     {
-        Debug.Log("Start cooking " + recipe.name);
+        DataLogger.Log("BasketRecipeSystem", "Start cooking " + recipe.name);
         startCooking(recipe);
     }
 

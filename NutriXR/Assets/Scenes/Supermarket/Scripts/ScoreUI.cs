@@ -90,10 +90,12 @@ public class ScoreUI : MonoBehaviour
             if (DataLogger.GOAL == "Nutrition")
             {
                 ShowNutriScore(ingredient.nutriScore);
+                DataLogger.Log("ScoreUI", "Showing NutriScore " + ingredient.nutriScore + " for " + ingredient.name);
             }
             else
             {
                 ShowEnvScore(ingredient.environmentScore);
+                DataLogger.Log("ScoreUI", "Showing EnvScore " + ingredient.environmentScore + " for " + ingredient.name);
             }
         }
     }
@@ -102,6 +104,7 @@ public class ScoreUI : MonoBehaviour
     {
         circles.SetActive(false);
         text.SetActive(false);
+        DataLogger.Log("ScoreUI", "Hiding UI");
     }
 
     private void disableAll()

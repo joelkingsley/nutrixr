@@ -30,17 +30,26 @@ public class KitchenFeedbackSystem : MonoBehaviour
         GetComponent<AudioSource>().Play();
         string feedbackMode = DataLogger.GOAL;
         Canvas.SetActive(true);
+
+        DataLogger.Log("KitchenFeedbackSystem", "Consumed Recipes:");
+        foreach (Recipe recipe in consumedRecipes)
+        {
+            DataLogger.Log("KitchenFeedbackSystem", recipe.name);
+        }
+
         if (feedbackMode.Equals("Nutrition"))
         {
             nutritionFeedbackCircle.RenderConsumedRecipes(consumedRecipes);
             environmentFeedbackBars.Hide();
             nutritionFeedbackCircle.Show();
+            DataLogger.Log("KitchenFeedbackSystem", "Showing Nutrition Circle...");
         }
         else
         {
             environmentFeedbackBars.RenderConsumedRecipes(consumedRecipes);
             nutritionFeedbackCircle.Hide();
             environmentFeedbackBars.Show();
+            DataLogger.Log("KitchenFeedbackSystem", "Showing Environment Bars...");
         }
     }
 }

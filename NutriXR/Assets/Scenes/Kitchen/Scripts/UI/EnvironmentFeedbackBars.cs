@@ -95,6 +95,11 @@ public class EnvironmentFeedbackBars : MonoBehaviour
         {
             Land.color = Color.red;
         }
+
+        DataLogger.Log("EnvironmentFeedbackBars", "Start feedback:");
+        DataLogger.Log("EnvironmentFeedbackBars", "CO2: " + co2fill + "%.");
+        DataLogger.Log("EnvironmentFeedbackBars", "Water: " + waterfill + "%.");
+        DataLogger.Log("EnvironmentFeedbackBars", "Land: " + landfill + "%.");
     }
 
     public void Show()
