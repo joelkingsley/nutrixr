@@ -34,9 +34,6 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
 
         localAvatar.gameObject.SetActive(false);
         remoteAvatar.gameObject.SetActive(true);
-
-        //Spawn Carts and give authority
-        NetworkServer.Spawn(Instantiate(shoppingCartPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), connectionToClient);
     }
 
     public override void OnStartClient()
@@ -65,6 +62,13 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
             localAvatar.gameObject.SetActive(false);
             remoteAvatar.gameObject.SetActive(true);
         }
+    }
+
+    [Command]   //Invoced by SpawnManager after the player was teleported to it corresponding spawn location
+    public void SpawnShoppingCart(Vector3 pos, Quaternion rot)
+    {
+        //Spawn Carts and give authority
+        NetworkServer.Spawn(Instantiate(shoppingCartPrefab, pos, rot), connectionToClient);
     }
 
     [Command]   //Invoked by Client, executed on Server
