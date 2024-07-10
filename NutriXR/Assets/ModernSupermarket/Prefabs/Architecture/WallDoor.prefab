@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1970090251568695662}
   - component: {fileID: 3240605120659539659}
   - component: {fileID: 800521954689397249}
-  - component: {fileID: -9024913010128321068}
   - component: {fileID: 5628840234128827938}
   - component: {fileID: 6467689207171345687}
+  - component: {fileID: 5434548646226585099}
   m_Layer: 0
   m_Name: WallDoor
   m_TagString: Untagged
@@ -86,28 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-9024913010128321068
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161077723981288404}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5575985040723181610, guid: 1aa93c97663a7cf46a2c9dc84e4cf896, type: 3}
 --- !u!114 &5628840234128827938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2140d2b457bea84881488302059889b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: -9024913010128321068}
+  _collider: {fileID: 5434548646226585099}
 --- !u!114 &6467689207171345687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +122,24 @@ MonoBehaviour:
   _targetPoint: {fileID: 0}
   _faceTargetDirection: 0
   _eyeLevel: 0
+--- !u!65 &5434548646226585099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161077723981288404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3.0000002, z: 0.20000017}
+  m_Center: {x: 0, y: 1.5000001, z: -0.1000002}

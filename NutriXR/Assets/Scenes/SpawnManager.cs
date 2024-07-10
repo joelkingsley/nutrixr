@@ -15,7 +15,10 @@ public class SpawnManager : NetworkBehaviour
     {
         CmdUpdateNumPlayers();
 
-        StartCoroutine(Delay());
+        if (isClient)
+        {
+            StartCoroutine(Delay());
+        }
     }
 
     IEnumerator Delay()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1163990600567388079}
   - component: {fileID: 2848677251287447562}
   - component: {fileID: 30539571396185280}
-  - component: {fileID: 3616794932956253197}
+  - component: {fileID: 164669419179338279}
   m_Layer: 0
   m_Name: Door_o8w2gy
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3616794932956253197
-MeshCollider:
+--- !u!65 &164669419179338279
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3292925553009838691, guid: 7cc56a3e97e785e4291e508372873433, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.92448133, y: 1.0999998, z: 0.15000002}
+  m_Center: {x: -0.3872408, y: 0.5499999, z: 0}

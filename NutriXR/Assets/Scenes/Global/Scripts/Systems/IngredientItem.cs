@@ -72,6 +72,7 @@ public class IngredientItem : MonoBehaviour
             if (shoppingCart == null)
             {
                 shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
+                Debug.Log(other.gameObject.name);
                 basketRecipeSystem = shoppingCart.GetComponentInParent<CartSync>().GetComponentInChildren<BasketRecipeSystem>();
             }
 
