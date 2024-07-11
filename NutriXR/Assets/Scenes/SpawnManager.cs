@@ -11,14 +11,10 @@ public class SpawnManager : NetworkBehaviour
     [SyncVar] public int numPlayers = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void OnStartLocalPlayer()
     {
         CmdUpdateNumPlayers();
-
-        if (isClient)
-        {
-            StartCoroutine(Delay());
-        }
+        StartCoroutine(Delay());
     }
 
     IEnumerator Delay()

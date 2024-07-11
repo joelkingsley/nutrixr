@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Mirror;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -30,6 +32,9 @@ public class IngredientItem : MonoBehaviour
         startingParent = transform.parent;
 
         allColliders = GetComponentsInChildren<Collider>(false);
+
+        HandGrabInteractable hgi = GetComponent<HandGrabInteractable>();
+
     }
 
     private void ChangeAllLayers(string newLayer)
@@ -45,9 +50,11 @@ public class IngredientItem : MonoBehaviour
     {
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
-
         DataLogger.Log("IngredientItem", "Grabbed " + name + ".");
 
+        //TODO Make this dependend of the current grabbing Hand
+        NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetRightHandItem(this);
+        //NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetLeftHandItem(this);
         scoreUI.Show(ingredient);
     }
 
@@ -55,9 +62,11 @@ public class IngredientItem : MonoBehaviour
     {
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("PendingIngredientItem");
-
         DataLogger.Log("IngredientItem", "Dropped " + name + ".");
 
+        //TODO Make this dependend of the current grabbing Hand
+        NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetRightHandItem();
+        //NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetLeftHandItem();
         scoreUI.Hide();
     }
 
