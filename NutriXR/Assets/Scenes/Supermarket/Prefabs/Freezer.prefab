@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 7879709432987075530}
   - component: {fileID: 3603448724722385031}
   - component: {fileID: 5531417119232418769}
+  - component: {fileID: 3600057277279938115}
   m_Layer: 0
   m_Name: FreezerBase
   m_TagString: Untagged
@@ -498,6 +499,21 @@ MonoBehaviour:
   _targetPoint: {fileID: 0}
   _faceTargetDirection: 0
   _eyeLevel: 0
+--- !u!114 &3600057277279938115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6032396958642523804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e617737c781e534eb8e2c4ace64b133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snapPoint: {fileID: 0}
+  _materialBlock: {fileID: 0}
+  _reticleMode: 0
 --- !u!1 &8272651483007239017
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +696,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

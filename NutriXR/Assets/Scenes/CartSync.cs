@@ -83,6 +83,7 @@ public class CartSync : NetworkBehaviour
         if (netIdentity.isOwned)
         {
             CmdLog("Parent Name: " + ingItem.transform.parent.gameObject.name + ", LocalPos: " + ingItem.gameObject.transform.localPosition + ", GlobPos: " + ingItem.gameObject.transform.position);
+            DataLogger.Log("CartSync", "Added " + ingItem.name + " to cart.");
             StartCoroutine(ReadAndSend(ingItem));
         }
     }
@@ -116,6 +117,7 @@ public class CartSync : NetworkBehaviour
             if (ingToItem.Remove(ingItem, out item))        //retrieve corresponding item
             {
                 CmdRemoveItemFromCart(item);
+                DataLogger.Log("CartSync", "Removed " + ingItem.name + " from cart.");
             }
         }
     }

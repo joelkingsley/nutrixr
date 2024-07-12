@@ -40,6 +40,8 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
     {
         base.OnStartClient();
 
+        DataLogger.Log("ConfigurePlayerForNetwork", "OnStartClient");
+
         if (isLocalPlayer)
         {
             //Player is the local player
@@ -69,6 +71,7 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
     {
         //Spawn Carts and give authority
         NetworkServer.Spawn(Instantiate(shoppingCartPrefab, pos, rot), connectionToClient);
+        DataLogger.Log("ConfigurePlayerForNetwork", "Spawn shopping cart");
     }
 
     [Command]   //Invoked by Client, executed on Server

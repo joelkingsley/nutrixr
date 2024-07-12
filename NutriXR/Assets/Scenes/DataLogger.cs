@@ -66,6 +66,7 @@ public static class DataLogger
 
     public static void DeleteLogFile()
     {
+        Log("DataLogger", "Deleting Log file");
         File.Delete(path);
     }
 

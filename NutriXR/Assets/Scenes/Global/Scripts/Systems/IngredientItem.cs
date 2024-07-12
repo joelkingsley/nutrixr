@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Mirror;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -30,6 +32,9 @@ public class IngredientItem : MonoBehaviour
         startingParent = transform.parent;
 
         allColliders = GetComponentsInChildren<Collider>(false);
+
+        HandGrabInteractable hgi = GetComponent<HandGrabInteractable>();
+
     }
 
     private void ChangeAllLayers(string newLayer)
@@ -45,7 +50,11 @@ public class IngredientItem : MonoBehaviour
     {
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
+        DataLogger.Log("IngredientItem", "Grabbed " + name + ".");
 
+        //TODO Make this dependend of the current grabbing Hand
+        NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetRightHandItem(this);
+        //NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetLeftHandItem(this);
         scoreUI.Show(ingredient);
     }
 
@@ -53,6 +62,11 @@ public class IngredientItem : MonoBehaviour
     {
         if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("PendingIngredientItem");
+        DataLogger.Log("IngredientItem", "Dropped " + name + ".");
+
+        //TODO Make this dependend of the current grabbing Hand
+        NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetRightHandItem();
+        //NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetLeftHandItem();
         scoreUI.Hide();
     }
 
@@ -67,6 +81,7 @@ public class IngredientItem : MonoBehaviour
             if (shoppingCart == null)
             {
                 shoppingCart = GameObject.FindGameObjectWithTag("ShoppingCartItemHook");
+                Debug.Log(other.gameObject.name);
                 basketRecipeSystem = shoppingCart.GetComponentInParent<CartSync>().GetComponentInChildren<BasketRecipeSystem>();
             }
 
@@ -77,6 +92,7 @@ public class IngredientItem : MonoBehaviour
                 transform.SetParent(shoppingCart.transform, true);
                 shoppingCart.GetComponentInParent<CartSync>().AddItemToCart(this);
                 basketRecipeSystem.AddToBasket(this);
+                DataLogger.Log("IngredientItem", name + " collided with shopping cart volume in supermarket.");
                 ChangeAllLayers("ShoppingCart");
             }
         }
@@ -89,6 +105,7 @@ public class IngredientItem : MonoBehaviour
                 transform.localScale *= inPotScaleModifier;
                 transform.SetParent(other.GetComponentInParent<Transform>(), true);
                 isInPot = true;
+                DataLogger.Log("IngredientItem", name + " collided with pot volume in kitchen.");
             }
         }
     }
@@ -100,6 +117,7 @@ public class IngredientItem : MonoBehaviour
         {
             //PendingIngredientItem <-> Default: The pending item is dropped and thus unselected
             ChangeAllLayers("UnselectedIngredientItem");
+            DataLogger.Log("IngredientItem", name + " dropped on floor.");
         }
     }
 
@@ -117,6 +135,7 @@ public class IngredientItem : MonoBehaviour
                 transform.SetParent(startingParent, true);
                 shoppingCart.GetComponentInParent<CartSync>().RemoveItemFromCart(this);
                 basketRecipeSystem.RemoveFromBasket(this);
+                DataLogger.Log("IngredientItem", name + " exited shopping cart volume in supermarket.");
                 if (gameObject.layer != LayerMask.NameToLayer("SelectedIngredientItem"))
                 {
                     ChangeAllLayers("PendingIngredientItem");
