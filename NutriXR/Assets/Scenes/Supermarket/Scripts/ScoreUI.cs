@@ -10,13 +10,17 @@ using UnityEngine.UI;
 
 public class ScoreUI : MonoBehaviour
 {
+    [SerializeField] private Transform eyeCenter;
     [SerializeField] private Transform rightHand;
     [SerializeField] private Transform leftHand;
-    [SerializeField] private Transform eyeCenter;
-    [SerializeField] private GameObject circles;
-    [SerializeField] private GameObject text;
-    [SerializeField] private List<GameObject> backgrounds;
-    private Dictionary<Ingredient.NutriScore, GameObject> colorDict;
+    [SerializeField] private GameObject rightCircles;
+    [SerializeField] private GameObject leftCircles;
+    [SerializeField] private GameObject rightText;
+    [SerializeField] private GameObject leftText;
+    [FormerlySerializedAs("backgrounds")] [SerializeField] private List<GameObject> rightBackgrounds;
+    [SerializeField] private List<GameObject> leftBackgrounds;
+    private Dictionary<Ingredient.NutriScore, GameObject> rightColorDict;
+    private Dictionary<Ingredient.NutriScore, GameObject> leftColorDict;
 
     private void Update()
     {
@@ -28,15 +32,22 @@ public class ScoreUI : MonoBehaviour
 
     private void Start()
     {
-        colorDict = new Dictionary<Ingredient.NutriScore, GameObject>(); //0:A, 1:B, 2:C, 3:D, 4:E
-        colorDict.Add(Ingredient.NutriScore.A, backgrounds[0]);
-        colorDict.Add(Ingredient.NutriScore.B, backgrounds[1]);
-        colorDict.Add(Ingredient.NutriScore.C, backgrounds[2]);
-        colorDict.Add(Ingredient.NutriScore.D, backgrounds[3]);
-        colorDict.Add(Ingredient.NutriScore.E, backgrounds[4]);
+        rightColorDict = new Dictionary<Ingredient.NutriScore, GameObject>(); //0:A, 1:B, 2:C, 3:D, 4:E
+        rightColorDict.Add(Ingredient.NutriScore.A, rightBackgrounds[0]);
+        rightColorDict.Add(Ingredient.NutriScore.B, rightBackgrounds[1]);
+        rightColorDict.Add(Ingredient.NutriScore.C, rightBackgrounds[2]);
+        rightColorDict.Add(Ingredient.NutriScore.D, rightBackgrounds[3]);
+        rightColorDict.Add(Ingredient.NutriScore.E, rightBackgrounds[4]);
 
-        Hide(true);
+        leftColorDict = new Dictionary<Ingredient.NutriScore, GameObject>(); //0:A, 1:B, 2:C, 3:D, 4:E
+        leftColorDict.Add(Ingredient.NutriScore.A, leftBackgrounds[0]);
+        leftColorDict.Add(Ingredient.NutriScore.B, leftBackgrounds[1]);
+        leftColorDict.Add(Ingredient.NutriScore.C, leftBackgrounds[2]);
+        leftColorDict.Add(Ingredient.NutriScore.D, leftBackgrounds[3]);
+        leftColorDict.Add(Ingredient.NutriScore.E, leftBackgrounds[4]);
+
         Hide(false);
+        Hide(true);
     }
 
     public bool isLeftHandGrab(Vector3 itemPos)
@@ -48,80 +59,103 @@ public class ScoreUI : MonoBehaviour
         return false;
     }
 
-    private void ShowNutriScore(Ingredient.NutriScore score)
+    private void setNutriscore(Ingredient.NutriScore score, bool isLeftSide)
     {
-        if (score == Ingredient.NutriScore.None)
+        if (isLeftSide)
         {
-            circles.SetActive(false);
-            text.SetActive(false);
-            return;
+            leftColorDict[score].SetActive(true);
+            leftText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
+        } else {
+            rightColorDict[score].SetActive(true);
+            rightText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
         }
-
-        circles.SetActive(true);
-        text.SetActive(true);
-        disableAll();
-        colorDict[score].SetActive(true);
-        text.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
     }
 
-    private void ShowEnvScore(Ingredient.EnvScore score)
+    private void ShowNutriScore(Ingredient.NutriScore score, bool isLeftGrab)
     {
-        text.SetActive(false);
-        if (score == Ingredient.EnvScore.None)
+        bool state = score == Ingredient.NutriScore.None;
+
+        if (isLeftGrab)
         {
-            circles.SetActive(false);
-            return;
+            leftCircles.SetActive(state);
+            leftText.SetActive(state);
+        } else {
+            rightCircles.SetActive(state);
+            rightText.SetActive(state);
         }
 
-        circles.SetActive(true);
-        disableAll();
-        //We misuse the NutriScore to show the EnvScore
-        switch (score)
+        disableAll(isLeftGrab);
+        setNutriscore(score, isLeftGrab);
+    }
+
+    private void ShowEnvScore(Ingredient.EnvScore score, bool isLeftGrab)
+    {
+        Dictionary<Ingredient.NutriScore, GameObject> usedDict = rightColorDict;
+        bool state = score == Ingredient.EnvScore.None;
+        if (isLeftGrab)
         {
+            usedDict = leftColorDict;
+            leftCircles.SetActive(state);
+        } else {
+            rightCircles.SetActive(state);
+        }
+
+        disableAll(isLeftGrab);
+        //We misuse the NutriScore to show the EnvScore
+
+        switch (score) {
             case Ingredient.EnvScore.Green:
-                colorDict[Ingredient.NutriScore.A].SetActive(true);
+                usedDict[Ingredient.NutriScore.A].SetActive(true);
                 break;
             case Ingredient.EnvScore.Yellow:
-                colorDict[Ingredient.NutriScore.C].SetActive(true);
+                usedDict[Ingredient.NutriScore.C].SetActive(true);
                 break;
             case Ingredient.EnvScore.Red:
-                colorDict[Ingredient.NutriScore.E].SetActive(true);
+                usedDict[Ingredient.NutriScore.E].SetActive(true);
                 break;
             default:
-                circles.SetActive(false);
-                text.SetActive(false);
+                rightCircles.SetActive(false);
+                rightText.SetActive(false);
                 break;
         }
     }
 
     public void Show(Ingredient ingredient, bool isLeftGrab)
     {
-        //ToDo
         if (!DataLogger.IsFirstRun)
         {
             if (DataLogger.GOAL == "Nutrition")
             {
-                ShowNutriScore(ingredient.nutriScore);
+                ShowNutriScore(ingredient.nutriScore, isLeftGrab);
                 DataLogger.Log("ScoreUI", "Showing NutriScore " + ingredient.nutriScore + " for " + ingredient.name);
             }
             else
             {
-                ShowEnvScore(ingredient.environmentScore);
+                ShowEnvScore(ingredient.environmentScore, isLeftGrab);
                 DataLogger.Log("ScoreUI", "Showing EnvScore " + ingredient.environmentScore + " for " + ingredient.name);
             }
         }
     }
 
-    public void Hide(bool isleftGrab)
+    public void Hide(bool isLeftGrab)
     {
-        //ToDo
-        circles.SetActive(false);
-        text.SetActive(false);
+        if (isLeftGrab)
+        {
+            leftCircles.SetActive(false);
+            leftText.SetActive(false);
+        }
+        else
+        {
+            rightCircles.SetActive(false);
+            rightText.SetActive(false);
+        }
         DataLogger.Log("ScoreUI", "Hiding UI");
     }
 
-    private void disableAll()
+    private void disableAll(bool isLeftSide)
     {
+        List<GameObject> backgrounds = rightBackgrounds;
+        if (isLeftSide) backgrounds = leftBackgrounds;
         foreach (GameObject inner in backgrounds)
         {
             inner.SetActive(false);
