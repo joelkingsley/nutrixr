@@ -11,15 +11,18 @@ public class SpawnManager : NetworkBehaviour
     [SyncVar] public int numPlayers = 0;
 
     // Start is called before the first frame update
-    void OnStartLocalPlayer()
+    public void Start()
     {
-        CmdUpdateNumPlayers();
-        StartCoroutine(Delay());
+        if (!isServer)
+        {
+            CmdUpdateNumPlayers();
+            StartCoroutine(Delay());
+        }
     }
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         GameObject localPlayer = NetworkClient.localPlayer.gameObject;
         Transform spawnPos = SpawnPositions[numPlayers - 1 % SpawnPositions.Length].transform;
@@ -32,7 +35,7 @@ public class SpawnManager : NetworkBehaviour
         //localPlayer.transform.position = spawnPos;
 
         //Spawn ShoppingCart at new location
-        localPlayer.GetComponent<ConfigurePlayerForNetwork>().SpawnShoppingCart(spawnPos.position + new Vector3(-1, 0, 0), Quaternion.Euler(0, 180, 0));
+        localPlayer.GetComponent<ConfigurePlayerForNetwork>().CmdSpawnShoppingCart(spawnPos.position + new Vector3(-1, 0, 0), Quaternion.Euler(0, 180, 0));
     }
 
     [Command(requiresAuthority = false)]
@@ -40,8 +43,6 @@ public class SpawnManager : NetworkBehaviour
     {
         numPlayers = NetworkManagerWithActions.singleton.numPlayers;
     }
-
-
 
 
     // Update is called once per frame
