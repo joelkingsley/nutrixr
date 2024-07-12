@@ -57658,6 +57658,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c0024848346d24d81a9199decb4f0b, type: 3}
+--- !u!4 &1788572304 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7607473931463264124, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
+  m_PrefabInstance: {fileID: 1295920}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1789204561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82827,9 +82832,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1295923}
     - target: {fileID: 4839703630517118617, guid: 6f675d99a73933c4c803ced5abaf5998, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1788572304}
+    - target: {fileID: 4839703630517118617, guid: 6f675d99a73933c4c803ced5abaf5998, type: 3}
       propertyPath: eyeCenter
       value: 
       objectReference: {fileID: 1295922}
+    - target: {fileID: 4839703630517118617, guid: 6f675d99a73933c4c803ced5abaf5998, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1295923}
     - target: {fileID: 6684750133891335968, guid: 6f675d99a73933c4c803ced5abaf5998, type: 3}
       propertyPath: m_Camera
       value: 

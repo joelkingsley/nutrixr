@@ -10,7 +10,8 @@ using UnityEngine.UI;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField] private Transform hand;
+    [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform leftHand;
     [SerializeField] private Transform eyeCenter;
     [SerializeField] private GameObject circles;
     [SerializeField] private GameObject text;
@@ -19,7 +20,7 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
-        transform.position = hand.position + new Vector3(0.07f, 0.07f, 0);
+        transform.position = rightHand.position + new Vector3(0.07f, 0.07f, 0);
         Vector3 eyeDirection = eyeCenter.position - transform.position;
         transform.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
         transform.localRotation.Set(transform.rotation.x+90, transform.rotation.y, transform.rotation.z, transform.rotation.w);
@@ -34,7 +35,17 @@ public class ScoreUI : MonoBehaviour
         colorDict.Add(Ingredient.NutriScore.D, backgrounds[3]);
         colorDict.Add(Ingredient.NutriScore.E, backgrounds[4]);
 
-        Hide();
+        Hide(true);
+        Hide(false);
+    }
+
+    public bool isLeftHandGrab(Vector3 itemPos)
+    {
+        if (Vector3.Distance(itemPos, leftHand.position) <= Vector3.Distance(itemPos, rightHand.position))
+        {
+            return true;
+        }
+        return false;
     }
 
     private void ShowNutriScore(Ingredient.NutriScore score)
@@ -83,8 +94,9 @@ public class ScoreUI : MonoBehaviour
         }
     }
 
-    public void Show(Ingredient ingredient)
+    public void Show(Ingredient ingredient, bool isLeftGrab)
     {
+        //ToDo
         if (!DataLogger.IsFirstRun)
         {
             if (DataLogger.GOAL == "Nutrition")
@@ -100,8 +112,9 @@ public class ScoreUI : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public void Hide(bool isleftGrab)
     {
+        //ToDo
         circles.SetActive(false);
         text.SetActive(false);
         DataLogger.Log("ScoreUI", "Hiding UI");
