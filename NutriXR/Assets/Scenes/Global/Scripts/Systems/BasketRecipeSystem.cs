@@ -331,6 +331,7 @@ public class BasketRecipeSystem : MonoBehaviour
         recipeObject.GetComponent<CookedRecipe>().setRecipe(recipe);
         recipeSpawner.addItem(recipeObject);
         GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>().ResetItems();
+        GameObject.FindGameObjectWithTag("KitchenFridgeIngredientSpawner").GetComponent<TableItemSpawner>().ResetItems();
         ingredientItemsInBasket.Clear();
         RedrawRecipeUI();
         RedrawBasketUI();
