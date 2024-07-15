@@ -80,6 +80,14 @@ public class BasketRecipeSystem : MonoBehaviour
     {
         if (scene.name == "Kitchen")
         {
+            //Log bought items to log file
+            DataLogger.Log("BasketRecipeSystem", "Dumping bought items...");
+            Dictionary<string, int> logData = GetBasketRenderData();
+            foreach(KeyValuePair<string, int> kv in logData)
+            {
+                DataLogger.Log("BasketRecipeSystem", "Item: " + kv.Key + "; Amount: " + kv.Value);
+            }
+
             //Un-cooled Ingredients
             List<Ingredient> tableItemDatas = new List<Ingredient>();
             foreach (IngredientItem item in ingredientItemsInBasket)
