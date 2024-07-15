@@ -122,12 +122,8 @@ public class IngSync : NetworkBehaviour
     [ClientRpc(includeOwner = false)] //only update remote avatars, not the owned one
     void UpdateLeftHand(Item item)
     {
-        if (item.name == null)
-        {
-            //Reset
-            Destroy(LeftHandGameObject);
-        }
-        else
+        Destroy(LeftHandGameObject);
+        if(item.name != null)
         {
             //Instantiate
             GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + item.name, typeof(GameObject));
@@ -158,12 +154,9 @@ public class IngSync : NetworkBehaviour
     [ClientRpc(includeOwner = false)] //only update remote avatars, not the owned one
     void UpdateRightHand(Item item)
     {
-        if (item.name == null)
-        {
-            //Reset
-            Destroy(RightHandGameObject);
-        }
-        else
+        //Reset
+        Destroy(RightHandGameObject);
+        if (item.name != null)
         {
             //Instantiate
             GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + item.name, typeof(GameObject));
