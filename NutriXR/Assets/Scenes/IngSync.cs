@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Oculus.Avatar2;
 using Oculus.Interaction;
 using UnityEngine;
 
@@ -23,8 +24,8 @@ public class IngSync : NetworkBehaviour
     private Item NULL_ITEM;
 
     //-----#####-----
-    [SyncVar(hook = nameof(OnLeftHandUpdate))] private Item LeftHandItem;
-    [SyncVar(hook = nameof(OnRightHandUpdate))] private Item RightHandItem;
+    //[SyncVar(hook = nameof(OnLeftHandUpdate))] private Item LeftHandItem;
+    //[SyncVar(hook = nameof(OnRightHandUpdate))] private Item RightHandItem;
     //What is actually synced
 
     //-----OWNER-----
@@ -46,18 +47,6 @@ public class IngSync : NetworkBehaviour
         NULL_ITEM.name = null;
     }
 
-    IEnumerator WaitForAvatarToSpawn()
-    {
-        yield return new WaitForSeconds(5.0f);
-        leftHand = transform.Find("RemoteAvatar/Joint LeftHandWrist");
-        rightHand = transform.Find("RemoteAvatar/Joint RightHandWrist");
-
-        if (rightHand == null)
-        {
-            Debug.LogWarning("Right Hand is null");
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -70,11 +59,7 @@ public class IngSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
-            if (LeftHandItem.name == null)
-            {
-                //Setting the SyncVar
-                CmdSetLeftHand(IngredientItemToItem(ingItem));
-            }
+            CmdSetLeftHand(IngredientItemToItem(ingItem));
         }
     }
 
@@ -83,11 +68,7 @@ public class IngSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
-            if (RightHandItem.name == null)
-            {
-                //Setting the SyncVar
-                CmdSetRightHand(IngredientItemToItem(ingItem));
-            }
+            CmdSetRightHand(IngredientItemToItem(ingItem));
         }
     }
 
@@ -96,7 +77,6 @@ public class IngSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
-            LeftHandItem = NULL_ITEM;
             CmdResetLeftHand();
         }
     }
@@ -106,7 +86,6 @@ public class IngSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
-            RightHandItem = NULL_ITEM;
             CmdResetRightHand();
         }
     }
@@ -117,112 +96,98 @@ public class IngSync : NetworkBehaviour
     [Command]
     public void CmdSetLeftHand(Item item)
     {
-        //Set SyncVar Item
-        LeftHandItem = item;
+        UpdateLeftHand(item);
     }
 
     [Command]
     public void CmdSetRightHand(Item item)
     {
-        //Set SyncVar Item
-        RightHandItem = item;
-        Debug.Log("SETTING RIGHT HAND ITEM TO " + item.name);
+        UpdateRightHand(item);
     }
 
     [Command]
     public void CmdResetLeftHand()
     {
-        //Reset SyncVar Item
-        LeftHandItem = NULL_ITEM;
+        UpdateLeftHand(NULL_ITEM);
     }
 
     [Command]
     public void CmdResetRightHand()
     {
-        //Reset SyncVar Item
-        RightHandItem = NULL_ITEM;
+        UpdateRightHand(NULL_ITEM);
     }
     //##### #####
 
     //##### CLIENT UPDATER #####
-    void OnLeftHandUpdate(Item oldItem, Item newItem)
+    [ClientRpc(includeOwner = false)] //only update remote avatars, not the owned one
+    void UpdateLeftHand(Item item)
     {
-        if (!netIdentity.isOwned) //only update remote avatars, not the owned one
+        if (item.name == null)
         {
-            if (newItem.name == null)
+            //Reset
+            Destroy(LeftHandGameObject);
+        }
+        else
+        {
+            //Instantiate
+            GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + item.name, typeof(GameObject));
+            GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
+
+            if (leftHand == null)
             {
-                //Reset
-                Destroy(LeftHandGameObject);
+                leftHand = transform.Find("RemoteAvatar").GetComponent<SampleAvatarEntity>().GetSkeletonTransform(CAPI.ovrAvatar2JointType.LeftHandWrist);
             }
-            else
-            {
-                //Instantiate
-                GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + newItem.name, typeof(GameObject));
-                GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
 
-                if (leftHand == null)
-                {
-                    leftHand = transform.Find("RemoteAvatar/Joint LeftHandWrist");
-                }
+            spawned.transform.SetParent(leftHand);
+            spawned.transform.position = item.position;
+            spawned.transform.rotation = item.rotation;
 
-                spawned.transform.SetParent(leftHand);
-                spawned.transform.position = newItem.position;
-                spawned.transform.rotation = newItem.rotation;
+            //Deactivate unnessecary gameobjects
+            spawned.GetComponent<IngredientItem>().enabled = false;
+            spawned.GetComponent<Grabbable>().enabled = false;
+            spawned.GetComponent<Rigidbody>().isKinematic = true;
 
-                //Deactivate unnessecary gameobjects
-                spawned.GetComponent<IngredientItem>().enabled = false;
-                spawned.GetComponent<Grabbable>().enabled = false;
-                spawned.GetComponent<Rigidbody>().isKinematic = true;
+            //Change physics layer
+            spawned.layer = LayerMask.NameToLayer("Remote");
 
-                //Change physics layer
-                spawned.layer = LayerMask.NameToLayer("Remote");
-
-                //Store GameObject
-                LeftHandGameObject = spawned;
-            }
+            //Store GameObject
+            LeftHandGameObject = spawned;
         }
     }
 
-    void OnRightHandUpdate(Item oldItem, Item newItem)
+    [ClientRpc(includeOwner = false)] //only update remote avatars, not the owned one
+    void UpdateRightHand(Item item)
     {
-        if (!netIdentity.isOwned) //only update remote avatars, not the owned one
+        if (item.name == null)
         {
-            if (newItem.name == null)
+            //Reset
+            Destroy(RightHandGameObject);
+        }
+        else
+        {
+            //Instantiate
+            GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + item.name, typeof(GameObject));
+            GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
+
+            if (rightHand == null)
             {
-                //Reset
-                Destroy(RightHandGameObject);
+                rightHand = transform.Find("RemoteAvatar").GetComponent<SampleAvatarEntity>().GetSkeletonTransform(CAPI.ovrAvatar2JointType.RightHandWrist);
             }
-            else
-            {
-                //Instantiate
-                GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + newItem.name, typeof(GameObject));
-                GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
 
-                if (rightHand == null)
-                {
-                    rightHand = transform.Find("RemoteAvatar/Joint RightHandWrist");
-                }
-                if (rightHand == null)
-                {
-                    Debug.LogWarning("RightHand still null");
-                    return;
-                }
+            spawned.transform.SetParent(rightHand);
+            spawned.transform.position = item.position;
+            spawned.transform.rotation = item.rotation;
 
-                spawned.transform.SetParent(rightHand);
-                spawned.transform.position = newItem.position;
-                spawned.transform.rotation = newItem.rotation;
+            //Deactivate unnessecary gameobjects
+            spawned.GetComponent<IngredientItem>().enabled = false;
+            spawned.GetComponent<Grabbable>().enabled = false;
+            spawned.GetComponent<Rigidbody>().isKinematic = true;
 
-                //Deactivate unnessecary gameobjects
-                spawned.GetComponent<IngredientItem>().enabled = false;
-                spawned.GetComponent<Grabbable>().enabled = false;
-                spawned.GetComponent<Rigidbody>().isKinematic = true;
+            //Change physics layer
+            spawned.layer = LayerMask.NameToLayer("Remote");
 
-                //Change physics layer
-                spawned.layer = LayerMask.NameToLayer("Remote");
-
-                //Store GameObject
-                RightHandGameObject = spawned;
-            }
+            //Store GameObject
+            RightHandGameObject = spawned;
         }
     }
     //##### #####
