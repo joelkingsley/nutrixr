@@ -44,12 +44,6 @@ public class IngSync : NetworkBehaviour
     {
         NULL_ITEM = new Item();
         NULL_ITEM.name = null;
-
-        //Find hooks
-        if (!netIdentity.isOwned)
-        {
-            StartCoroutine(WaitForAvatarToSpawn());
-        }
     }
 
     IEnumerator WaitForAvatarToSpawn()
@@ -166,6 +160,11 @@ public class IngSync : NetworkBehaviour
                 GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + newItem.name, typeof(GameObject));
                 GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
 
+                if (leftHand == null)
+                {
+                    leftHand = transform.Find("RemoteAvatar/Joint LeftHandWrist");
+                }
+
                 spawned.transform.SetParent(leftHand);
                 spawned.transform.position = newItem.position;
                 spawned.transform.rotation = newItem.rotation;
@@ -198,6 +197,16 @@ public class IngSync : NetworkBehaviour
                 //Instantiate
                 GameObject toSpawn = (GameObject)Resources.Load("Ingredients/Prefabs/" + newItem.name, typeof(GameObject));
                 GameObject spawned = Instantiate(toSpawn, Vector3.zero, Quaternion.identity);
+
+                if (rightHand == null)
+                {
+                    rightHand = transform.Find("RemoteAvatar/Joint RightHandWrist");
+                }
+                if (rightHand == null)
+                {
+                    Debug.LogWarning("RightHand still null");
+                    return;
+                }
 
                 spawned.transform.SetParent(rightHand);
                 spawned.transform.position = newItem.position;

@@ -67,7 +67,7 @@ public class ConfigurePlayerForNetwork : NetworkBehaviour
     }
 
     [Command]   //Invoced by SpawnManager after the player was teleported to it corresponding spawn location
-    public void SpawnShoppingCart(Vector3 pos, Quaternion rot)
+    public void CmdSpawnShoppingCart(Vector3 pos, Quaternion rot)
     {
         //Spawn Carts and give authority
         NetworkServer.Spawn(Instantiate(shoppingCartPrefab, pos, rot), connectionToClient);
