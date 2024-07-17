@@ -1,12 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Oculus.Interaction;
-using Org.BouncyCastle.Utilities;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class ScoreUI : MonoBehaviour
 {
@@ -24,22 +19,31 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
-        transform.position = rightHand.position + new Vector3(0.07f, 0.07f, 0);
         Vector3 eyeDirection = eyeCenter.position - transform.position;
-        transform.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
-        transform.localRotation.Set(transform.rotation.x+90, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+
+        //Adjust right score
+        Transform rightTrans = rightCircles.transform;
+        rightTrans.position = rightHand.position + new Vector3(0.07f, 0.07f, 0);
+        rightTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
+        //rightTrans.localRotation.Set(rightTrans.rotation.x+90, rightTrans.rotation.y, rightTrans.rotation.z, rightTrans.rotation.w);
+
+        //Adjust left score
+        Transform leftTrans = leftCircles.transform;
+        leftTrans.position = leftHand.position + new Vector3(0.07f, 0.07f, 0);
+        leftTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
+        //leftTrans.localRotation.Set(leftTrans.rotation.x+90, leftTrans.rotation.y, leftTrans.rotation.z, leftTrans.rotation.w);
     }
 
     private void Start()
     {
-        rightColorDict = new Dictionary<Ingredient.NutriScore, GameObject>(); //0:A, 1:B, 2:C, 3:D, 4:E
+        rightColorDict = new Dictionary<Ingredient.NutriScore, GameObject>();
         rightColorDict.Add(Ingredient.NutriScore.A, rightBackgrounds[0]);
         rightColorDict.Add(Ingredient.NutriScore.B, rightBackgrounds[1]);
         rightColorDict.Add(Ingredient.NutriScore.C, rightBackgrounds[2]);
         rightColorDict.Add(Ingredient.NutriScore.D, rightBackgrounds[3]);
         rightColorDict.Add(Ingredient.NutriScore.E, rightBackgrounds[4]);
 
-        leftColorDict = new Dictionary<Ingredient.NutriScore, GameObject>(); //0:A, 1:B, 2:C, 3:D, 4:E
+        leftColorDict = new Dictionary<Ingredient.NutriScore, GameObject>();
         leftColorDict.Add(Ingredient.NutriScore.A, leftBackgrounds[0]);
         leftColorDict.Add(Ingredient.NutriScore.B, leftBackgrounds[1]);
         leftColorDict.Add(Ingredient.NutriScore.C, leftBackgrounds[2]);
@@ -73,16 +77,15 @@ public class ScoreUI : MonoBehaviour
 
     private void ShowNutriScore(Ingredient.NutriScore score, bool isLeftGrab)
     {
-        bool state = score == Ingredient.NutriScore.None;
+        bool state = score != Ingredient.NutriScore.None;
 
         if (isLeftGrab)
         {
             leftCircles.SetActive(state);
-            leftText.SetActive(state);
         } else {
             rightCircles.SetActive(state);
-            rightText.SetActive(state);
         }
+        //Debug.Log("Set NutriScore: " + state +" with score " + score);
 
         disableAll(isLeftGrab);
         setNutriscore(score, isLeftGrab);
@@ -91,18 +94,20 @@ public class ScoreUI : MonoBehaviour
     private void ShowEnvScore(Ingredient.EnvScore score, bool isLeftGrab)
     {
         Dictionary<Ingredient.NutriScore, GameObject> usedDict = rightColorDict;
-        bool state = score == Ingredient.EnvScore.None;
+        bool state = score != Ingredient.EnvScore.None;
         if (isLeftGrab)
         {
             usedDict = leftColorDict;
             leftCircles.SetActive(state);
+            leftText.SetActive(false);
         } else {
             rightCircles.SetActive(state);
+            rightText.SetActive(false);
         }
 
         disableAll(isLeftGrab);
         //We misuse the NutriScore to show the EnvScore
-
+        //Debug.Log("Set EnvScore: " + state +" with score " + score);
         switch (score) {
             case Ingredient.EnvScore.Green:
                 usedDict[Ingredient.NutriScore.A].SetActive(true);
@@ -142,12 +147,10 @@ public class ScoreUI : MonoBehaviour
         if (isLeftGrab)
         {
             leftCircles.SetActive(false);
-            leftText.SetActive(false);
         }
         else
         {
             rightCircles.SetActive(false);
-            rightText.SetActive(false);
         }
         DataLogger.Log("ScoreUI", "Hiding UI");
     }
