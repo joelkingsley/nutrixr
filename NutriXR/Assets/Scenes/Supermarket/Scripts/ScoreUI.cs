@@ -17,7 +17,7 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private GameObject leftCircles;
     [SerializeField] private GameObject rightText;
     [SerializeField] private GameObject leftText;
-    [FormerlySerializedAs("backgrounds")] [SerializeField] private List<GameObject> rightBackgrounds;
+    [SerializeField] private List<GameObject> rightBackgrounds;
     [SerializeField] private List<GameObject> leftBackgrounds;
     private Dictionary<Ingredient.NutriScore, GameObject> rightColorDict;
     private Dictionary<Ingredient.NutriScore, GameObject> leftColorDict;

@@ -80,6 +80,14 @@ public class BasketRecipeSystem : MonoBehaviour
     {
         if (scene.name == "Kitchen")
         {
+            //Log bought items to log file
+            DataLogger.Log("BasketRecipeSystem", "Dumping bought items...");
+            Dictionary<string, int> logData = GetBasketRenderData();
+            foreach(KeyValuePair<string, int> kv in logData)
+            {
+                DataLogger.Log("BasketRecipeSystem", "Item: " + kv.Key + "; Amount: " + kv.Value);
+            }
+
             //Un-cooled Ingredients
             List<Ingredient> tableItemDatas = new List<Ingredient>();
             foreach (IngredientItem item in ingredientItemsInBasket)
@@ -331,6 +339,7 @@ public class BasketRecipeSystem : MonoBehaviour
         recipeObject.GetComponent<CookedRecipe>().setRecipe(recipe);
         recipeSpawner.addItem(recipeObject);
         GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>().ResetItems();
+        GameObject.FindGameObjectWithTag("KitchenFridgeIngredientSpawner").GetComponent<TableItemSpawner>().ResetItems();
         ingredientItemsInBasket.Clear();
         RedrawRecipeUI();
         RedrawBasketUI();

@@ -34,6 +34,7 @@ public class StartManager : MonoBehaviour
         //NetworkManager.singleton.StartServer();
         //NetworkManager.singleton.StartHost();
         //StartCoroutine(EditorAutomaticStart());
+        //NetworkManagerWithActions.singleton.StartClient();
         NetworkManagerWithActions.singleton.StartServer();
         //NetworkManagerWithActions.singleton.StartHost();
 #endif

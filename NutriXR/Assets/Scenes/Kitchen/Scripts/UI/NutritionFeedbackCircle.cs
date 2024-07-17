@@ -83,12 +83,18 @@ public class NutritionFeedbackCircle : MonoBehaviour
 
     public void SetValues(float[] valuesToSet)
     {
+        DataLogger.Log("NutritionFeedbackCircle", "Start feedback:");
+        string logEntry = "IngredientFractions";
+
         float totalValues = 0;
         for (int i = 0; i < imagesPieChart.Length; i++)
         {
             totalValues += FindPercentage(valuesToSet, i);
+            logEntry += ";" + FindPercentage(valuesToSet, i);
             imagesPieChart[i].fillAmount = totalValues;
         }
+
+        DataLogger.Log("NutritionFeedbackCircle", logEntry);
     }
 
     private float FindPercentage(float[] valuesToSet, int index)

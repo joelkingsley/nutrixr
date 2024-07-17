@@ -22,7 +22,8 @@ public static class DataLogger
     {
         if (!File.Exists(path))
         {
-            File.Create(path);
+            //Create and close the file
+            File.Create(path).Close();
         }
 
         if (IsPersonalDataAvailabe())
@@ -87,6 +88,7 @@ public static class DataLogger
 
         using (StreamWriter sr = new StreamWriter(path, true)) {
             sr.WriteLine(to_write);
+            sr.Close();
         }
     }
 }
