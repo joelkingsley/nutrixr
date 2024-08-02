@@ -15,9 +15,9 @@ public class EnvironmentFeedbackBars : MonoBehaviour
     [SerializeField] private Image Land;
 
     //Attention: These values are guessed!
-    [SerializeField] private float SustainableCO2 = 5;
-    [SerializeField] private float SustainableWater = 100;
-    [SerializeField] private float SustainableLand = 500;
+    [SerializeField] private float SustainableCO2 = 1.9f; // 30% of 2.3 tons per year, per day
+    [SerializeField] private float SustainableWater = 500; //
+    [SerializeField] private float SustainableLand = 20; //
 
     // Start is called before the first frame update
     void Start()
