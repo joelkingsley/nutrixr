@@ -82,13 +82,12 @@ public class CartSync : NetworkBehaviour
     {
         if (netIdentity.isOwned)
         {
-            CmdLog("Parent Name: " + ingItem.transform.parent.gameObject.name + ", LocalPos: " + ingItem.gameObject.transform.localPosition + ", GlobPos: " + ingItem.gameObject.transform.position);
             DataLogger.Log("CartSync", "Added " + ingItem.name + " to cart.");
-            StartCoroutine(ReadAndSend(ingItem));
+            StartCoroutine(DelayedAddAndSend(ingItem));
         }
     }
 
-    private IEnumerator ReadAndSend(IngredientItem ingItem)
+    private IEnumerator DelayedAddAndSend(IngredientItem ingItem)
     {
         yield return new WaitForSeconds(2.0f);
         Item item = new Item
@@ -101,6 +100,7 @@ public class CartSync : NetworkBehaviour
         {
             ingToItem.Add(ingItem, item);
             CmdAddItemToCart(item);
+            DataLogger.Log("CartSync", "NetworkItem added " + ingItem.name + " to cart.");
         }
         else
         {
@@ -111,13 +111,27 @@ public class CartSync : NetworkBehaviour
     [Client]
     public void RemoveItemFromCart(IngredientItem ingItem)    //executed by owner
     {
+        if (netIdentity.isOwned)
+        {
+            DataLogger.Log("CartSync", "Removed " + ingItem.name + " from cart.");
+            StartCoroutine(DelayedRemoveAndSend(ingItem));
+        }
+    }
+
+    private IEnumerator DelayedRemoveAndSend(IngredientItem ingItem)
+    {
+        yield return new WaitForSeconds(2.0f);
         if (netIdentity.isOwned && ingToItem.ContainsKey(ingItem))
         {
             Item item;
             if (ingToItem.Remove(ingItem, out item))        //retrieve corresponding item
             {
                 CmdRemoveItemFromCart(item);
-                DataLogger.Log("CartSync", "Removed " + ingItem.name + " from cart.");
+                DataLogger.Log("CartSync", "NetworkItem removed " + ingItem.name + " from cart.");
+            }
+            else
+            {
+                Debug.LogWarning("IngredientItem not contained in ingToItem");
             }
         }
     }
