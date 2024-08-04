@@ -48,38 +48,43 @@ public class IngredientItem : MonoBehaviour
 
     public void OnSelect()
     {
-        if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("SelectedIngredientItem");
         DataLogger.Log("IngredientItem", "Grabbed " + name + ".");
 
-        bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
-        if (isLeftGrab)
+
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetLeftHandItem(this);
+            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
+            if (isLeftGrab)
+            {
+                NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetLeftHandItem(this);
+            }
+            else
+            {
+                NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetRightHandItem(this);
+            }
+            scoreUI.Show(ingredient, isLeftGrab);
         }
-        else
-        {
-            NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetRightHandItem(this);
-        }
-        scoreUI.Show(ingredient, isLeftGrab);
     }
 
     public void OnUnselect()
     {
-        if (!SceneManager.GetActiveScene().name.Equals("Supermarket")) return;
         ChangeAllLayers("PendingIngredientItem");
         DataLogger.Log("IngredientItem", "Dropped " + name + ".");
 
-        bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
-        if (isLeftGrab)
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetLeftHandItem();
+            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
+            if (isLeftGrab)
+            {
+                NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetLeftHandItem();
+            }
+            else
+            {
+                NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetRightHandItem();
+            }
+            scoreUI.Hide(isLeftGrab);
         }
-        else
-        {
-            NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetRightHandItem();
-        }
-        scoreUI.Hide(isLeftGrab);
     }
 
     private void OnTriggerEnter(Collider other)
