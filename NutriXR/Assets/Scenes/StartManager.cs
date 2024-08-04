@@ -6,6 +6,7 @@ using Oculus.Avatar2;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class StartManager : MonoBehaviour
@@ -17,12 +18,14 @@ public class StartManager : MonoBehaviour
     [SerializeField] private GameObject scanButton;
     [SerializeField] private GameObject joinButton;
 
-    [SerializeField] private GameObject personalDataMenu;
+    [SerializeField] private GameObject studySetupUI;
+    [SerializeField] private GameObject studyRejoinUI;
     [SerializeField] private TextMeshProUGUI IDField;
-    [SerializeField] private TextMeshProUGUI AgeField;
-    [SerializeField] private TextMeshProUGUI HeightField;
-    [SerializeField] private TextMeshProUGUI GenderField;
     [SerializeField] private TextMeshProUGUI GoalField;
+
+    //Fields used for the rejoin UI in the second iteration
+    [SerializeField] private TextMeshProUGUI FixIDField;
+    [SerializeField] private TextMeshProUGUI FixGoalField;
 
     // Start is called before the first frame update
     private void Start()
@@ -120,20 +123,28 @@ public class StartManager : MonoBehaviour
         DataLogger.Load();
         if (!DataLogger.IsPersonalDataAvailabe())
         {
-            personalDataMenu.SetActive(true);
-            DataLogger.Log("StartManager", "Personal data is not available. Promting PersonalDataUI.");
+            studySetupUI.SetActive(true);
+            DataLogger.Log("StartManager", "Personal data is not available. Promoting StudySetupUI.");
         }
         else
         {
-            DataLogger.Log("StartManager", "Personal data is available. Starting client.");
-            NetworkManagerWithActions.singleton.StartClient();
+            FixIDField.SetText(DataLogger.ID);
+            FixGoalField.SetText(DataLogger.GOAL);
+            studyRejoinUI.SetActive(true);
+            DataLogger.Log("StartManager", "Personal data is available. Promoting StudyRejoinUI.");
         }
     }
 
-    public void PersonalDataJoinClicked()
+    public void StudySetupUI_JoinClicked()
     {
         DataLogger.Log("StartManager", "Logging Personal Data:");
-        DataLogger.LogPersonal(IDField.text, AgeField.text, HeightField.text, GenderField.text, GoalField.text);
+        DataLogger.LogPersonal(IDField.text, GoalField.text);
+        NetworkManagerWithActions.singleton.StartClient();
+    }
+
+    public void StudyRejoinUI_JoinClicked()
+    {
+        DataLogger.Log("StartManager", "Reusing Personal Data. Do not log again.");
         NetworkManagerWithActions.singleton.StartClient();
     }
 

@@ -11,9 +11,6 @@ public static class DataLogger
     private static readonly string path = Path.Combine(Application.persistentDataPath, "LogData.txt");
 
     public static string ID;
-    public static string AGE;
-    public static string HEIGHT;
-    public static string GENDER;
     public static string GOAL;
 
     public static bool IsFirstRun = true;
@@ -34,25 +31,19 @@ public static class DataLogger
                 if (line.StartsWith("[PERSONAL]"))
                 {
                     ID = line.Split("$")[1];
-                    AGE = line.Split("$")[2];
-                    HEIGHT = line.Split("$")[3];
-                    GENDER = line.Split("$")[4];
-                    GOAL = line.Split("$")[5];
+                    GOAL = line.Split("$")[2];
                 }
             }
         }
     }
 
-    public static void LogPersonal(string id, string age, string height, string gender, string goal)
+    public static void LogPersonal(string id, string goal)
     {
         if (!IsPersonalDataAvailabe())
         {
             ID = id;
-            AGE = age;
-            HEIGHT = height;
-            GENDER = gender;
             GOAL = goal;
-            Log("PERSONAL", "$" + id + "$" + age + "$" + height + "$" + gender + "$" + goal);
+            Log("PERSONAL", "$" + id + "$"  + goal);
         }
     }
 
