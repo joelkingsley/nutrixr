@@ -7490,6 +7490,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613989231}
   m_CullTransparentMesh: 1
+--- !u!1 &1625636803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4612000121498113241, guid: 05fcbe68aa4554f4c8539f84ccf1a4f6, type: 3}
+  m_PrefabInstance: {fileID: 1295920}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1629850574
 GameObject:
   m_ObjectHideFlags: 0
@@ -11728,6 +11733,7 @@ GameObject:
   - component: {fileID: 7114770130182900370}
   - component: {fileID: 7114770130182900368}
   - component: {fileID: 7114770130182900372}
+  - component: {fileID: 7114770130182900374}
   m_Layer: 0
   m_Name: StartMenu
   m_TagString: Untagged
@@ -11955,6 +11961,22 @@ Transform:
   - {fileID: 8615701476083258128}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 17, y: 0, z: 0}
+--- !u!114 &7114770130182900374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7114770130182900369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8affb333a33eec64194112dad9b257c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnchorToFollow: {fileID: 1625636803}
+  positionOffset: {x: 0, y: 0, z: 0.4}
+  distanceThreshold: 0.5
+  speed: 5
 --- !u!114 &7598376895004890348
 MonoBehaviour:
   m_ObjectHideFlags: 0
