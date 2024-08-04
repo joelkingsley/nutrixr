@@ -41,7 +41,7 @@ public class SpawnManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdUpdateNumPlayers()
     {
-        numPlayers = NetworkManagerWithActions.singleton.numPlayers;
+        numPlayers = NetworkManager.singleton.numPlayers;
     }
 
 
