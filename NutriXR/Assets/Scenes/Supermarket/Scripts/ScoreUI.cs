@@ -8,7 +8,9 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private Transform eyeCenter;
     [SerializeField] private Transform rightHand;
     [SerializeField] private Transform leftHand;
+    [SerializeField] private GameObject rightCanvas;
     [SerializeField] private GameObject rightCircles;
+    [SerializeField] private GameObject leftCanvas;
     [SerializeField] private GameObject leftCircles;
     [SerializeField] private GameObject rightText;
     [SerializeField] private GameObject leftText;
@@ -17,28 +19,13 @@ public class ScoreUI : MonoBehaviour
     private Dictionary<Ingredient.NutriScore, GameObject> rightColorDict;
     private Dictionary<Ingredient.NutriScore, GameObject> leftColorDict;
 
-    private void Update()
-    {
-        Vector3 eyeDirection = eyeCenter.position - transform.position;
-
-        if (eyeDirection.normalized != Vector3.zero)   //Prevent Server flooding
-        {
-            //Adjust right score
-            Transform rightTrans = rightCircles.transform;
-            rightTrans.position = rightHand.position + new Vector3(0.07f, 0.07f, 0);
-            rightTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
-            //rightTrans.localRotation.Set(rightTrans.rotation.x+90, rightTrans.rotation.y, rightTrans.rotation.z, rightTrans.rotation.w);
-
-            //Adjust left score
-            Transform leftTrans = leftCircles.transform;
-            leftTrans.position = leftHand.position + new Vector3(0.07f, 0.07f, 0);
-            leftTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
-            //leftTrans.localRotation.Set(leftTrans.rotation.x+90, leftTrans.rotation.y, leftTrans.rotation.z, leftTrans.rotation.w);
-        }
-    }
-
     private void Start()
     {
+        rightCanvas.transform.SetParent(rightHand);
+        rightCanvas.transform.localPosition = new Vector3(0.07f, 0.07f, 0);
+        leftCanvas.transform.SetParent(leftHand);
+        leftCanvas.transform.localPosition = new Vector3(0, 0.07f, 0.07f);
+
         rightColorDict = new Dictionary<Ingredient.NutriScore, GameObject>();
         rightColorDict.Add(Ingredient.NutriScore.A, rightBackgrounds[0]);
         rightColorDict.Add(Ingredient.NutriScore.B, rightBackgrounds[1]);
@@ -55,6 +42,20 @@ public class ScoreUI : MonoBehaviour
 
         Hide(false);
         Hide(true);
+    }
+
+    private void Update()
+    {
+        if (eyeCenter.position != Vector3.zero)   //Prevent Server flooding
+        {
+            //Adjust right score
+            Transform rightTrans = rightCanvas.transform;
+            rightTrans.rotation = Quaternion.LookRotation(-(eyeCenter.position - rightTrans.position).normalized, Vector3.up);
+
+            //Adjust left score
+            Transform leftTrans = leftCanvas.transform;
+            leftTrans.rotation = Quaternion.LookRotation(-(eyeCenter.position - leftTrans.position).normalized, Vector3.up);
+        }
     }
 
     public bool isLeftHandGrab(Vector3 itemPos)

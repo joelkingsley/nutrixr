@@ -32,9 +32,6 @@ public class IngredientItem : MonoBehaviour
         startingParent = transform.parent;
 
         allColliders = GetComponentsInChildren<Collider>(false);
-
-        HandGrabInteractable hgi = GetComponent<HandGrabInteractable>();
-
     }
 
     private void ChangeAllLayers(string newLayer)
