@@ -26,6 +26,8 @@ public class BasketRecipeSystem : MonoBehaviour
     [SerializeField] private TableItemSpawner recipeSpawner = null;
     private bool recipesCanBePrepared = false;
 
+    [SerializeField] private BoughtIngredientsStorage boughtIngredientsStorage;
+
     public struct RecipeIngredientRenderData
     {
         public Recipe recipeData;
@@ -78,6 +80,7 @@ public class BasketRecipeSystem : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // transfer items to kitchen
         if (scene.name == "Kitchen")
         {
             //Log bought items to log file
@@ -88,27 +91,13 @@ public class BasketRecipeSystem : MonoBehaviour
                 DataLogger.Log("BasketRecipeSystem", "Item: " + kv.Key + "; Amount: " + kv.Value);
             }
 
-            //Un-cooled Ingredients
-            List<Ingredient> tableItemDatas = new List<Ingredient>();
+            // Transfer bought items to kitchen
+            List<Ingredient> allBoughtIngredients = new List<Ingredient>();
             foreach (IngredientItem item in ingredientItemsInBasket)
             {
-                if (item.ingredient.cooled == false)
-                {
-                    tableItemDatas.Add(item.ingredient);
-                }
+                allBoughtIngredients.Add(item.ingredient);
             }
-            GameObject.FindGameObjectWithTag("KitchenTableIngredientSpawner").GetComponent<TableItemSpawner>().SpawnKitchenSceneItems(tableItemDatas);
-
-            //Cooled Ingredients
-            List<Ingredient> fridgeItemDatas = new List<Ingredient>();
-            foreach (IngredientItem item in ingredientItemsInBasket)
-            {
-                if (item.ingredient.cooled)
-                {
-                    fridgeItemDatas.Add(item.ingredient);
-                }
-            }
-            GameObject.FindGameObjectWithTag("KitchenFridgeIngredientSpawner").GetComponent<TableItemSpawner>().SpawnKitchenSceneItems(fridgeItemDatas);
+            GameObject.FindGameObjectWithTag("BoughtIngredientsStorage").GetComponent<BoughtIngredientsStorage>().StoreAndSpawnBoughtIngredientList(allBoughtIngredients);
         }
     }
 
@@ -199,14 +188,61 @@ public class BasketRecipeSystem : MonoBehaviour
         newIngredientElement.SetActive(true);
     }
 
-    private List<RecipeIngredientRenderData> GetRecipesToShow()
+    // we only want to show recipes for which all ingredients were bought
+    private List<Recipe> GetPossibleRecipes()
     {
-        List<RecipeIngredientRenderData> recipesToShow = new List<RecipeIngredientRenderData>();
+        List<Recipe> possibleRecipesList = new List<Recipe>();
+        List<Ingredient> boughtIngredients = null;
+        if (boughtIngredientsStorage != null)
+        {
+            boughtIngredients = boughtIngredientsStorage.GetIngredientList();
+        }
 
         foreach (KeyValuePair<string, Recipe> kv in allRecipes)
         {
             Recipe recipe = kv.Value;
 
+            bool filterRecipe = false;
+
+            // filter recipe if in kitchen and ingredients were not all bought
+            if (boughtIngredientsStorage != null)
+            {
+                foreach (Ingredient recipeIngredient in recipe.ingredients)
+                {
+                    bool itemBought = false;
+                    foreach (Ingredient boughtIngredient in boughtIngredients)
+                    {
+                        if (recipeIngredient.name.Equals(boughtIngredient.name))
+                        {
+                            itemBought = true;
+                            break;
+                        }
+                    }
+
+                    if (!itemBought)
+                    {
+                        filterRecipe = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!filterRecipe)
+            {
+                possibleRecipesList.Add(recipe);
+            }
+        }
+
+        return possibleRecipesList;
+    }
+
+
+    private List<RecipeIngredientRenderData> GetRecipesToShow()
+    {
+        List<RecipeIngredientRenderData> recipesToShow = new List<RecipeIngredientRenderData>();
+
+        foreach (Recipe recipe in GetPossibleRecipes())
+        {
             List<Tuple<Ingredient, bool>> ingredientsAvailableData = new List<Tuple<Ingredient, bool>>();
             int ingredientsAvailable = 0;
 
