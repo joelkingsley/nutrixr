@@ -21,17 +21,20 @@ public class ScoreUI : MonoBehaviour
     {
         Vector3 eyeDirection = eyeCenter.position - transform.position;
 
-        //Adjust right score
-        Transform rightTrans = rightCircles.transform;
-        rightTrans.position = rightHand.position + new Vector3(0.07f, 0.07f, 0);
-        rightTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
-        //rightTrans.localRotation.Set(rightTrans.rotation.x+90, rightTrans.rotation.y, rightTrans.rotation.z, rightTrans.rotation.w);
+        if (eyeDirection.normalized != Vector3.zero)   //Prevent Server flooding
+        {
+            //Adjust right score
+            Transform rightTrans = rightCircles.transform;
+            rightTrans.position = rightHand.position + new Vector3(0.07f, 0.07f, 0);
+            rightTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
+            //rightTrans.localRotation.Set(rightTrans.rotation.x+90, rightTrans.rotation.y, rightTrans.rotation.z, rightTrans.rotation.w);
 
-        //Adjust left score
-        Transform leftTrans = leftCircles.transform;
-        leftTrans.position = leftHand.position + new Vector3(0.07f, 0.07f, 0);
-        leftTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
-        //leftTrans.localRotation.Set(leftTrans.rotation.x+90, leftTrans.rotation.y, leftTrans.rotation.z, leftTrans.rotation.w);
+            //Adjust left score
+            Transform leftTrans = leftCircles.transform;
+            leftTrans.position = leftHand.position + new Vector3(0.07f, 0.07f, 0);
+            leftTrans.localRotation = Quaternion.LookRotation(-eyeDirection.normalized, transform.up);
+            //leftTrans.localRotation.Set(leftTrans.rotation.x+90, leftTrans.rotation.y, leftTrans.rotation.z, leftTrans.rotation.w);
+        }
     }
 
     private void Start()
