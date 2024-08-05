@@ -281,7 +281,7 @@ public class BasketRecipeSystem : MonoBehaviour
             }
             else
             {
-                return (x.recipeData.ingredients.Length - x.ingredientsMissingCount) - (y.recipeData.ingredients.Length - y.ingredientsMissingCount);
+                return (y.recipeData.ingredients.Length - y.ingredientsMissingCount) - (x.recipeData.ingredients.Length - x.ingredientsMissingCount);
             }
         });
 
