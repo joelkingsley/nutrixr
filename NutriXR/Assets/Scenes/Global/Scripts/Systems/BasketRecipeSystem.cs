@@ -262,17 +262,29 @@ public class BasketRecipeSystem : MonoBehaviour
         }
 
         List<RecipeIngredientRenderData> recipesToShow = GetRecipesToShow();
+        //recipesToShow.Sort((RecipeIngredientRenderData x, RecipeIngredientRenderData y) =>
+        //{
+        //    if (x.ingredientsMissingCount == y.ingredientsMissingCount)
+        //    {
+        //        return x.recipeData.name.CompareTo(y.recipeData.name);
+        //    }
+        //    else
+        //    {
+        //        return x.ingredientsMissingCount - y.ingredientsMissingCount;
+        //    }
+        //});
         recipesToShow.Sort((RecipeIngredientRenderData x, RecipeIngredientRenderData y) =>
         {
-            if (x.ingredientsMissingCount == y.ingredientsMissingCount)
+            if ((x.recipeData.ingredients.Length - x.ingredientsMissingCount) == (y.recipeData.ingredients.Length - y.ingredientsMissingCount))
             {
                 return x.recipeData.name.CompareTo(y.recipeData.name);
             }
             else
             {
-                return x.ingredientsMissingCount - y.ingredientsMissingCount;
+                return (x.recipeData.ingredients.Length - x.ingredientsMissingCount) - (y.recipeData.ingredients.Length - y.ingredientsMissingCount);
             }
         });
+
 
         //Redraw GUI
         foreach (RecipeIngredientRenderData recipeData in recipesToShow)
