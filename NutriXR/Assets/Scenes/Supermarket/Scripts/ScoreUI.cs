@@ -18,6 +18,8 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private List<GameObject> leftBackgrounds;
     private Dictionary<Ingredient.NutriScore, GameObject> rightColorDict;
     private Dictionary<Ingredient.NutriScore, GameObject> leftColorDict;
+    private bool leftActive;
+    private bool rightActive;
 
     private void Start()
     {
@@ -58,13 +60,15 @@ public class ScoreUI : MonoBehaviour
         }
     }
 
-    public bool isLeftHandGrab(Vector3 itemPos)
+    public bool isLeftHandGrab(Vector3 itemPos, bool isSelect)
     {
-        if (Vector3.Distance(itemPos, leftHand.position) <= Vector3.Distance(itemPos, rightHand.position))
+        bool isLeftSide = Vector3.Distance(itemPos, leftHand.position) <= Vector3.Distance(itemPos, rightHand.position);
+
+        if ((isLeftSide && isSelect ^ leftActive) || (!isLeftSide && isSelect ^ rightActive))
         {
-            return true;
+            return isLeftSide;
         }
-        return false;
+        return !isLeftSide;
     }
 
     private void setNutriscore(Ingredient.NutriScore score, bool isLeftSide)
@@ -133,6 +137,14 @@ public class ScoreUI : MonoBehaviour
     {
         if (!DataLogger.IsFirstRun)
         {
+            if (isLeftGrab)
+            {
+                leftActive = true;
+            }
+            else
+            {
+                rightActive = true;
+            }
             if (DataLogger.GOAL == "Nutrition")
             {
                 ShowNutriScore(ingredient.nutriScore, isLeftGrab);
@@ -150,10 +162,12 @@ public class ScoreUI : MonoBehaviour
     {
         if (isLeftGrab)
         {
+            leftActive = false;
             leftCircles.SetActive(false);
         }
         else
         {
+            rightActive = false;
             rightCircles.SetActive(false);
         }
         DataLogger.Log("ScoreUI", "Hiding UI");

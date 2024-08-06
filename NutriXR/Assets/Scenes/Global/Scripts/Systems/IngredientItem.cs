@@ -51,7 +51,7 @@ public class IngredientItem : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
+            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position, true);
             if (isLeftGrab)
             {
                 NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetLeftHandItem(this);
@@ -71,7 +71,7 @@ public class IngredientItem : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
+            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position, false);
             if (isLeftGrab)
             {
                 NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetLeftHandItem();
