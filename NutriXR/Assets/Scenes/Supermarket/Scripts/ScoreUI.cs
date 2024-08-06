@@ -24,7 +24,7 @@ public class ScoreUI : MonoBehaviour
         rightCanvas.transform.SetParent(rightHand);
         rightCanvas.transform.localPosition = new Vector3(0.07f, 0.07f, 0);
         leftCanvas.transform.SetParent(leftHand);
-        leftCanvas.transform.localPosition = new Vector3(0, 0.07f, 0.07f);
+        leftCanvas.transform.localPosition = new Vector3(-0.07f, -0.07f, 0);
 
         rightColorDict = new Dictionary<Ingredient.NutriScore, GameObject>();
         rightColorDict.Add(Ingredient.NutriScore.A, rightBackgrounds[0]);
