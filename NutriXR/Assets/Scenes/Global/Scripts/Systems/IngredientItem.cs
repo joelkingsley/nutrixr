@@ -23,15 +23,18 @@ public class IngredientItem : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
-        {
-            scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
-        }
-
         startingScale = transform.localScale;
         startingParent = transform.parent;
 
         allColliders = GetComponentsInChildren<Collider>(false);
+
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
+        {
+            scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
+        } else if (SceneManager.GetActiveScene().name.Equals("Kitchen")) // Ingredient should behave differently in the kitchen
+        {
+            ChangeAllLayers("KitchenIngredient");
+        }
     }
 
     private void ChangeAllLayers(string newLayer)
@@ -51,7 +54,7 @@ public class IngredientItem : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
+            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position, true);
             if (isLeftGrab)
             {
                 NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().SetLeftHandItem(this);
@@ -71,7 +74,7 @@ public class IngredientItem : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
         {
-            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position);
+            bool isLeftGrab = scoreUI.isLeftHandGrab(transform.position, false);
             if (isLeftGrab)
             {
                 NetworkClient.localPlayer.gameObject.GetComponent<IngSync>().ResetLeftHandItem();

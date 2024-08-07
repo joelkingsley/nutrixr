@@ -135,6 +135,14 @@ public class BasketRecipeSystem : MonoBehaviour
         RedrawBasketUI();
     }
 
+    public void resetBasket()
+    {
+        ingredientItemsInBasket.Clear();
+        DataLogger.Log("BasketRecipeSystem", "Reset");
+        RedrawRecipeUI();
+        RedrawBasketUI();
+    }
+
     private Dictionary<string, int> GetBasketRenderData()
     {
         Dictionary<string, int> ingredientCountDict = new Dictionary<string, int>();
