@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 7054519612966013259}
   - component: {fileID: 6217619110026708718}
   - component: {fileID: 8191375828437856804}
-  - component: {fileID: 5840166523392440930}
   - component: {fileID: -3528083824346233600}
   - component: {fileID: 5990917525335563622}
   - component: {fileID: -3666445946851573089}
   - component: {fileID: 1811642756880177943}
   - component: {fileID: 5776642166069337379}
   - component: {fileID: -8355287039161241140}
+  - component: {fileID: 3343458955095465700}
   m_Layer: 9
   m_Name: Potato
   m_TagString: Untagged
@@ -90,29 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5840166523392440930
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7686906356710626289}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.032813013
-  m_Height: 0.12139999
-  m_Direction: 0
-  m_Center: {x: -0.000000018626451, y: -0.0023073405, z: 0.0003999807}
 --- !u!54 &-3528083824346233600
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -286,3 +263,24 @@ MonoBehaviour:
   _pointable: {fileID: -3666445946851573089}
   _rigidbody: {fileID: -3528083824346233600}
   _scaleMassWithSize: 0
+--- !u!65 &3343458955095465700
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686906356710626289}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12139999, y: 0.0611, z: 0.08299999}
+  m_Center: {x: -0.000000018626451, y: -0.0005500065, z: 0.00039998256}
