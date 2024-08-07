@@ -31,7 +31,7 @@ public class CookedRecipe : MonoBehaviour
                 return;
             }
         }
-        else if (Vector3.Distance(transform.position, userHead.position - new Vector3(0,0.1f,0)) < 0.15)
+        else if (!feedbackSystem.calculatedFeedback && Vector3.Distance(transform.position, userHead.position - new Vector3(0,0.1f,0)) < 0.15)
         {
             feedbackSystem.TrackConsumedRecipe(recipe);
             audioSource.Play();
