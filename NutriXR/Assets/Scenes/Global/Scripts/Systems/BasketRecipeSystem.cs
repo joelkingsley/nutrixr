@@ -138,7 +138,6 @@ public class BasketRecipeSystem : MonoBehaviour
     public void resetBasket()
     {
         ingredientItemsInBasket.Clear();
-        DataLogger.Log("BasketRecipeSystem", "Reset");
         RedrawRecipeUI();
         RedrawBasketUI();
     }
