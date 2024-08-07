@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class DataLogger
@@ -35,6 +36,10 @@ public static class DataLogger
                 }
             }
         }
+        else
+        {
+            IsFirstRun = true;
+        }
     }
 
     public static void LogPersonal(string id, string goal)
@@ -60,6 +65,7 @@ public static class DataLogger
     {
         Log("DataLogger", "Deleting Log file");
         File.Delete(path);
+        Load();
     }
 
     public static void Log(string sender, string msg)
