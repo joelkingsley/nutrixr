@@ -23,15 +23,18 @@ public class IngredientItem : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
-        {
-            scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
-        }
-
         startingScale = transform.localScale;
         startingParent = transform.parent;
 
         allColliders = GetComponentsInChildren<Collider>(false);
+
+        if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
+        {
+            scoreUI = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<ScoreUI>();
+        } else if (SceneManager.GetActiveScene().name.Equals("Kitchen")) // Ingredient should behave differently in the kitchen
+        {
+            ChangeAllLayers("KitchenIngredient");
+        }
     }
 
     private void ChangeAllLayers(string newLayer)
