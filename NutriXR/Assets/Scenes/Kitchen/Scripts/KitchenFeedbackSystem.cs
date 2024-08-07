@@ -9,6 +9,7 @@ public class KitchenFeedbackSystem : MonoBehaviour
     [SerializeField] private GameObject Canvas;
     [SerializeField] private NutritionFeedbackCircle nutritionFeedbackCircle;
     [SerializeField] private EnvironmentFeedbackBars environmentFeedbackBars;
+    public bool calculatedFeedback = false;
 
     private List<Recipe> consumedRecipes;
 
@@ -26,7 +27,8 @@ public class KitchenFeedbackSystem : MonoBehaviour
 
     public void StartFeedback()
     {
-        if (consumedRecipes.Count == 0) return;
+        if (calculatedFeedback || consumedRecipes.Count == 0) return;
+        calculatedFeedback = true;
         GetComponent<AudioSource>().Play();
         string feedbackMode = DataLogger.GOAL;
         Canvas.SetActive(true);
