@@ -71,45 +71,44 @@ public class ScoreUI : MonoBehaviour
         return !isLeftSide;
     }
 
-    private void setNutriscore(Ingredient.NutriScore score, bool isLeftSide)
-    {
-        if (isLeftSide)
-        {
-            leftColorDict[score].SetActive(true);
-            leftText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
-        } else {
-            rightColorDict[score].SetActive(true);
-            rightText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
-        }
-    }
-
     private void ShowNutriScore(Ingredient.NutriScore score, bool isLeftGrab)
     {
-        bool state = score != Ingredient.NutriScore.None;
+        bool notNone = score != Ingredient.NutriScore.None;
 
         if (isLeftGrab)
         {
-            leftCircles.SetActive(state);
+            leftCircles.SetActive(notNone);
         } else {
-            rightCircles.SetActive(state);
+            rightCircles.SetActive(notNone);
         }
         //Debug.Log("Set NutriScore: " + state +" with score " + score);
 
         disableAll(isLeftGrab);
-        setNutriscore(score, isLeftGrab);
+
+        if (notNone)
+        {
+            if (isLeftGrab)
+            {
+                leftColorDict[score].SetActive(true);
+                leftText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
+            } else {
+                rightColorDict[score].SetActive(true);
+                rightText.GetComponent<TextMeshProUGUI>().text = Enum.GetName(typeof(Ingredient.NutriScore), score);
+            }
+        }
     }
 
     private void ShowEnvScore(Ingredient.EnvScore score, bool isLeftGrab)
     {
         Dictionary<Ingredient.NutriScore, GameObject> usedDict = rightColorDict;
-        bool state = score != Ingredient.EnvScore.None;
+        bool notNone = score != Ingredient.EnvScore.None;
         if (isLeftGrab)
         {
             usedDict = leftColorDict;
-            leftCircles.SetActive(state);
+            leftCircles.SetActive(notNone);
             leftText.SetActive(false);
         } else {
-            rightCircles.SetActive(state);
+            rightCircles.SetActive(notNone);
             rightText.SetActive(false);
         }
 
