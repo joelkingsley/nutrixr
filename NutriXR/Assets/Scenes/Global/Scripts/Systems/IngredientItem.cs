@@ -133,7 +133,14 @@ public class IngredientItem : MonoBehaviour
             && other.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
             //PendingIngredientItem <-> Default: The pending item is dropped and thus unselected
-            ChangeAllLayers("UnselectedIngredientItem");
+            if (SceneManager.GetActiveScene().name.Equals("Supermarket"))
+            {
+                ChangeAllLayers("UnselectedIngredientItem");
+            } else if(SceneManager.GetActiveScene().name.Equals("Kitchen"))
+            {
+                ChangeAllLayers("KitchenIngredient");
+            }
+
             DataLogger.Log("IngredientItem", name + " dropped on floor.");
         }
     }
