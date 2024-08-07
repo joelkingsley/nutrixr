@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 7102343878540555764}
   - component: {fileID: 6142702865570560593}
   - component: {fileID: 8276407735135473307}
-  - component: {fileID: 3947493421538299443}
   - component: {fileID: 1516371357582019965}
   - component: {fileID: 5564468261883808137}
   - component: {fileID: -7722173714532791845}
   - component: {fileID: -5190598125882397199}
   - component: {fileID: 7108977658425859490}
   - component: {fileID: -8599256054000267243}
+  - component: {fileID: 4173896375068467387}
   m_Layer: 9
   m_Name: Mushroom
   m_TagString: Untagged
@@ -90,27 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3947493421538299443
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7627770160746868558}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.035614092
-  m_Center: {x: 0, y: -0.00089377165, z: 0.0002078712}
 --- !u!54 &1516371357582019965
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -284,3 +263,24 @@ MonoBehaviour:
   _pointable: {fileID: -7722173714532791845}
   _rigidbody: {fileID: 1516371357582019965}
   _scaleMassWithSize: 0
+--- !u!65 &4173896375068467387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627770160746868558}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0726, y: 0.065, z: 0.07119998}
+  m_Center: {x: 0, y: 0.0000000037252903, z: 0.0000000055879354}

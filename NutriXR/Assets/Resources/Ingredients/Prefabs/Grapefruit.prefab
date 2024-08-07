@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 6107631029509507552}
   - component: {fileID: 7164507490789246533}
   - component: {fileID: 4938626708813034127}
-  - component: {fileID: 2128524473531466520}
   - component: {fileID: 3065751937725410780}
   - component: {fileID: -1006498457044973799}
   - component: {fileID: 7990044517284228471}
   - component: {fileID: 6184242182243015721}
   - component: {fileID: 1649989294297428213}
   - component: {fileID: 6421741786211262269}
+  - component: {fileID: 1673676216370381089}
   m_Layer: 9
   m_Name: Grapefruit
   m_TagString: Untagged
@@ -90,27 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2128524473531466520
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6884168347380945754}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.050775345
-  m_Center: {x: -0.000000007450581, y: -0.0027246661, z: -0.000000007450581}
 --- !u!54 &3065751937725410780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -284,3 +263,24 @@ MonoBehaviour:
   _pointable: {fileID: 7990044517284228471}
   _rigidbody: {fileID: 3065751937725410780}
   _scaleMassWithSize: 0
+--- !u!65 &1673676216370381089
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884168347380945754}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.10619995, y: 0.099999994, z: 0.10700001}
+  m_Center: {x: -0.000000009313226, y: -0.000000009313226, z: -0.000000009313226}

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 7411541939944408438}
   - component: {fileID: 4701724380078223804}
   - component: {fileID: 4262794727882041686}
-  - component: {fileID: 2224135396091610971}
   - component: {fileID: -6439452942872276272}
   - component: {fileID: 8422273956164490858}
   - component: {fileID: -4024689412367628850}
   - component: {fileID: 2658127957371956549}
   - component: {fileID: 7374261351874922912}
+  - component: {fileID: 977850598592321121}
   m_Layer: 9
   m_Name: Garlic
   m_TagString: Untagged
@@ -117,27 +117,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &2224135396091610971
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6502948382388293737}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.034
-  m_Center: {x: 0, y: -0.004, z: 0}
 --- !u!114 &-6439452942872276272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,3 +263,24 @@ MonoBehaviour:
   _pointable: {fileID: 8422273956164490858}
   _rigidbody: {fileID: 4262794727882041686}
   _scaleMassWithSize: 0
+--- !u!65 &977850598592321121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502948382388293737}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.082200006, y: 0.0672, z: 0.079799995}
+  m_Center: {x: -0.000000009313226, y: 0, z: 0}
