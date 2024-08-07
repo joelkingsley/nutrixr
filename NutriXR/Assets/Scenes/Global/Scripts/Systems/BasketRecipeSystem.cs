@@ -305,28 +305,28 @@ public class BasketRecipeSystem : MonoBehaviour
         }
 
         List<RecipeIngredientRenderData> recipesToShow = GetRecipesToShow();
-        //recipesToShow.Sort((RecipeIngredientRenderData x, RecipeIngredientRenderData y) =>
-        //{
-        //    if (x.ingredientsMissingCount == y.ingredientsMissingCount)
-        //    {
-        //        return x.recipeData.name.CompareTo(y.recipeData.name);
-        //    }
-        //    else
-        //    {
-        //        return x.ingredientsMissingCount - y.ingredientsMissingCount;
-        //    }
-        //});
         recipesToShow.Sort((RecipeIngredientRenderData x, RecipeIngredientRenderData y) =>
         {
-            if ((x.recipeData.ingredients.Length - x.ingredientsMissingCount) == (y.recipeData.ingredients.Length - y.ingredientsMissingCount))
+            if (x.ingredientsMissingCount == y.ingredientsMissingCount)
             {
                 return x.recipeData.name.CompareTo(y.recipeData.name);
             }
             else
             {
-                return (y.recipeData.ingredients.Length - y.ingredientsMissingCount) - (x.recipeData.ingredients.Length - x.ingredientsMissingCount);
+                return x.ingredientsMissingCount - y.ingredientsMissingCount;
             }
         });
+        //recipesToShow.Sort((RecipeIngredientRenderData x, RecipeIngredientRenderData y) =>
+        //{
+        //    if ((x.recipeData.ingredients.Length - x.ingredientsMissingCount) == (y.recipeData.ingredients.Length - y.ingredientsMissingCount))
+        //    {
+        //        return x.recipeData.name.CompareTo(y.recipeData.name);
+        //    }
+        //    else
+        //    {
+        //        return (y.recipeData.ingredients.Length - y.ingredientsMissingCount) - (x.recipeData.ingredients.Length - x.ingredientsMissingCount);
+        //    }
+        //});
 
 
         //Redraw GUI
