@@ -1,93 +1,196 @@
 # NutriXR
 
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.uni-paderborn.de/awab/nutrixr.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.uni-paderborn.de/awab/nutrixr/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+A Virtual Reality application for nutrition education and awareness, built with Unity and Meta XR SDK. NutriXR provides immersive experiences in virtual supermarket and kitchen environments to help users make informed food choices and understand nutritional and environmental impacts.
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+NutriXR is an educational VR application that combines interactive shopping and cooking experiences with real-time feedback on nutritional choices and environmental impact. The application features:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- **Virtual Supermarket**: Browse and select ingredients in a realistic 3D supermarket environment
+- **Virtual Kitchen**: Cook recipes using selected ingredients with interactive kitchen appliances
+- **Nutrition Feedback**: Visual feedback systems showing nutritional content and health impacts
+- **Environmental Impact**: Real-time feedback on the environmental effects of food choices
+- **Recipe System**: Predefined recipes with ingredient tracking and cooking simulation
+- **Data Logging**: Comprehensive tracking of user interactions and choices for research purposes
+- **Multiplayer Support**: Network-enabled collaborative experiences
+
+## Features
+
+- 🥽 **VR Experience**: Full immersion using Meta Quest/Oculus headsets
+- 🛒 **Interactive Shopping**: Realistic supermarket with grabbable products
+- 👨‍🍳 **Cooking Simulation**: Virtual kitchen with working appliances and cooking mechanics
+- 📊 **Nutrition Visualization**: Real-time feedback on nutritional content
+- 🌱 **Environmental Awareness**: Visual feedback on environmental impact of food choices
+- 📈 **Progress Tracking**: Data logging and analytics for research purposes
+- 🤝 **Collaborative Mode**: Multi-user support for shared experiences
+- 🎯 **Educational Goals**: Customizable learning objectives and feedback modes
+
+## System Requirements
+
+### Minimum Requirements
+- **VR Headset**: Meta Quest 2, Quest 3, or Oculus Rift
+- **Unity Version**: Unity 2022.3.0f1 or later
+- **Platform**: Windows 10/11 (for development)
+- **RAM**: 8GB minimum, 16GB recommended
+- **Storage**: 5GB available space
+
+### Development Requirements
+- Unity 2022.3.0f1
+- Meta XR SDK 62.0.0
+- Visual Studio 2019/2022 or VS Code
+- Git LFS (for 3D models and assets)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+### For Developers
+
+1. **Clone the repository**
+   ```bash
+   git clone https://git.uni-paderborn.de/awab/nutrixr.git
+   cd nutrixr
+   ```
+
+2. **Install Unity Hub and Unity 2022.3.0f1**
+   - Download from [Unity Download Page](https://unity3d.com/get-unity/download)
+   - Install Unity Hub
+   - Install Unity 2022.3.0f1 through Unity Hub
+
+3. **Open the Project**
+   - Open Unity Hub
+   - Click "Add" and select the `nutrixr/NutriXR` folder
+   - Open the project in Unity
+
+4. **Configure XR Settings**
+   - Ensure Meta XR SDK packages are properly imported
+   - Configure build settings for your target VR platform
+   - Set up the appropriate XR Management settings
+
+5. **Build and Deploy**
+   - Connect your VR headset
+   - Switch platform to Android (for Quest) or Windows (for PC VR)
+   - Build and deploy to your device
+
+### For End Users
+
+1. Install the built APK on your Meta Quest device
+2. Enable Developer Mode on your headset
+3. Launch NutriXR from your library
+4. Follow the in-app tutorial to get started
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Getting Started
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1. **Launch the Application**: Put on your VR headset and start NutriXR
+2. **Choose Your Goal**: Select between nutrition-focused or environment-focused feedback
+3. **Enter the Supermarket**: Browse and select ingredients for your recipes
+4. **Cook in the Kitchen**: Use the ingredients to prepare meals in the virtual kitchen
+5. **View Feedback**: Receive visual feedback on your nutritional and environmental choices
+
+### Key Interactions
+
+- **Hand Tracking/Controllers**: Grab and manipulate objects
+- **Recipe Selection**: Choose from available recipes at cooking stations
+- **Ingredient Shopping**: Pick up items from supermarket shelves
+- **Cooking Actions**: Use ovens, mixers, and other kitchen appliances
+- **Feedback Review**: View nutrition circles and environmental impact bars
+
+## Project Structure
+
+```
+NutriXR/
+├── Assets/
+│   ├── Scenes/
+│   │   ├── StartScene.unity          # Main menu and setup
+│   │   ├── Supermarket/              # Shopping environment
+│   │   ├── Kitchen/                  # Cooking environment
+│   │   └── Global/                   # Shared scripts and systems
+│   ├── Resources/                    # Game assets and data
+│   ├── Plugins/                      # Third-party integrations
+│   └── XR/                          # VR-specific configurations
+├── Packages/                         # Unity package dependencies
+├── ProjectSettings/                  # Unity project configuration
+└── WorkingFiles/                     # Development assets and documentation
+    ├── Blender Files/               # 3D model source files
+    └── Documents/                   # Research and design documents
+```
+
+## Development
+
+### Key Scripts
+
+- `Recipe.cs` - Defines recipe data structure with ingredients and weights
+- `KitchenFeedbackSystem.cs` - Handles nutrition and environmental feedback
+- `DataLogger.cs` - Tracks user interactions for research purposes
+- `IngredientItem.cs` - Manages individual ingredient properties
+- `BasketRecipeSystem.cs` - Handles recipe completion logic
+
+### Adding New Features
+
+1. **New Ingredients**: Create new ingredient ScriptableObjects
+2. **New Recipes**: Define recipes using the Recipe system
+3. **Feedback Systems**: Extend the feedback classes for new metrics
+4. **Scenes**: Add new environments following the existing structure
+
+## Research Integration
+
+NutriXR includes comprehensive data logging for research purposes:
+
+- User interaction tracking
+- Choice logging with timestamps
+- Nutrition feedback effectiveness
+- Environmental awareness metrics
+- Movement and behavior patterns
+
+Data is logged locally and can be exported for analysis.
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+This project is part of ongoing research at the University of Paderborn. For collaboration opportunities or research partnerships, please contact the development team.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+### Guidelines
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+1. Follow Unity coding conventions
+2. Test all VR interactions thoroughly
+3. Maintain compatibility with Meta XR SDK
+4. Document any new features or systems
+5. Ensure data privacy compliance for research logging
+
+## Support
+
+For technical issues or questions:
+- Check the Unity Console for error messages
+- Verify VR headset compatibility and setup
+- Ensure all required packages are properly installed
+- Review the data logging output for debugging information
+
+## Authors and Acknowledgment
+
+- **Development Team**: University of Paderborn
+- **Research Supervision**: [Add supervisor names]
+- **3D Assets**: Custom models created for educational purposes
+- **Unity Technologies**: For the Unity engine and XR framework
+- **Meta**: For the XR SDK and VR platform support
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is developed for research and educational purposes. Please contact the development team regarding usage and distribution rights.
+
+## Project Status
+
+This project is actively under development as part of ongoing research into VR-based nutrition education. The current version includes core functionality for supermarket shopping, kitchen cooking, and feedback systems.
+
+### Current Features
+- ✅ VR supermarket environment
+- ✅ Virtual kitchen with cooking mechanics  
+- ✅ Nutrition feedback visualization
+- ✅ Environmental impact feedback
+- ✅ Data logging and analytics
+- ✅ Multi-user networking support
+
+### Planned Features
+- 🔄 Expanded ingredient database
+- 🔄 Additional recipe categories
+- 🔄 Enhanced feedback visualizations
+- 🔄 Mobile companion app
+- 🔄 Advanced analytics dashboard
